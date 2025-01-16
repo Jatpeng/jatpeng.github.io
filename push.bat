@@ -42,5 +42,9 @@ if %errorlevel% neq 0 (
     exit /b 1
 )
 
+:: 部署到 GitHub Pages
+echo Deploying to GitHub Pages...
+call hexo deploy
+
 echo Deployment completed successfully!
 pause 
