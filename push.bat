@@ -46,7 +46,11 @@ if %errorlevel% neq 0 (
 echo Deploying to GitHub Pages...
 call hexo deploy
 
-
+:: 创建 CNAME 文件
+echo Creating CNAME file...
+cd public
+echo jatpeng.cn > CNAME
+cd ..
 
 echo Deployment completed successfully!
 pause
