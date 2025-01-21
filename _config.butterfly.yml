@@ -1,0 +1,111 @@
+# 首页顶部 banner 图设置
+index_img: /images/background/wood.jpeg  # 首页顶部大图
+
+# 是否显示 banner 图
+index_img_enable: true
+
+# banner 图显示位置
+# 可选值: left | right | both
+index_img_position: both
+
+# 其他页面的顶部图
+archive_img: /images/archive.jpg
+tag_img: /images/tags.jpg
+category_img: /images/categories.jpg
+
+# 页面背景
+background:
+  # 是否启用背景图
+  enable: true
+  # 背景图片 URL
+  url: /images/background/background_1.jpg
+  # 背景图显示位置
+  position: fixed
+  # 是否重复显示
+  repeat: no-repeat
+  # 背景图大小
+  size: cover
+  # 背景透明度
+  opacity: 1
+
+# 主题颜色配置
+theme_color:
+  enable: true
+  main: "#49B1F5"
+  paginator: "#00c4b6"
+  button_hover: "#FF7242"
+  text_selection: "#00c4b6"
+  link_color: "#99a9bf"
+  meta_color: "#858585"
+  hr_color: "#A4D8FA"
+  code_foreground: "#F47466"
+  code_background: "rgba(27, 31, 35, .05)"
+  toc_color: "#00c4b6"
+  blockquote_padding_color: "#49b1f5"
+  blockquote_background_color: "#49b1f5"
+
+# 网站背景是否开启网格动画
+canvas_ribbon:
+  enable: false
+  size: 150
+  alpha: 0.6
+  zIndex: -1
+  click_to_change: false
+  mobile: false
+
+# 网站图标
+favicon: /img/favicon.png
+
+# 头像
+avatar:
+  img: /images/avatar.png
+  effect: false  # 头像是否旋转
+
+# 作者信息
+author:
+  name: Jatpeng
+  description: 'Never Settle'
+  link: https://github.com/Jatpeng  # 作者链接
+
+# 社交链接
+social:
+  Github: https://github.com/Jatpeng || fab fa-github
+  E-Mail: mailto:707752925@qq.com || fas fa-envelope
+  # Weibo: https://weibo.com/xxx || fab fa-weibo
+  # Twitter: https://twitter.com/xxx || fab fa-twitter
+  # Facebook: https://www.facebook.com/xxx || fab fa-facebook
+  # Youtube: https://youtube.com/xxx || fab fa-youtube
+
+# 公告设置
+notice_board:
+  enable: true
+  onmobile: true
+  description: ["Hi，欢迎访问我的博客！", "这里会分享一些编程、游戏开发和生活感悟。"]
+
+# 侧边栏设置
+aside:
+  enable: true
+  mobile: true
+  position: right
+  card_announcement:
+    enable: true
+    content: "欢迎来到我的博客！<br/>这里会分享一些编程、游戏开发和生活感悟。"
+  display:
+    archive: true
+    tag: true
+    category: true
+  card_author:
+    enable: true
+    description: Never Settle
+    button:
+      enable: true
+      icon: fab fa-github
+      text: Follow Me
+      link: https://github.com/Jatpeng
+    social: true
+
+# 友情链接
+links_settings:
+  enable: true  # 是否启用
+  text: Links  # 标题
+  desc: 友情链接
