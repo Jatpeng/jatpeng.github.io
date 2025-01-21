@@ -16,6 +16,13 @@ if %errorlevel% neq 0 (
 call hexo clean
 call hexo generate
 
+:: 创建 CNAME 文件（在 generate 之后）
+echo Creating CNAME file...
+echo jatpeng.cn > source/CNAME
+
+:: 重新生成（包含 CNAME）
+call hexo generate
+
 :: 添加所有更改
 echo Adding changes to git...
 git add .
@@ -36,21 +43,9 @@ git checkout source
 echo Pushing to remote repository...
 git push origin source
 
-if %errorlevel% neq 0 (
-    echo Error occurred during git operations
-    pause
-    exit /b 1
-)
-
 :: 部署到 GitHub Pages
 echo Deploying to GitHub Pages...
 call hexo deploy
-
-:: 创建 CNAME 文件
-echo Creating CNAME file...
-cd public
-echo jatpeng.cn > CNAME
-cd ..
 
 echo Deployment completed successfully!
 pause
