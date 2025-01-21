@@ -46,5 +46,17 @@ if %errorlevel% neq 0 (
 echo Deploying to GitHub Pages...
 call hexo deploy
 
+:: 创建临时目录并克隆master分支
+echo Creating CNAME file...
+mkdir temp_master
+cd temp_master
+git clone -b master git@github.com:Jatpeng/jatpeng.github.io.git .
+echo jatpeng.cn > CNAME
+git add CNAME
+git commit -m "Add CNAME"
+git push origin master
+cd ..
+rd /s /q temp_master
+
 echo Deployment completed successfully!
-pause 
+pause
