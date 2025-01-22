@@ -4,7 +4,7 @@ date: {{ date }}
 tags:
 categories:
 description:
-cover: https://loremflickr.com/800/600
+cover: https://picsum.photos/800/600
 comments: true
 copyright: true
 typora-root-url: ..
