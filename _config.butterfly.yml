@@ -125,7 +125,7 @@ valine:
   notify: false
   verify: false
   placeholder: '请留下你的评论~'
-  avatar: 'monsterid'
+  avatar: 'mp' # 修改这里，使用 Gravatar 的默认头像
   meta: ['nick', 'mail']
   pageSize: 10
   lang: 'zh-CN'
