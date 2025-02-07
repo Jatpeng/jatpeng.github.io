@@ -112,30 +112,82 @@ links_settings:
 
 # 评论设置
 comments:
-  # Up to 2 comments system, the first will be shown as default
-  # Choose: Valine/Disqus/Gitalk/Utterances/Artalk
-  use: Valine # Valine/Disqus
-  text: true # Display the comment name next to the button
-  lazyload: true # The comment system will be loaded when the visitor clicks
+  use: Valine
+  text: true
+  lazyload: false # 改为 false，避免懒加载导致的问题
 
 # Valine
 # https://valine.js.org
+
+
 valine:
-  enable: true # if you want use valine,please set this value is true
-  appId: aQWrbyCXv2t1dSu0mIJdzHFh-MdYXbMMI # leancloud application app id
-  appKey: v5nFJzPNBU2DCg8W9PIg2umc # leancloud application app key
-  notify: false # valine mail notify (true/false) Deprecated in v1.4.0+
-  verify: false # valine verify code (true/false) Deprecated in v1.4.0+
-  pageSize: 10 # comment list page size
-  avatar: monsterid # gravatar style https://valine.js.org/#/avatar
-  lang: zh-CN # i18n: zh-CN/zh-TW/en/ja
-  placeholder: 请留下你的评论 # valine comment input placeholder (like: Please leave your footprints)
-  guest_info: nick,mail,link # valine comment header info (nick/mail/link)
-  recordIP: false # Record reviewer IP
-  serverURLs: # This configuration is suitable for domestic custom domain name users, overseas version will be automatically detected (no need to manually fill in)
-  bg: # valine background
-  emojiCDN: # emoji CDN
-  enableQQ: false # enable the Nickname box to automatically get QQ Nickname and QQ Avatar
-  requiredFields: nick,mail # required fields (nick/mail)
-  visitor: true
-  option:
+  enable: true # 是否开启
+  appId: aQWrbyCXv2t1dSu0mIJdzHFh-MdYXbMMI 
+  appKey: v5nFJzPNBU2DCg8W9PIg2umc
+  visitor: true # 访客数量
+  avatar: 'mm' # 头像展示方式 Gravatar style : mm/identicon/monsterid/wavatar/retro/hide
+  pageSize: 10 # 一页显示的评论数
+  placeholder: 'just go go' # 评论框占位文本
+  background: /medias/comment_bg.png # 评论框背景
+
+# 全局字体设置
+font:
+  global-font-size: 16px  # 全局字体大小
+  code-font-size: 14px    # 代码字体大小
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Helvetica Neue", Lato, Roboto, "PingFang SC", "Microsoft JhengHei", "Microsoft YaHei", sans-serif
+  code-font-family: consolas, Menlo, "PingFang SC", "Microsoft JhengHei", "Microsoft YaHei", sans-serif
+
+# 代码块设置
+highlight_theme: mac light # 代码主题 darker / pale night / light / ocean / mac / mac light / false
+highlight_copy: true      # 复制按钮
+highlight_lang: true      # 显示代码语言
+highlight_height_limit: false # unit: px
+
+# 文章页设置
+post_meta:
+  page:
+    date_type: both # created or updated or both 主页文章日期是创建日或者更新日或都显示
+    date_format: relative # date/relative 显示日期还是相对日期
+    categories: true # true or false 主页是否显示分类
+    tags: true # true or false 主页是否显示标籤
+    label: true # true or false 显示描述性文字
+  post:
+    date_type: both # created or updated or both 文章页日期是创建日或者更新日或都显示
+    date_format: relative # date/relative 显示日期还是相对日期
+    categories: true # true or false 文章页是否显示分类
+    tags: true # true or false 文章页是否显示标籤
+    label: true # true or false 显示描述性文字
+
+# 文章版权
+post_copyright:
+  enable: true
+  decode: false
+  author_href: https://github.com/Jatpeng
+  license: CC BY-NC-SA 4.0
+  license_url: https://creativecommons.org/licenses/by-nc-sa/4.0/
+
+# 相关文章推荐
+related_post:
+  enable: true
+  limit: 6 # 显示推荐文章数目
+  date_type: created # or created or updated 文章日期显示创建日或者更新日
+
+# TOC 目录设置
+toc:
+  enable: true
+  number: true  # 显示序号
+  auto_open: true # 自动展开目录
+  style_simple: false # 简洁模式
+
+# 页脚设置
+footer:
+  owner:
+    enable: true
+    since: 2024
+  custom_text: <a href="https://github.com/Jatpeng"><span>Github</span></a>
+  copyright: true # Copyright of theme and framework
+
+# 滚动效果
+scroll:
+  progress_bar: true    # 阅读进度条
+  percent: true        # 显示阅读百分比
