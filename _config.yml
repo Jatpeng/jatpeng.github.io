@@ -101,6 +101,18 @@ butterfly:
   # Butterfly Theme Config
   # See: https://github.com/jerryc127/hexo-theme-butterfly/blob/master/README.zh-Hans.md
 
+# Valine 评论系统配置
+valine:
+  enable: true
+  appId: aQWrbyCXv2t1dSu0mIJdzHFh-MdYXbMMI # 从 LeanCloud 获取
+  appKey: v5nFJzPNBU2DCg8W9PIg2umc # 从 LeanCloud 获取
+  notify: True # 邮件提醒
+  verify: false # 验证码
+  avatar: 'mp' # 头像样式
+  placeholder: '在这里输入你的评论...' # 评论框占位符
+  pageSize: 10 # 每页评论数
+  visitor: true # 文章访问量统计
+
 # Deployment
 ## Docs: https://hexo.io/docs/one-command-deployment
 deploy:
