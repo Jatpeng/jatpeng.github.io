@@ -116,7 +116,7 @@ comment:
   type: valine
   appId: aQWrbyCXv2t1dSu0mIJdzHFh # 从 LeanCloud 获取
   appKey: v5nFJzPNBU2DCg8W9PIg2umc # 从 LeanCloud 获取
-  notify: True # 邮件提醒
+  notify: true # 邮件提醒
   verify: false # 验证码
   avatar: 'mp' # 头像样式
   placeholder: '在这里输入你的评论...' # 评论框占位符
