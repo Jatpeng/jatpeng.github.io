@@ -135,6 +135,7 @@ valine:
   appKey: v5nFJzPNBU2DCg8W9PIg2umc # your appKey
   pageSize: 10
   avatar: monsterid
+  serverURLs: https://leancloud.app
   lang: zh-CN
   placeholder: 请留下你的评论~
   guest_info: nick,mail # 评论者信息字段
