@@ -5,7 +5,7 @@ tags:
 categories:
 description:
 cover: https://picsum.photos/800/600
-comments: true   # 确保这里为 true
+comments: true
 copyright: true
 typora-root-url: ..
 ---
