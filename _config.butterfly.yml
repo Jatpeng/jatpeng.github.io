@@ -122,3 +122,25 @@ comment:
   placeholder: '在这里输入你的评论...' # 评论框占位符
   pageSize: 10 # 每页评论数
   visitor: true # 文章访问量统计
+
+comments:
+  use: Valine # 使用的评论系统
+  text: true # 显示评论按钮文字
+  lazyload: false # 关闭懒加载以确保评论区加载
+  count: true # 显示评论数
+
+# Valine 配置
+valine:
+  appId: aQWrbyCXv2t1dSu0mIJdzHFh-MdYXbMMI # your appId
+  appKey: v5nFJzPNBU2DCg8W9PIg2umc # your appKey
+  pageSize: 10
+  avatar: monsterid
+  lang: zh-CN
+  placeholder: 请留下你的评论~
+  guest_info: nick,mail # 评论者信息字段
+  recordIP: false
+  bg: # 评论框背景
+  emojiCDN: # emoji CDN
+  enableQQ: false
+  requiredFields: [nick, mail] # 必填项
+  visitor: true
