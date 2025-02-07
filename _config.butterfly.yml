@@ -110,15 +110,32 @@ links_settings:
   text: Links  # 标题
   desc: 友情链接
 
-# 评论系统配置
-comment:
-  enable: true
-  type: valine
-  appId: aQWrbyCXv2t1dSu0mIJdzHFh # 从 LeanCloud 获取
-  appKey: v5nFJzPNBU2DCg8W9PIg2umc # 从 LeanCloud 获取
-  notify: true # 邮件提醒
-  verify: false # 验证码
-  avatar: 'mp' # 头像样式
-  placeholder: '在这里输入你的评论...' # 评论框占位符
-  pageSize: 10 # 每页评论数
-  visitor: true # 文章访问量统计
+# 评论设置
+comments:
+  # Up to 2 comments system, the first will be shown as default
+  # Choose: Valine/Disqus/Gitalk/Utterances/Artalk
+  use: Valine # Valine/Disqus
+  text: true # Display the comment name next to the button
+  lazyload: true # The comment system will be loaded when the visitor clicks
+
+# Valine
+# https://valine.js.org
+valine:
+  enable: true # if you want use valine,please set this value is true
+  appId: aQWrbyCXv2t1dSu0mIJdzHFh-MdYXbMMI # leancloud application app id
+  appKey: v5nFJzPNBU2DCg8W9PIg2umc # leancloud application app key
+  notify: false # valine mail notify (true/false) Deprecated in v1.4.0+
+  verify: false # valine verify code (true/false) Deprecated in v1.4.0+
+  pageSize: 10 # comment list page size
+  avatar: monsterid # gravatar style https://valine.js.org/#/avatar
+  lang: zh-CN # i18n: zh-CN/zh-TW/en/ja
+  placeholder: 请留下你的评论 # valine comment input placeholder (like: Please leave your footprints)
+  guest_info: nick,mail,link # valine comment header info (nick/mail/link)
+  recordIP: false # Record reviewer IP
+  serverURLs: # This configuration is suitable for domestic custom domain name users, overseas version will be automatically detected (no need to manually fill in)
+  bg: # valine background
+  emojiCDN: # emoji CDN
+  enableQQ: false # enable the Nickname box to automatically get QQ Nickname and QQ Avatar
+  requiredFields: nick,mail # required fields (nick/mail)
+  visitor: true
+  option:
