@@ -124,11 +124,11 @@ comment:
   visitor: true # 文章访问量统计
 
 comments:
-  use: Valine # 使用的评论系统
-  text: true # 显示评论按钮文字
-  lazyload: false # 关闭懒加载以确保评论区加载
-  count: true # 显示评论数
-
+  use: Valine #,Disqus # 可实现单评论、双评论(最多两个)
+  text: true # 是否显示评论服务商的名字
+  lazyload: true # 是否为评论开启lazyload，开启后，只有滚动到评论位置时才会加载评论所需要的资源（开启lazyload后，评论数将不显示）
+  count: true # 是否在文章顶部显示评论数，livere、Giscus 和 utterances 不支持评论数显示
+  card_post_count: false # 是否在首页文章卡片显示评论数，gitalk、livere 、Giscus 和 utterances 不支持评论数显示
 # Valine 配置
 valine:
   appId: aQWrbyCXv2t1dSu0mIJdzHFh-MdYXbMMI # your appId
