@@ -122,7 +122,7 @@ valine:
   enable: true
   appId: 'aQWrbyCXv2t1dSu0mIJdzHFh-MdYXbMMI' 
   appKey: 'v5nFJzPNBU2DCg8W9PIg2umc'
-  notify: false
+  notify: true
   verify: false
   placeholder: '请留下你的评论~'
   avatar: 'mp' # 修改这里，使用 Gravatar 的默认头像
