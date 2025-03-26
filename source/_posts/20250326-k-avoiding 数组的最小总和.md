@@ -1,7 +1,8 @@
 ---
-layout: 250326-leetcode2593k-avoiding数组的最小总和
+layout: 20250326-leetcode2593k-avoiding数组的最小总和
 title: k-avoiding数组的最小总和
 date: 2025-03-26 09:06:37
+cover: cover: https://picsum.photos/800/600?random=<%= titleHash('20250326-leetcode2593k-avoiding数组的最小总和') %>
 tags:
 ---
 给你两个整数 n 和 k 。
