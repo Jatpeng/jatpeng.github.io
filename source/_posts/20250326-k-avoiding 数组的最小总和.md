@@ -1,7 +1,7 @@
 ---
 title: leetcodek-avoiding数组的最小总和
 date: 2025-03-26 09:06:37
-cover: cover: https://picsum.photos/800/600?random=<%= titleHash('20250326-leetcode2593k-avoiding数组的最小总和') %>
+cover: https://picsum.photos/800/600?random=<%= titleHash('20250326-leetcode2593k-avoiding数组的最小总和') %>
 comments: true
 categories:
   - 算法
