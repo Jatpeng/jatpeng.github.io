@@ -108,12 +108,64 @@ ABP_Aura 动画状态机，状态切换，根据速度判断是idle 还是run
 
 # Enemy Interfacce
 
-![已上传的图片](/images/20250701-Aura-UE5-leraning/ZpAlPwW8l3xDEPswRoWAacbpVzDfEcU1c8%3D.png)
+
+
+```mermaid
+graph LR
+    A[AuraPlayerController] -->|Hover Over| B[BP_Goblin_Spear]
+    A -->|Hover Over| C[BP_Goblin_Slingshot]
+    B --> D[Actor]
+    C --> D
+    D --> E[IEenemyInterface]
+    E --> F[Highlight]
+
+```
 
 
 
-```flow
-flowchart LR
-	A[AuraPlayerController] -->|Hover Over| B[BP_Goblin_Speas
+
+
+```mermaid
+---
+title: AAuraCharacterBase example
+---
+classDiagram
+	Character的基类
+	note for AAuraCharacterBase "所有Character的基类"
+    AAuraCharacterBase <|-- AAuraCharacter
+    AAuraCharacterBase <|-- AAuraEnemy
+    AAuraCharacterBase : +Weapon
+    AAuraCharacterBase: +AAuraCharacterBase()创建了一个Wepon的骨骼网格组件，同时声明了Weapon 挂接点
+    AAuraEnemy <|-- BP_Enemy
+    class AAuraCharacter{
+    	AAuraCharacter <|-- BP_AuraCharacter
+        -AAuraCharacter()
+    }
+    class AAuraEnemy{
+    	
+        +bool is_wild
+        +HighlightActor()
+        +UnHighlightActor()
+    }
+
+  class EnemyInterface
+  <<interface>> EnemyInterface
+  EnemyInterface:HighlightActor()
+  EnemyInterface:UnHighlightActor()
+  EnemyInterface<|--AAuraEnemy
+      class AAuraPlayerController{
+        + AAuraPlayerController()
+        -PlayerTick()
+        -BeginPlay() 初始化增强输入
+        -SetupInputComponent()设置输入
+        # CursorTrace() 
+        # Move() 控制角色移动
+        # MoveAction
+        # AuraContext
+    	# LastActor;
+		# ThisActor;
+    }
+
+class BP_Enemy
 ```
 
