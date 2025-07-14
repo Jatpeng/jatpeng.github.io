@@ -23,7 +23,7 @@ description:
 
 # 2.类
 AuraCharacter.cpp
-TObjectptr ？
+TObjectptr：UE5新增的指针，相比原先的UObject* 实现GC,序列化
 c++ 类
 AuraCharacterBase  锁有Character的基类，创建了一个Wepon的骨骼网格组件，同时声明了Weapon 挂接点
 
@@ -45,17 +45,20 @@ ABP_Goblin_Spear    设置敌人持有Spear的动画
 # 3.增强输入
 https://dev.epicgames.com/documentation/zh-cn/unreal-engine/configure-character-movement-with-cplusplus-in-unreal-engine?application_version=5.6
 
+## 1.Aura.Build.cs 中添加EnhancedInput模块
 
-Aura.Build.cs 中添加EnhancedInput模块
+## 2.创建IA 和IMC 
 
-input Action IA_Move :设置输入的值类型，是float bool vector2,3 ?  
+​	1. input Action IA_Move :设置输入的值类型，是float bool vector2,3 ?  
 
-input map context :IMC_  设置IA_Move 中的按键，AwSD，和对应的按键的modifiy
+​	2. input map context :IMC_  设置IA_Move 中的按键，AWSD，和对应的按键的modifiy
 
 Swizzle input Axis Values:
 
 
 ## 1.AuraPlayerController class
+
+EnhanceInput system ： 增强输入系统，用来管理IA 和IMC
 
 获取EnhanceInput system 将创建号IMC 添加到Enhance Input系统中
 
@@ -71,6 +74,32 @@ EnhancedInputComponent->BindAction(MoveAction,ETriggerEvent::Triggered,this,&AAu
 Move()
 将输入的IA_Move 输入，转为角色移动的位置
 
+```
+
+## 3.绑定IA_Move 到Move 响应函数
+
+```c++
+void AAuraPlayerController::SetupInputComponent()
+{
+	Super::SetupInputComponent();
+
+	// 1.获取EnhanceInput system 
+	UEnhancedInputLocalPlayerSubsystem* Subsystem = ULocalPlayer::GetSubsystem<UEnhancedInputLocalPlayerSubsystem>(GetLocalPlayer());
+	// 2.获取IA_Move
+	UInputMappingContext* IA_Move = LoadObject<UInputMappingContext>(nullptr,TEXT("InputMappingContext'/Game/Input/IMC_Move.IMC_Move'"));
+	// 3.将IA_Move 添加到EnhanceInput system 中
+	if (Subsystem && IA_Move)
+	{
+		Subsystem->AddMappingContext(IA_Move,0);
+	}
+	// 4.绑定IA_Move 到Move 响应函数
+	UEnhancedInputComponent* EnhancedInputComponent = Cast<UEnhancedInputComponent>(InputComponent);
+	if (EnhancedInputComponent && MoveAction)
+	{
+		EnhancedInputComponent->BindAction(MoveAction,ETriggerEvent::Triggered,this,&AAuraPlayerController::Move);
+	}
+}
+```
 ```c++
 void AAuraPlayerController::Move(const FInputActionValue& InputActionValue)
 {
@@ -102,13 +131,10 @@ BP_AuraCharacter 中设置弹簧臂相机
 
 AuraCharacter Class 中设置角色的朝向为移动方向
 
-
 ABP_Aura 动画状态机，状态切换，根据速度判断是idle 还是run 
 
 
 # Enemy Interfacce
-
-
 
 ```mermaid
 graph LR
@@ -118,54 +144,46 @@ graph LR
     C --> D
     D --> E[IEenemyInterface]
     E --> F[Highlight]
-
 ```
-
-
 
 
 
 ```mermaid
----
-title: AAuraCharacterBase example
----
 classDiagram
-	Character的基类
-	note for AAuraCharacterBase "所有Character的基类"
+    %% Character的基类
+    class AAuraCharacterBase {
+        +Weapon
+        +AAuraCharacterBase() 创建了一个Wepon的骨骼网格组件，同时声明了Weapon 挂接点
+    }
     AAuraCharacterBase <|-- AAuraCharacter
     AAuraCharacterBase <|-- AAuraEnemy
-    AAuraCharacterBase : +Weapon
-    AAuraCharacterBase: +AAuraCharacterBase()创建了一个Wepon的骨骼网格组件，同时声明了Weapon 挂接点
     AAuraEnemy <|-- BP_Enemy
-    class AAuraCharacter{
-    	AAuraCharacter <|-- BP_AuraCharacter
+    class AAuraCharacter {
         -AAuraCharacter()
     }
-    class AAuraEnemy{
-    	
+    AAuraCharacter <|-- BP_AuraCharacter
+    class AAuraEnemy {
         +bool is_wild
         +HighlightActor()
         +UnHighlightActor()
     }
-
-  class EnemyInterface
-  <<interface>> EnemyInterface
-  EnemyInterface:HighlightActor()
-  EnemyInterface:UnHighlightActor()
-  EnemyInterface<|--AAuraEnemy
-      class AAuraPlayerController{
-        + AAuraPlayerController()
+    class EnemyInterface {
+        <<interface>> EnemyInterface
+        +HighlightActor()
+        +UnHighlightActor()
+    }
+    EnemyInterface <|-- AAuraEnemy
+    class AAuraPlayerController {
+        +AAuraPlayerController()
         -PlayerTick()
         -BeginPlay() 初始化增强输入
-        -SetupInputComponent()设置输入
-        # CursorTrace() 
-        # Move() 控制角色移动
-        # MoveAction
-        # AuraContext
-    	# LastActor;
-		# ThisActor;
+        -SetupInputComponent() 设置输入
+        #CursorTrace()
+        #Move() 控制角色移动
+        #MoveAction
+        #AuraContext
+        #LastActor
+        #ThisActor
     }
-
-class BP_Enemy
+    class BP_Enemy
 ```
-
