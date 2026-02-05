@@ -1,0 +1,22 @@
+/* Image rendering fixes for posts */
+img {
+  max-width: 100%;
+  height: auto;
+}
+
+/* Common article containers */
+#article-container img,
+.post-content img,
+.article-entry img {
+  display: block;
+  margin: 1.2rem auto;
+  object-fit: contain;
+}
+
+@media (min-width: 1024px) {
+  #article-container img,
+  .post-content img,
+  .article-entry img {
+    max-width: 92%;
+  }
+}

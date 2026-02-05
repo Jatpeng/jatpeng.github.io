@@ -1,6 +1,6 @@
 ---
-title: 20250701-Aura UE5 leraning
-cover: https://picsum.photos/800/600
+title: Aura UE5 Learning
+cover: https://picsum.photos/seed/20250701-Aura-UE5-leraning/1200/675
 comments: true
 copyright: true
 typora-root-url: ..
@@ -9,10 +9,9 @@ tags:
 categories:
 description:
 ---
+## 1. Create Project
 
-# 1 .Create  project
-
-项目设置
+项目设置：
 
 ![image-20250701171016760](/images/20250701-Aura-UE5-leraning/image-20250701171016760.png)
 
@@ -20,121 +19,106 @@ description:
 
 ![image-20250701172653793](/images/20250701-Aura-UE5-leraning/image-20250701172653793.png)
 
+## 2. 类
 
-# 2.类
-AuraCharacter.cpp
-TObjectptr：UE5新增的指针，相比原先的UObject* 实现GC,序列化
-c++ 类
-AuraCharacterBase  锁有Character的基类，创建了一个Wepon的骨骼网格组件，同时声明了Weapon 挂接点
+### 2.1 代码结构
 
-AuraCharacter Class 主角类
-AuraEnemy class  敌人类的父类，继承与AuraCharacter
+- `AuraCharacter.cpp`
+- `TObjectPtr`：UE5 新增指针类型，相比 `UObject*` 更好地支持 GC 与序列化。
+- `AuraCharacterBase`：`Character` 基类，创建了 `Weapon` 的骨骼网格组件，同时声明了 `Weapon` 挂接点。
+- `AuraCharacter`：主角类。
+- `AuraEnemy`：敌人类的父类，继承自 `AuraCharacter`。
 
+### 2.2 蓝图
 
+- `BP_Aura_Character`
+- `ABP_Aura_Character`
+- `ABP_Enemy`：敌人动画蓝图模板基类，不需要指定骨骼，不同敌人复用其中的动画播放速度逻辑。
+- `ABP_Goblin_Slingshot`：设置指定敌人持有 Slingshot 的动画。
+- `ABP_Goblin_Spear`：设置指定敌人持有 Spear 的动画。
 
-蓝图
+## 3. 增强输入
 
-BP_Aura_Character 
-ABP_Aura_Character
-
-ABP_Enemy 敌人动画蓝图模板基类，不需要指定骨骼。不同敌人复用里面的动画播放速度计算逻辑
-ABP_Goblin_SlingShot  设置指定敌人持有SlingShot的动画
-ABP_Goblin_Spear    设置敌人持有Spear的动画
-
-
-# 3.增强输入
+参考文档：
 https://dev.epicgames.com/documentation/zh-cn/unreal-engine/configure-character-movement-with-cplusplus-in-unreal-engine?application_version=5.6
 
-## 1.Aura.Build.cs 中添加EnhancedInput模块
+### 3.1 Aura.Build.cs 中添加 EnhancedInput 模块
 
-## 2.创建IA 和IMC 
+### 3.2 创建 IA 和 IMC
 
-​	1. input Action IA_Move :设置输入的值类型，是float bool vector2,3 ?  
+1. `IA_Move`：设置输入值类型（float / bool / vector2 / vector3）。
+2. `IMC_...`：设置 `IA_Move` 的按键（WASD）及 modifier。
 
-​	2. input map context :IMC_  设置IA_Move 中的按键，AWSD，和对应的按键的modifiy
+Swizzle Input Axis Values。
 
-Swizzle input Axis Values:
+### 3.3 AuraPlayerController
 
+- Enhanced Input system：用于管理 IA 与 IMC。
+- 获取 Enhanced Input system 并添加 IMC。
+- 在 `SetupInputComponent()` 中绑定 `IA_Move` 与 `Move`。
 
-## 1.AuraPlayerController class
-
-EnhanceInput system ： 增强输入系统，用来管理IA 和IMC
-
-获取EnhanceInput system 将创建号IMC 添加到Enhance Input系统中
-
-输入函数:
-SetupInputComponent() 
-为了实现输入和WSAD后，游戏有相应，需要一个IA_Move触发后的响应函数 Move
-通过增强输入组件，来控制IA_Move 和Move 响应函数的绑定
-
-EnhancedInputComponent->BindAction(MoveAction,ETriggerEvent::Triggered,this,&AAuraPlayerController::Move);
-
-响应函数:
-
-Move()
-将输入的IA_Move 输入，转为角色移动的位置
+绑定示例：
 
 ```
+EnhancedInputComponent->BindAction(MoveAction, ETriggerEvent::Triggered, this, &AAuraPlayerController::Move);
+```
 
-## 3.绑定IA_Move 到Move 响应函数
+### 3.4 绑定 IA_Move 到 Move 响应函数
 
-```c++
+```cpp
 void AAuraPlayerController::SetupInputComponent()
 {
-	Super::SetupInputComponent();
+    Super::SetupInputComponent();
 
-	// 1.获取EnhanceInput system 
-	UEnhancedInputLocalPlayerSubsystem* Subsystem = ULocalPlayer::GetSubsystem<UEnhancedInputLocalPlayerSubsystem>(GetLocalPlayer());
-	// 2.获取IA_Move
-	UInputMappingContext* IA_Move = LoadObject<UInputMappingContext>(nullptr,TEXT("InputMappingContext'/Game/Input/IMC_Move.IMC_Move'"));
-	// 3.将IA_Move 添加到EnhanceInput system 中
-	if (Subsystem && IA_Move)
-	{
-		Subsystem->AddMappingContext(IA_Move,0);
-	}
-	// 4.绑定IA_Move 到Move 响应函数
-	UEnhancedInputComponent* EnhancedInputComponent = Cast<UEnhancedInputComponent>(InputComponent);
-	if (EnhancedInputComponent && MoveAction)
-	{
-		EnhancedInputComponent->BindAction(MoveAction,ETriggerEvent::Triggered,this,&AAuraPlayerController::Move);
-	}
+    // 1. 获取 Enhanced Input system
+    UEnhancedInputLocalPlayerSubsystem* Subsystem =
+        ULocalPlayer::GetSubsystem<UEnhancedInputLocalPlayerSubsystem>(GetLocalPlayer());
+    // 2. 获取 IA_Move
+    UInputMappingContext* IA_Move = LoadObject<UInputMappingContext>(
+        nullptr, TEXT("InputMappingContext'/Game/Input/IMC_Move.IMC_Move'"));
+    // 3. 将 IA_Move 添加到 Enhanced Input system 中
+    if (Subsystem && IA_Move)
+    {
+        Subsystem->AddMappingContext(IA_Move, 0);
+    }
+    // 4. 绑定 IA_Move 到 Move 响应函数
+    UEnhancedInputComponent* EnhancedInputComponent = Cast<UEnhancedInputComponent>(InputComponent);
+    if (EnhancedInputComponent && MoveAction)
+    {
+        EnhancedInputComponent->BindAction(MoveAction, ETriggerEvent::Triggered, this,
+                                           &AAuraPlayerController::Move);
+    }
 }
 ```
-```c++
+
+```cpp
 void AAuraPlayerController::Move(const FInputActionValue& InputActionValue)
 {
-	const FVector2D InputAxisVector = InputActionValue.Get<FVector2D>();//获取MoveAction 输入xY 两个方向的值
-	
-	const FRotator Rotation = GetControlRotation();//控制器的选装矩阵
-	const FRotator YawRotation(0.f,Rotation.Yaw,0.f);// 将控制器，俯仰角pitch，旋转角Roll,保存为0，保留偏航角Yaw。 
+    const FVector2D InputAxisVector = InputActionValue.Get<FVector2D>();
 
-	const FVector ForwardDirection = FRotationMatrix(YawRotation).GetUnitAxis(EAxis::X);// 根据偏航角,获取相机当前热forward 方向
-	const FVector  RightDirection = FRotationMatrix(YawRotation).GetUnitAxis(EAxis::Y); // right 方向
+    const FRotator Rotation = GetControlRotation();
+    const FRotator YawRotation(0.f, Rotation.Yaw, 0.f);
 
-	if (APawn* ControlledPawn = GetPawn<APawn>())
-	{
-		ControlledPawn->AddMovementInput(ForwardDirection,InputAxisVector.Y); 
-		ControlledPawn->AddMovementInput(RightDirection,InputAxisVector.X);
-	}
+    const FVector ForwardDirection = FRotationMatrix(YawRotation).GetUnitAxis(EAxis::X);
+    const FVector RightDirection = FRotationMatrix(YawRotation).GetUnitAxis(EAxis::Y);
+
+    if (APawn* ControlledPawn = GetPawn<APawn>())
+    {
+        ControlledPawn->AddMovementInput(ForwardDirection, InputAxisVector.Y);
+        ControlledPawn->AddMovementInput(RightDirection, InputAxisVector.X);
+    }
 }
-
 ```
 
+## Game Mode
 
-# Game Mode
+- `GameModeBase` 类：C++ `AuraGameModeBase`，蓝图 `BP_Aura_GameMode`，设置默认 Pawn 和 Controller。
+- 在 World Settings 中设置 GameMode。
+- 在 `BP_AuraCharacter` 中设置弹簧臂与相机。
+- 在 `AuraCharacter` 中设置角色朝向为移动方向。
+- `ABP_Aura` 动画状态机：根据速度在 idle/run 之间切换。
 
-GameModeBase Class  C++ AuraGameModeBase  蓝图:BP_Aura_GameMode  设置 默认Pawn 和controller
-
-WordSetting 中设置 GameMode
-
-BP_AuraCharacter 中设置弹簧臂相机
-
-AuraCharacter Class 中设置角色的朝向为移动方向
-
-ABP_Aura 动画状态机，状态切换，根据速度判断是idle 还是run 
-
-
-# Enemy Interfacce
+## Enemy Interface
 
 ```mermaid
 graph LR
@@ -142,18 +126,16 @@ graph LR
     A -->|Hover Over| C[BP_Goblin_Slingshot]
     B --> D[Actor]
     C --> D
-    D --> E[IEenemyInterface]
+    D --> E[IEnemyInterface]
     E --> F[Highlight]
 ```
 
-
-
 ```mermaid
 classDiagram
-    %% Character的基类
+    %% Character 的基类
     class AAuraCharacterBase {
         +Weapon
-        +AAuraCharacterBase() 创建了一个Wepon的骨骼网格组件，同时声明了Weapon 挂接点
+        +AAuraCharacterBase() 创建了一个 Weapon 的骨骼网格组件，同时声明了 Weapon 挂接点
     }
     AAuraCharacterBase <|-- AAuraCharacter
     AAuraCharacterBase <|-- AAuraEnemy

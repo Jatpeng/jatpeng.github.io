@@ -135,3 +135,8 @@ valine:
   serverURLs: https://aqwrbycx.api.lncldglobal.com # 国际版需要这行，之前是不需要的
   enableQQ: false
   requiredFields: ['nick', 'mail']
+
+# 自定义样式注入
+inject:
+  head:
+    - <link rel="stylesheet" href="/css/custom.css">

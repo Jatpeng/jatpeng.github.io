@@ -1,6 +1,6 @@
 ---
-title: 20250714-线程池和jobSystem
-cover: https://picsum.photos/800/600?random=<%= titleHash('20250714-线程池和jobSystem) %>
+title: 线程池与 Job System
+cover: https://picsum.photos/seed/20250714-线程池和jobSystem/1200/675
 comments: true
 copyright: true
 typora-root-url: ..
@@ -9,11 +9,9 @@ tags:
 categories:
 description:
 ---
-
 ## C++ 最小线程池实现
 
 下面是一个简洁易懂的 C++11 线程池最小实现示例，并附详细注释：
-
 ```cpp
 #include <vector>                // 用于存储线程对象
 #include <queue>                 // 任务队列
@@ -76,7 +74,6 @@ private:
 ```
 
 ### 使用方法
-
 ```cpp
 ThreadPool pool(4);
 auto fut = pool.enqueue([] { return 42; });

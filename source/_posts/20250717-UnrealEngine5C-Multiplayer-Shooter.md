@@ -1,6 +1,6 @@
 ---
-title: 20250717-UnrealEngine5C++Multiplayer-Shooter
-cover: https://picsum.photos/800/600
+title: Unreal Engine 5 C++ Multiplayer Shooter
+cover: https://picsum.photos/seed/20250717-UnrealEngine5C-Multiplayer-Shooter/1200/675
 comments: true
 copyright: true
 typora-root-url: ..
@@ -9,9 +9,7 @@ tags:
 categories:
 description:
 ---
-
-
-# 42.Network Role
+# 42. Network Role
 本文主要介绍了虚幻引擎中多玩家游戏中角色的网络角色（role），包括本地角色（local role）与远程角色（remote role），以及它们在多机环境中的不同应用。作者通过创建一个悬浮角色状态显示Widget，详细讲解了服务器端（authority）、自主代理（autonomous proxy）和模拟代理（simulated proxy）等概念，帮助开发者理解不同角色在网络中的表现，从而实现角色状态的可视化和判别。
 
 重点总结
@@ -25,8 +23,7 @@ description:
 演示了如何在多人游戏中动态更新角色角色状态，提高游戏的可视化和调试效率。
 重点提示了网络角色在多机游戏中角色控制和状态判断的重要性，为后续开发提供基础。
 
-
-# 44.weapon
+# 44. weapon
 摘要
 本文介绍了在虚幻引擎5中使用C++开发多玩家射击游戏时，如何设计和实现武器类。内容涵盖了创建武器类的步骤，包括添加基础组件（如骨架网格和区域碰撞体）、定义武器状态枚举，以及实现网络同步和碰撞逻辑，确保武器在不同场景下的正确行为。这些设计原则有助于实现具有交互性和多操作的武器系统，以支持多人游戏的复杂需求。
 

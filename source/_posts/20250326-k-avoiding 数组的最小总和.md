@@ -1,7 +1,7 @@
 ---
-title: leetcodek-avoiding数组的最小总和
+title: K-Avoiding 数组的最小总和
 date: 2025-03-26 09:06:37
-cover: https://picsum.photos/800/600?random=<%= titleHash('20250326-leetcode2593k-avoiding数组的最小总和') %>
+cover: https://picsum.photos/seed/20250326-k-avoiding 数组的最小总和/1200/675
 comments: true
 categories:
   - 算法
@@ -11,8 +11,6 @@ categories:
 对于一个由 不同 正整数组成的数组，如果其中不存在任何求和等于 k 的不同元素对，则称其为 k-avoiding 数组。
 
 返回长度为 n 的 k-avoiding 数组的可能的最小总和。
-
- 
 
 示例 1：
 
@@ -25,8 +23,7 @@ categories:
 输入：n = 2, k = 6
 输出：3
 解释：可以构造数组 [1,2] ，其元素总和为 3 。
-可以证明不存在总和小于 3 的 k-avoiding 数组。 
- 
+可以证明不存在总和小于 3 的 k-avoiding 数组。
 
 提示：
 
@@ -54,10 +51,6 @@ class Solution:
         return sum(result)
 ```
 
-
-
-
-
 ## 解法二：Pythonic 写法
 使用 Python3 内置函数 all()，使代码更简洁。
 ```
@@ -74,7 +67,6 @@ class Solution:
 
 ## 解法三：贪心 + 等差数列
 
-
 核心思想
 假设 k = 7, n = 3，数组构造分为两部分：
 
@@ -82,7 +74,6 @@ class Solution:
 如果 n > k//2，数组分为两部分：
 第一部分：从 1 到 k/2 的和
 第二部分：从 k 开始的 (n - k/2) 个数的和
-
 ```
 class Solution:
     def minimumSum(self, n: int, k: int) -> int:
@@ -101,5 +92,3 @@ class Solution:
         return (a1 + a1 + (n - 1) * d) * n // 2
 
 ```
-
-
