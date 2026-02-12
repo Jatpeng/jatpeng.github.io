@@ -31,6 +31,15 @@ jobs:
       - name: Install dependencies
         run: npm ci
 
+      - name: Ensure Butterfly theme is usable in CI
+        run: |
+          # In this repo, themes/butterfly is tracked as a gitlink.
+          # Without submodule content, the folder can exist but be unusable,
+          # which makes Hexo emit empty HTML files.
+          if [ -d themes/butterfly ] && [ ! -f themes/butterfly/layout/index.pug ]; then
+            rm -rf themes/butterfly
+          fi
+
       - name: Build Hexo site
         run: npx hexo clean && npx hexo generate
 
