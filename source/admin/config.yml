@@ -1,0 +1,75 @@
+backend:
+  name: github
+  repo: Jatpeng/jatpeng.github.io
+  branch: source
+  # Browser-side GitHub authentication is required.
+  # Option 1 (managed service): uncomment and use Decap Bridge.
+  # base_url: https://auth.decapbridge.com
+  # Option 2 (self-host): set your own auth service.
+  # base_url: https://cms-auth.example.com
+  # auth_endpoint: auth
+
+site_url: https://jatpeng.github.io
+display_url: https://jatpeng.github.io
+locale: zh_Hans
+
+media_folder: source/images/uploads
+public_folder: /images/uploads
+
+slug:
+  encoding: ascii
+  clean_accents: true
+
+collections:
+  - name: posts
+    label: Posts
+    label_singular: Post
+    folder: source/_posts
+    create: true
+    delete: true
+    extension: md
+    format: frontmatter
+    slug: "{{year}}{{month}}{{day}}-{{slug}}"
+    preview_path: "{{year}}/{{month}}/{{day}}/{{slug}}/"
+    fields:
+      - label: Title
+        name: title
+        widget: string
+      - label: Date
+        name: date
+        widget: datetime
+        format: "YYYY-MM-DD HH:mm:ss"
+      - label: Updated
+        name: updated
+        widget: datetime
+        format: "YYYY-MM-DD HH:mm:ss"
+        required: false
+      - label: Tags
+        name: tags
+        widget: list
+        required: false
+      - label: Categories
+        name: categories
+        widget: list
+        required: false
+      - label: Description
+        name: description
+        widget: text
+        required: false
+      - label: Cover
+        name: cover
+        widget: image
+        required: false
+      - label: Comments
+        name: comments
+        widget: boolean
+        default: true
+        required: false
+      - label: Copyright
+        name: copyright
+        widget: boolean
+        default: true
+        required: false
+      - label: Body
+        name: body
+        widget: markdown
