@@ -40,6 +40,18 @@ jobs:
             rm -rf themes/butterfly
           fi
 
+      - name: Build TinaCMS admin
+        env:
+          TINA_CLIENT_ID: ${{ secrets.TINA_CLIENT_ID }}
+          TINA_TOKEN: ${{ secrets.TINA_TOKEN }}
+          GITHUB_BRANCH: source
+        run: |
+          if [ -z "${TINA_CLIENT_ID}" ] || [ -z "${TINA_TOKEN}" ]; then
+            echo "Skipping TinaCMS build: TINA_CLIENT_ID or TINA_TOKEN is missing."
+            exit 0
+          fi
+          npx tinacms build
+
       - name: Build Hexo site
         run: npx hexo clean && npx hexo generate
 
