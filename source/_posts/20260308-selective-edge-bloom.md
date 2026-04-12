@@ -1,6 +1,5 @@
 ---
-
-## title: 基于 URP 的 LDR 局部边缘泛光方案 (Selective Edge Bloom)
+title: 基于 URP 的 LDR 局部边缘泛光方案 (Selective Edge Bloom)
 comments: true
 copyright: true
 date: 2026-03-08 11:13:00
@@ -12,7 +11,8 @@ tags:
 categories:
   - 游戏开发
 description: 在 URP 环境下实现不依赖 HDR 的局部边缘泛光，包含深度与遮挡控制
-cover: [https://picsum.photos/seed/20260308-selective-edge-bloom/1200/675](https://picsum.photos/seed/20260308-selective-edge-bloom/1200/675)
+cover: https://picsum.photos/seed/20260308-selective-edge-bloom/1200/675
+---
 
 ## 1. 概述 (Overview)
 
