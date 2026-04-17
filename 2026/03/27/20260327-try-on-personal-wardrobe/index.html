@@ -1,0 +1,351 @@
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0,viewport-fit=cover"><title>Try on 个人衣柜 | Never Settle</title><meta name="author" content="Jatpeng"><meta name="copyright" content="Jatpeng"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta name="description" content="集 AI 虚拟试穿、个人衣柜与推荐能力于一体的商业化应用展示">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Try on 个人衣柜">
+<meta property="og:url" content="https://jatpeng.github.io/2026/03/27/20260327-try-on-personal-wardrobe/index.html">
+<meta property="og:site_name" content="Never Settle">
+<meta property="og:description" content="集 AI 虚拟试穿、个人衣柜与推荐能力于一体的商业化应用展示">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://jatpeng.github.io/images/20260327-Try-on-AI-%E4%BD%9C%E5%93%81%E5%B1%95%E7%A4%BA/home-demo-1.jpg">
+<meta property="article:published_time" content="2026-03-27T04:33:00.000Z">
+<meta property="article:modified_time" content="2026-03-27T04:59:25.185Z">
+<meta property="article:author" content="Jatpeng">
+<meta property="article:tag" content="AI">
+<meta property="article:tag" content="电商">
+<meta property="article:tag" content="React">
+<meta property="article:tag" content="Cloudflare Workers">
+<meta property="article:tag" content="项目展示">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://jatpeng.github.io/images/20260327-Try-on-AI-%E4%BD%9C%E5%93%81%E5%B1%95%E7%A4%BA/home-demo-1.jpg"><script type="application/ld+json">{
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "headline": "Try on 个人衣柜",
+  "url": "https://jatpeng.github.io/2026/03/27/20260327-try-on-personal-wardrobe/",
+  "image": "https://jatpeng.github.io/images/20260327-Try-on-AI-%E4%BD%9C%E5%93%81%E5%B1%95%E7%A4%BA/home-demo-1.jpg",
+  "datePublished": "2026-03-27T04:33:00.000Z",
+  "dateModified": "2026-03-27T04:59:25.185Z",
+  "author": [
+    {
+      "@type": "Person",
+      "name": "Jatpeng",
+      "url": "https://jatpeng.github.io"
+    }
+  ]
+}</script><link rel="shortcut icon" href="/img/favicon.png"><link rel="canonical" href="https://jatpeng.github.io/2026/03/27/20260327-try-on-personal-wardrobe/index.html"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><link rel="stylesheet" href="/css/index.css?v=5.5.4"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@7.1.0/css/all.min.css"><script>
+    (() => {
+      
+    const saveToLocal = {
+      set: (key, value, ttl) => {
+        if (!ttl) return
+        const expiry = Date.now() + ttl * 86400000
+        localStorage.setItem(key, JSON.stringify({ value, expiry }))
+      },
+      get: key => {
+        const itemStr = localStorage.getItem(key)
+        if (!itemStr) return undefined
+        const { value, expiry } = JSON.parse(itemStr)
+        if (Date.now() > expiry) {
+          localStorage.removeItem(key)
+          return undefined
+        }
+        return value
+      }
+    }
+
+    window.btf = {
+      saveToLocal,
+      getScript: (url, attr = {}) => new Promise((resolve, reject) => {
+        const script = document.createElement('script')
+        script.src = url
+        script.async = true
+        Object.entries(attr).forEach(([key, val]) => script.setAttribute(key, val))
+        script.onload = script.onreadystatechange = () => {
+          if (!script.readyState || /loaded|complete/.test(script.readyState)) resolve()
+        }
+        script.onerror = reject
+        document.head.appendChild(script)
+      }),
+      getCSS: (url, id) => new Promise((resolve, reject) => {
+        const link = document.createElement('link')
+        link.rel = 'stylesheet'
+        link.href = url
+        if (id) link.id = id
+        link.onload = link.onreadystatechange = () => {
+          if (!link.readyState || /loaded|complete/.test(link.readyState)) resolve()
+        }
+        link.onerror = reject
+        document.head.appendChild(link)
+      }),
+      addGlobalFn: (key, fn, name = false, parent = window) => {
+        if (!false && key.startsWith('pjax')) return
+        const globalFn = parent.globalFn || {}
+        globalFn[key] = globalFn[key] || {}
+        globalFn[key][name || Object.keys(globalFn[key]).length] = fn
+        parent.globalFn = globalFn
+      }
+    }
+  
+      
+      const activateDarkMode = () => {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', 'undefined')
+        }
+      }
+      const activateLightMode = () => {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', 'undefined')
+        }
+      }
+
+      btf.activateDarkMode = activateDarkMode
+      btf.activateLightMode = activateLightMode
+
+      const theme = saveToLocal.get('theme')
+    
+          theme === 'dark' ? activateDarkMode() : theme === 'light' ? activateLightMode() : null
+        
+      
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        document.documentElement.classList.toggle('hide-aside', asideStatus === 'hide')
+      }
+    
+      
+    const detectApple = () => {
+      if (/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)) {
+        document.documentElement.classList.add('apple')
+      }
+    }
+    detectApple()
+  
+    })()
+  </script><script>const GLOBAL_CONFIG = {
+  root: '/',
+  algolia: undefined,
+  localSearch: undefined,
+  translate: undefined,
+  highlight: {"plugin":"highlight.js","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":false,"highlightFullpage":false,"highlightMacStyle":false},
+  copy: {
+    success: '复制成功',
+    error: '复制失败',
+    noSupport: '浏览器不支持'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: '',
+  dateSuffix: {
+    just: '刚刚',
+    min: '分钟前',
+    hour: '小时前',
+    day: '天前',
+    month: '个月前'
+  },
+  copyright: undefined,
+  lightbox: 'null',
+  Snackbar: undefined,
+  infinitegrid: {
+    js: 'https://cdn.jsdelivr.net/npm/@egjs/infinitegrid@4.13.0/dist/infinitegrid.min.js',
+    buttonText: '加载更多'
+  },
+  isPhotoFigcaption: false,
+  islazyloadPlugin: false,
+  isAnchor: false,
+  percent: {
+    toc: true,
+    rightside: false,
+  },
+  autoDarkmode: false
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: 'Try on 个人衣柜',
+  isHighlightShrink: false,
+  isToc: true,
+  pageType: 'post'
+}</script><link rel="stylesheet" href="/css/custom.css"><meta name="generator" content="Hexo 7.3.0"></head><body><div class="bg-animation" id="web_bg" style="background: [object Object];"></div><div class="post" id="body-wrap"><header class="post-bg" id="page-header" style="background-image: url(/images/20260327-Try-on-AI-%E4%BD%9C%E5%93%81%E5%B1%95%E7%A4%BA/home-demo-1.jpg);"><nav id="nav"><span id="blog-info"><a class="nav-site-title" href="/"><span class="site-name">Never Settle</span></a><a class="nav-page-title" href="/"><span class="site-name">Try on 个人衣柜</span><span class="site-name"><i class="fa-solid fa-circle-arrow-left"></i><span>  返回首页</span></span></a></span><div id="menus"></div></nav><div id="post-info"><h1 class="post-title">Try on 个人衣柜</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" datetime="2026-03-27T04:33:00.000Z" title="发表于 2026-03-27 12:33:00">2026-03-27</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2026-03-27T04:59:25.185Z" title="更新于 2026-03-27 12:59:25">2026-03-27</time></span><span class="post-meta-categories"><span class="post-meta-separator">|</span><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/categories/%E9%A1%B9%E7%9B%AE%E5%B1%95%E7%A4%BA/">项目展示</a></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="leancloud_visitors" id="/2026/03/27/20260327-try-on-personal-wardrobe/" data-flag-title="Try on 个人衣柜"><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">浏览量:</span><span class="leancloud-visitors-count"><i class="fa-solid fa-spinner fa-spin"></i></span></span><span class="post-meta-separator">|</span><span class="post-meta-commentcount"><i class="far fa-comments fa-fw post-meta-icon"></i><span class="post-meta-label">评论数:</span><a href="/2026/03/27/20260327-try-on-personal-wardrobe/#post-comment" itemprop="discussionUrl"><span class="valine-comment-count" data-xid="/2026/03/27/20260327-try-on-personal-wardrobe/" itemprop="commentCount"><i class="fa-solid fa-spinner fa-spin"></i></span></a></span></div></div></div></header><main class="layout" id="content-inner"><div id="post"><article class="container post-content" id="article-container"><blockquote>
+<p>AI 试穿 + 个人衣柜，让一次性试穿体验沉淀为可持续复用的数字穿搭资产。</p>
+</blockquote>
+<p><code>Try on 个人衣柜</code> 是一款面向线上穿搭决策的 AI 应用。它不仅提供虚拟试穿，还把用户上传或生成的服装沉淀为结构化衣橱数据，进一步支持分类管理、每日推荐和后续复用。相比单次试穿工具，它更接近一个持续增长的个人穿搭系统。</p>
+<span id="more"></span>
+
+<h2 id="项目概览"><a href="#项目概览" class="headerlink" title="项目概览"></a>项目概览</h2><ul>
+<li>官网：<a target="_blank" rel="noopener" href="https://theafitroom.com/">theafitroom.com</a></li>
+<li>核心定位：AI 试穿 + 个人衣柜 + 穿搭推荐</li>
+<li>技术栈：React 19 + TypeScript + Tailwind CSS + Cloudflare Workers + D1 + R2 + Gemini &#x2F; Vertex AI</li>
+<li>产品状态：已商业化运营</li>
+<li>适用场景：线上购物、穿搭预览、衣橱整理</li>
+</ul>
+<h2 id="核心功能"><a href="#核心功能" class="headerlink" title="核心功能"></a>核心功能</h2><h3 id="1-智能虚拟试穿"><a href="#1-智能虚拟试穿" class="headerlink" title="1. 智能虚拟试穿"></a>1. 智能虚拟试穿</h3><p>上传人物照片与服装图片后，系统会发起异步试穿任务，完成服装替换、光影融合和结果评估，生成接近真实上身效果的试穿预览。</p>
+<p><img src="/images/20260327-Try-on-AI-%E4%BD%9C%E5%93%81%E5%B1%95%E7%A4%BA/virtual-tryon-result.jpg" alt="虚拟试穿效果"></p>
+<h3 id="2-服装上传与自动入柜"><a href="#2-服装上传与自动入柜" class="headerlink" title="2. 服装上传与自动入柜"></a>2. 服装上传与自动入柜</h3><p>服装图片除了用于试穿，也可以进入个人衣柜。系统会自动识别品类并提取结构化标签，例如颜色、季节、层级和适用场景，方便后续检索和推荐。</p>
+<p><img src="/images/20260327-Try-on-AI-%E4%BD%9C%E5%93%81%E5%B1%95%E7%A4%BA/upload-garment.jpg" alt="上传服装"></p>
+<h3 id="3-人物照片上传"><a href="#3-人物照片上传" class="headerlink" title="3. 人物照片上传"></a>3. 人物照片上传</h3><p>支持自拍或全身照输入，系统会基于人物照片进行试穿生成；在人像预处理开启时，还能减少紧身服装或复杂姿态下的轮廓错位问题。</p>
+<p><img src="/images/20260327-Try-on-AI-%E4%BD%9C%E5%93%81%E5%B1%95%E7%A4%BA/upload-person.jpg" alt="上传人物"></p>
+<h3 id="4-个人衣柜与推荐"><a href="#4-个人衣柜与推荐" class="headerlink" title="4. 个人衣柜与推荐"></a>4. 个人衣柜与推荐</h3><p>试穿不是终点。用户保存到衣柜后的单品会形成长期可复用的数据资产，系统可结合天气、风格偏好和现有衣物，给出更贴近现实场景的每日搭配建议。</p>
+<h2 id="界面展示"><a href="#界面展示" class="headerlink" title="界面展示"></a>界面展示</h2><h3 id="首页演示"><a href="#首页演示" class="headerlink" title="首页演示"></a>首页演示</h3><p><img src="/images/20260327-Try-on-AI-%E4%BD%9C%E5%93%81%E5%B1%95%E7%A4%BA/home-demo-1.jpg" alt="首页 Demo 1"></p>
+<p><img src="/images/20260327-Try-on-AI-%E4%BD%9C%E5%93%81%E5%B1%95%E7%A4%BA/home-demo-3.jpg" alt="首页 Demo 2"></p>
+<h2 id="产品特色"><a href="#产品特色" class="headerlink" title="产品特色"></a>产品特色</h2><table>
+<thead>
+<tr>
+<th>功能</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><strong>AI 智能试穿</strong></td>
+<td>结合人物图与服装图，生成自然的上身效果</td>
+</tr>
+<tr>
+<td><strong>个人衣柜</strong></td>
+<td>自动整理并结构化存储衣物，形成长期可用的穿搭资产</td>
+</tr>
+<tr>
+<td><strong>每日推荐</strong></td>
+<td>结合天气、风格偏好和现有衣橱给出搭配建议</td>
+</tr>
+<tr>
+<td><strong>商业化闭环</strong></td>
+<td>连接账号、积分、支付与后台运营，支持正式产品化</td>
+</tr>
+</tbody></table>
+<h2 id="效果展示"><a href="#效果展示" class="headerlink" title="效果展示"></a>效果展示</h2><h3 id="虚拟试穿效果"><a href="#虚拟试穿效果" class="headerlink" title="虚拟试穿效果"></a>虚拟试穿效果</h3><p><img src="/images/20260327-Try-on-AI-%E4%BD%9C%E5%93%81%E5%B1%95%E7%A4%BA/preview-fit.png" alt="试穿效果预览"></p>
+<h3 id="左侧面板"><a href="#左侧面板" class="headerlink" title="左侧面板"></a>左侧面板</h3><p><img src="/images/20260327-Try-on-AI-%E4%BD%9C%E5%93%81%E5%B1%95%E7%A4%BA/left-panel.png" alt="左侧面板"></p>
+<h3 id="预览模式对比"><a href="#预览模式对比" class="headerlink" title="预览模式对比"></a>预览模式对比</h3><table>
+<thead>
+<tr>
+<th>无灰底</th>
+<th>有灰底</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><img src="/images/20260327-Try-on-AI-%E4%BD%9C%E5%93%81%E5%B1%95%E7%A4%BA/preview-no-gray.png" alt="无灰底"></td>
+<td><img src="/images/20260327-Try-on-AI-%E4%BD%9C%E5%93%81%E5%B1%95%E7%A4%BA/preview-fit.png" alt="有灰底"></td>
+</tr>
+</tbody></table>
+<h2 id="技术亮点"><a href="#技术亮点" class="headerlink" title="技术亮点"></a>技术亮点</h2><ul>
+<li>前端：React + TypeScript + Tailwind CSS，负责图片上传、任务轮询和结果展示</li>
+<li>后端：Cloudflare Workers 作为统一 API 层，处理鉴权、积分扣减、任务编排和签名访问</li>
+<li>数据层：D1 存储用户、任务、衣橱元数据，R2 私有存储图片资源</li>
+<li>AI 引擎：Gemini 多模态生成与评估，单品预览优先 Vertex Virtual Try-On</li>
+<li>产品能力：账号体系、积分支付、后台运营与推荐系统已形成闭环</li>
+</ul>
+<h2 id="实现技术原理"><a href="#实现技术原理" class="headerlink" title="实现技术原理"></a>实现技术原理</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">flowchart LR</span><br><span class="line">  U[&quot;用户上传人物照 / 服装图&quot;] --&gt; FE[&quot;React 前端&quot;]</span><br><span class="line">  FE --&gt; API[&quot;Cloudflare Worker API&quot;]</span><br><span class="line">  API --&gt; JOB[&quot;创建任务 / 扣积分 / 轮询状态&quot;]</span><br><span class="line">  API --&gt; AI[&quot;Gemini / Vertex Try-On&quot;]</span><br><span class="line">  API --&gt; PRE[&quot;可选预处理 / 人脸修复&quot;]</span><br><span class="line">  API --&gt; DB[&quot;D1 元数据&quot;]</span><br><span class="line">  API --&gt; STORE[&quot;R2 私有图片存储&quot;]</span><br><span class="line">  STORE --&gt; URL[&quot;签名 URL 返回前端&quot;]</span><br></pre></td></tr></table></figure>
+
+<h3 id="1-前端上传与任务发起"><a href="#1-前端上传与任务发起" class="headerlink" title="1. 前端上传与任务发起"></a>1. 前端上传与任务发起</h3><p>前端负责图片压缩、上传和状态轮询。用户发起正式试穿时，请求会进入 <code>POST /api/tryon</code>；如果是单品预览，则进入 <code>POST /api/tryon/preview</code>。接口返回 <code>jobId</code> 后，前端轮询任务状态，直到拿到最终图片。</p>
+<h3 id="2-Worker-作为核心编排层"><a href="#2-Worker-作为核心编排层" class="headerlink" title="2. Worker 作为核心编排层"></a>2. Worker 作为核心编排层</h3><p>Cloudflare Worker 不是简单的转发层，而是整条业务链路的控制中心。它负责鉴权、积分扣减、任务状态管理、异常回滚、签名 URL 下发，以及与 AI 服务、数据库和对象存储之间的串联。</p>
+<h3 id="3-AI-试穿生成链路"><a href="#3-AI-试穿生成链路" class="headerlink" title="3. AI 试穿生成链路"></a>3. AI 试穿生成链路</h3><p>正式试穿链路以 Gemini 多模态模型为主，用于完成服装替换、结果评估与回退策略控制；单品预览链路优先走 Vertex Virtual Try-On，以提升标准化预览效果。对于紧身衣、复杂姿态等更容易失败的情况，还可以引入人物预处理与人脸修复服务，降低衣廓残留和面部失真。</p>
+<h3 id="4-数据存储与安全访问"><a href="#4-数据存储与安全访问" class="headerlink" title="4. 数据存储与安全访问"></a>4. 数据存储与安全访问</h3><p>生成结果和上传素材存入 R2 私有存储，D1 只记录任务、用户、图片索引和衣橱元数据。前端并不直接持久暴露原始对象地址，而是通过 Worker 获取带时效的签名 URL，再访问对应资源。</p>
+<h3 id="5-个人衣柜与推荐系统"><a href="#5-个人衣柜与推荐系统" class="headerlink" title="5. 个人衣柜与推荐系统"></a>5. 个人衣柜与推荐系统</h3><p>衣柜接口会把单品保存为结构化数据，而不只是图片集合。系统会自动提取 <code>aiCategory</code>、<code>warmthIndex</code>、<code>seasonTags</code>、<code>occasionTags</code>、<code>colorName</code> 等标签；在推荐阶段，再结合 Open-Meteo 天气信息和用户衣橱，生成更加场景化的穿搭建议。</p>
+<h2 id="AI-工作流讲解"><a href="#AI-工作流讲解" class="headerlink" title="AI 工作流讲解"></a>AI 工作流讲解</h2><p>如果从一次真实请求来看，<code>Try on 个人衣柜</code> 的 AI 工作流大致可以拆成下面几步：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line">sequenceDiagram</span><br><span class="line">  participant U as 用户</span><br><span class="line">  participant FE as React 前端</span><br><span class="line">  participant W as Cloudflare Worker</span><br><span class="line">  participant P as 预处理/去底服务</span><br><span class="line">  participant G as Gemini / Vertex</span><br><span class="line">  participant E as 点评模型</span><br><span class="line">  participant R2 as R2</span><br><span class="line">  participant D1 as D1</span><br><span class="line"></span><br><span class="line">  U-&gt;&gt;FE: 上传人物照 / 衣物图</span><br><span class="line">  FE-&gt;&gt;W: POST /api/tryon 或 /api/tryon/preview</span><br><span class="line">  W-&gt;&gt;W: cleanBase64 + 计算 cache key + 创建 job</span><br><span class="line">  W-&gt;&gt;P: 可选去底 / 人像预处理</span><br><span class="line">  W-&gt;&gt;G: 生成试穿图</span><br><span class="line">  G--&gt;&gt;W: 返回结果或触发回退</span><br><span class="line">  W-&gt;&gt;E: evaluateLook 风格点评</span><br><span class="line">  W-&gt;&gt;R2: 保存生成图</span><br><span class="line">  W-&gt;&gt;D1: 记录任务 / 图片 / 点评 / 衣柜元数据</span><br><span class="line">  FE-&gt;&gt;W: 轮询 /api/tryon/:jobId</span><br><span class="line">  W--&gt;&gt;FE: 返回 imageId 与状态</span><br></pre></td></tr></table></figure>
+
+<h3 id="1-输入预处理"><a href="#1-输入预处理" class="headerlink" title="1. 输入预处理"></a>1. 输入预处理</h3><p>用户上传图片后，前端会先把长边压到 <code>1024px</code> 以内，并统一转成 Base64 JPEG，再发给后端。Worker 收到后会先执行 <code>cleanBase64</code>，去掉 Data URL 前缀，保证后续送给 Gemini 或 Vertex 的都是纯 Base64 数据。</p>
+<p>这一步的目标很明确：控制 token 和带宽成本，统一输入格式，并减少不同图片来源带来的解析差异。</p>
+<h3 id="2-建立任务、扣费与缓存判断"><a href="#2-建立任务、扣费与缓存判断" class="headerlink" title="2. 建立任务、扣费与缓存判断"></a>2. 建立任务、扣费与缓存判断</h3><p>当请求进入 <code>POST /api/tryon</code> 或 <code>POST /api/tryon/preview</code> 后，Worker 会先完成几件业务动作：</p>
+<ul>
+<li>校验登录态、额度和必要参数。</li>
+<li>按分辨率或模式扣减积分。</li>
+<li>创建 <code>job</code>，返回 <code>jobId</code> 给前端轮询。</li>
+<li>根据人物图、衣物图、模式、语言、衣物类型等信息生成缓存 key。</li>
+</ul>
+<p>如果同一组输入已经生成过，系统会优先命中缓存，直接复用已有结果，而不是重新跑一次完整推理。</p>
+<h3 id="3-模型前的可选增强"><a href="#3-模型前的可选增强" class="headerlink" title="3. 模型前的可选增强"></a>3. 模型前的可选增强</h3><p>在真正进入生成模型之前，系统还会根据配置决定是否做额外处理：</p>
+<ul>
+<li><strong>衣物去底</strong>：先把衣架、背景板、商品底图噪声去掉，让模型更聚焦于衣物主体。</li>
+<li><strong>人物预处理</strong>：针对紧身衣、瑜伽服或复杂姿态，预先生成 <code>personAgnosticImage</code>、<code>densePose</code>、<code>bodyMask</code> 等控制信息，减少旧衣轮廓残留。</li>
+<li><strong>人脸修复</strong>：生成完成后再做一次脸部修复，避免高频细节在试穿后变形。</li>
+</ul>
+<p>这些处理都不是硬依赖。配置缺失或服务失败时，系统会自动回退到基础流程，不会直接中断用户请求。</p>
+<h3 id="4-正式试穿与单品预览的分流"><a href="#4-正式试穿与单品预览的分流" class="headerlink" title="4. 正式试穿与单品预览的分流"></a>4. 正式试穿与单品预览的分流</h3><p>这里实际上有两条 AI 路径：</p>
+<ul>
+<li><strong>正式试穿</strong>：走 <code>POST /api/tryon</code>，主引擎是 Gemini 多模态图像生成。它会同时吃入人物图、衣物图和 prompt，完成替换、重绘、贴合与光影融合。</li>
+<li><strong>单品预览</strong>：走 <code>POST /api/tryon/preview</code>，优先使用 Vertex <code>virtual-try-on-preview-08-04</code>，更适合快速看单件衣服的标准化上身效果。</li>
+</ul>
+<p>正式试穿不是只调用一个模型就结束。项目里给 Gemini 设计了顺序回退链，若某个模型不可用，会继续尝试下一档；如果 Gemini 在区域或权限上不可用，还会回退到 Vertex 预览链路，尽量保证请求能产出结果。</p>
+<h3 id="5-Prompt-约束与生成目标"><a href="#5-Prompt-约束与生成目标" class="headerlink" title="5. Prompt 约束与生成目标"></a>5. Prompt 约束与生成目标</h3><p>这套工作流的关键不只是“把两张图丢给模型”，而是通过 prompt 明确限定生成范围：</p>
+<ul>
+<li>保留人脸、发型、肤色和背景。</li>
+<li>把衣物图只当作服装参考，不继承其中人物信息。</li>
+<li>根据 <code>clothCategory</code> 决定替换上装、下装、连衣裙还是整套。</li>
+<li>对短裙、整套、下装等场景追加额外约束，减少叠穿伪影和长度错误。</li>
+</ul>
+<p>也就是说，模型并不是自由生成，而是在一套比较强的替换规则下工作，尽量把随机性压到可控范围内。</p>
+<h3 id="6-结果评估、存储与返回"><a href="#6-结果评估、存储与返回" class="headerlink" title="6. 结果评估、存储与返回"></a>6. 结果评估、存储与返回</h3><p>生成完成后，系统不会立刻结束。它还会继续做三件事：</p>
+<ul>
+<li>调用 <code>evaluateLook</code> 对结果图做风格点评，输出分数、短评和风格关键词。</li>
+<li>把最终图片写入 R2 私有存储。</li>
+<li>把任务状态、图片索引、点评结果写入 D1。</li>
+</ul>
+<p>前端随后通过 <code>GET /api/tryon/:jobId</code> 拿到状态和 <code>imageId</code>，再通过图片接口获取带时效的签名 URL，最终展示给用户。</p>
+<h3 id="7-从“试穿结果”到“个人衣柜资产”"><a href="#7-从“试穿结果”到“个人衣柜资产”" class="headerlink" title="7. 从“试穿结果”到“个人衣柜资产”"></a>7. 从“试穿结果”到“个人衣柜资产”</h3><p>这个项目跟很多一次性试穿 Demo 最大的区别，是它会继续把结果沉淀成可复用数据：</p>
+<ul>
+<li>开启 <code>autoSaveGarment</code> 后，系统会尝试把衣物提取并自动入衣橱。</li>
+<li>只有识别为“纯衣物图”时才真正写入 <code>wardrobe_items</code>，避免把带人物的脏图存进去。</li>
+<li>入库时同步写入 AI 标签，如分类、保暖度、层级、季节和场景。</li>
+</ul>
+<p>这样后续的推荐、检索和搭配，不再依赖人工整理，而是建立在结构化衣柜之上。</p>
+<h3 id="8-推荐链路如何复用前面的-AI-结果"><a href="#8-推荐链路如何复用前面的-AI-结果" class="headerlink" title="8. 推荐链路如何复用前面的 AI 结果"></a>8. 推荐链路如何复用前面的 AI 结果</h3><p>推荐系统本身也是 AI 工作流的一部分。它会先取天气数据，再读取当前用户衣柜候选项，然后让模型在“只能从这些单品里选”的约束下生成搭配建议；如果模型失败，再回退到规则化推荐。</p>
+<p>这意味着 <code>Try on 个人衣柜</code> 不是单点式生成工具，而是一个从图像理解、试穿生成、结构化入库，到推荐输出的连续 AI 管道。</p>
+<h2 id="对未来电商的延展项目"><a href="#对未来电商的延展项目" class="headerlink" title="对未来电商的延展项目"></a>对未来电商的延展项目</h2><p>如果把 <code>Try on 个人衣柜</code> 看成基础设施，它可以继续延展出几个很有价值的电商方向：</p>
+<ul>
+<li><strong>Agent 导购入口</strong>：让用户先告诉 AI 预算、风格、场景和尺码，再由系统从商品池里筛选候选，而不是让用户自己翻大量 SKU。</li>
+<li><strong>衣柜驱动的商品推荐</strong>：基于“用户已经有什么”和“还缺什么”做推荐，减少重复购买，提升推荐相关性。</li>
+<li><strong>商品详情页内嵌试穿</strong>：把虚拟试穿前置到商品详情页或投放落地页，让用户在点击后立刻看到自己的上身效果。</li>
+<li><strong>尺码与退货反馈闭环</strong>：把试穿结果、购买行为和退货原因接起来，逐步沉淀更可靠的尺码建议和商品匹配能力。</li>
+<li><strong>品牌侧结构化供给</strong>：未来商家不只要做漂亮页面，还要输出可被 AI 理解的结构化商品数据，服务搜索、推荐和 Agent 决策。</li>
+</ul>
+<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p><code>Try on 个人衣柜</code> 的价值不只在于“生成一张试穿图”，而在于把试穿、衣橱、推荐和电商转化串成一个连续链路。它既能提升单次购买决策效率，也有机会成为未来个性化电商入口的一部分。</p>
+<p>如果你对 AI 虚拟试穿、智能衣橱或相关商业化应用感兴趣，可以访问官网进一步体验：<a target="_blank" rel="noopener" href="https://theafitroom.com/">https://theafitroom.com/</a></p>
+</article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta"><i class="fas fa-circle-user fa-fw"></i>文章作者: </span><span class="post-copyright-info"><a href="https://jatpeng.github.io">Jatpeng</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta"><i class="fas fa-square-arrow-up-right fa-fw"></i>文章链接: </span><span class="post-copyright-info"><a href="https://jatpeng.github.io/2026/03/27/20260327-try-on-personal-wardrobe/">https://jatpeng.github.io/2026/03/27/20260327-try-on-personal-wardrobe/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta"><i class="fas fa-circle-exclamation fa-fw"></i>版权声明: </span><span class="post-copyright-info">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a> 许可协议。转载请注明来源 <a href="https://jatpeng.github.io" target="_blank">Never Settle</a>！</span></div></div><div class="tag_share"><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/AI/">AI</a><a class="post-meta__tags" href="/tags/%E7%94%B5%E5%95%86/">电商</a><a class="post-meta__tags" href="/tags/React/">React</a><a class="post-meta__tags" href="/tags/Cloudflare-Workers/">Cloudflare Workers</a><a class="post-meta__tags" href="/tags/%E9%A1%B9%E7%9B%AE%E5%B1%95%E7%A4%BA/">项目展示</a></div><div class="post-share"><div class="social-share" data-image="/images/20260327-Try-on-AI-%E4%BD%9C%E5%93%81%E5%B1%95%E7%A4%BA/home-demo-1.jpg" data-sites="facebook,x,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1.1.6/sharejs/dist/css/share.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1.1.6/sharejs/dist/js/social-share.min.js" defer></script></div></div><nav class="pagination-post" id="pagination"><a class="pagination-related" href="/2026/04/10/20260410-%E5%AD%A6%E4%B9%A0%E5%9B%BE%E5%BD%A2%E5%AD%A6%E5%85%89%E7%BA%BF%E8%BF%BD%E8%B8%AA/" title="学习图形学：光线追踪入门（从 0 到可用的最小实现）"><img class="cover" src="https://picsum.photos/seed/20260410-学习图形学光线追踪/1200/675" onerror="onerror=null;src='/img/404.jpg'" alt="cover of previous post"><div class="info"><div class="info-1"><div class="info-item-1">上一篇</div><div class="info-item-2">学习图形学：光线追踪入门（从 0 到可用的最小实现）</div></div><div class="info-2"><div class="info-item-1">0. 为什么要学光线追踪光线追踪（Ray Tracing）的价值不只是“更真实”，而是它把渲染问题拆成一套非常统一的数学与工程模块：发射射线 → 求交 → 计算散射&#x2F;发光 → 继续追踪&#x2F;结束。理解这套闭环后，再回头看光栅化管线、PBR、GI、采样与降噪，会更容易形成体系。 本文目标：做出一个能渲染球体&#x2F;三角形、支持阴影、反射，并能逐步扩展到路径追踪的最小实现。  1. 你需要的最小数学与约定 向量：点乘（投影&#x2F;夹角）、叉乘（法线&#x2F;面积）、归一化 射线：( r(t) &#x3D; o + t d )，其中 (t &gt; 0) 坐标系：右手&#x2F;左手都行，但要一致（相机、法线方向、叉乘方向） EPS：为避免自相交，常用一个很小的偏移量 ( \epsilon )（如 (1e{-4})）   2. 关键模块总览（建议按这个顺序实现） 2.1 相机（Camera）：把像素坐标映射到世界空间射线 2.2 几何（Hittable）：射线-物体求交（球体最容易起步） 2.3 材质（Material &#x2F; BSDF）：命中点如何散射...</div></div></div></a><a class="pagination-related" href="/2026/03/08/20260308-selective-edge-bloom/" title="基于 URP 的 LDR 局部边缘泛光方案 (Selective Edge Bloom)"><img class="cover" src="https://picsum.photos/seed/20260308-selective-edge-bloom/1200/675" onerror="onerror=null;src='/img/404.jpg'" alt="cover of next post"><div class="info text-right"><div class="info-1"><div class="info-item-1">下一篇</div><div class="info-item-2">基于 URP 的 LDR 局部边缘泛光方案 (Selective Edge Bloom)</div></div><div class="info-2"><div class="info-item-1">1. 概述 (Overview)本方案旨在 Unity Universal Render Pipeline (URP) 环境下，实现一种不依赖高动态范围（HDR）与全局后处理的局部边缘泛光效果。特别适用于需要保留模型本身贴图细节、仅在物体边缘产生溢色光晕，且严格要求物理遮挡关系正确的场景（如复杂的室内环境、角色背着发光武器等）。 1.1 解决的核心痛点 绕过 LDR 限制：无需全屏亮度阈值提取 保护材质细节：利用反向遮罩剔除中心过曝，保留模型原有光照 解决透视穿模（X-Ray 穿透）：通过复用主相机深度缓冲（Depth Buffer），确保发光体在被其他物体遮挡时，光晕表现符合物理逻辑   2. 渲染管线架构 (Pipeline Architecture)本方案通过自定义 URP ScriptableRendererFeature 注入三个核心 Render Pass：    Pass 注入时机 职责    Mask Pass AfterRenderingOpaques 提取目标物体遮罩   Blur Pass AfterMaskPass 降采样与升采样模糊   Composit...</div></div></div></a></nav><div class="relatedPosts"><div class="headline"><i class="fas fa-thumbs-up fa-fw"></i><span>相关推荐</span></div><div class="relatedPosts-list"><a class="pagination-related" href="/2026/02/08/20260208-AI%E6%97%B6%E4%BB%A3%E7%9A%84%E7%94%B5%E5%95%86%E8%BD%AC%E5%9E%8B/" title="AI 时代的电商转型"><img class="cover" src="https://picsum.photos/seed/20260208-AI时代的电商转型/1200/675" alt="cover"><div class="info text-center"><div class="info-1"><div class="info-item-1"><i class="far fa-calendar-alt fa-fw"></i> 2026-02-08</div><div class="info-item-2">AI 时代的电商转型</div></div><div class="info-2"><div class="info-item-1">一个核心变化过去电商买衣服，主路径是：  用户打开 App 或网页。 用户自己搜索、筛选、对比。 商家通过投流、关键词和活动位争夺曝光。  AI Agent 出现后，入口开始变化：  用户先告诉 Agent 需求（预算、尺码、风格、场景）。 Agent 去多平台检索、比价、过滤。 Agent 只把少量“候选结果”返回给用户。  这意味着，商家不再只是“面向人类页面”，而是必须“面向 Agent 决策”。 旧电商逻辑：买流量传统玩法的核心是曝光竞争：  买广告位和关键词。 做点击率、停留时长、转化漏斗。 依赖平台推荐算法博弈流量。  这套逻辑的前提是：用户大部分时间停留在平台页面里。 新电商逻辑：给 Agent 数据当 Agent 成为主要入口，商家需要投入的重点会转向“可被机器理解和调用”：  商品属性结构化：材质、版型、厚度、季节、适配人群、退换规则。 库存和价格实时化：避免 Agent 选到失效商品。 尺码与版型标准化：让 Agent 能做跨品牌推荐。 售后与履约能力可读：发货时效、运费、逆向物流、客服 SLA。  一句话：从“页面好看”转向“数据可用”。 对 Agent 友...</div></div></div></a></div></div><hr class="custom-hr"/><div id="post-comment"><div class="comment-head"><div class="comment-headline"><i class="fas fa-comments fa-fw"></i><span> 评论</span></div></div><div class="comment-wrap"><div><div class="vcomment" id="vcomment"></div></div></div></div></div><div class="aside-content" id="aside-content"><div class="card-widget card-info text-center"><div class="avatar-img"><img src="/images/avatar.png" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="author-info-name">Jatpeng</div><div class="author-info-description">Never Settle</div><div class="site-data"><a href="/archives/"><div class="headline">文章</div><div class="length-num">47</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">36</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">8</div></a></div><a id="card-info-btn" target="_blank" rel="noopener" href="https://github.com/Jatpeng"><i class="fab fa-github"></i><span>Follow Me</span></a><div class="card-info-social-icons"><a class="social-icon" href="https://github.com/Jatpeng" target="_blank" title="fab fa-github"><i class="Github"></i></a><a class="social-icon" href="mailto:707752925@qq.com" target="_blank" title="fas fa-envelope"><i class="E-Mail"></i></a></div></div><div class="card-widget card-announcement"><div class="item-headline"><i class="fas fa-bullhorn fa-shake"></i><span>公告</span></div><div class="announcement_content">欢迎来到我的博客！<br/>这里会分享一些编程、游戏开发和生活感悟。</div></div><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="fas fa-stream"></i><span>目录</span><span class="toc-percentage"></span></div><div class="toc-content"><ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E9%A1%B9%E7%9B%AE%E6%A6%82%E8%A7%88"><span class="toc-number">1.</span> <span class="toc-text">项目概览</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%A0%B8%E5%BF%83%E5%8A%9F%E8%83%BD"><span class="toc-number">2.</span> <span class="toc-text">核心功能</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-%E6%99%BA%E8%83%BD%E8%99%9A%E6%8B%9F%E8%AF%95%E7%A9%BF"><span class="toc-number">2.1.</span> <span class="toc-text">1. 智能虚拟试穿</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-%E6%9C%8D%E8%A3%85%E4%B8%8A%E4%BC%A0%E4%B8%8E%E8%87%AA%E5%8A%A8%E5%85%A5%E6%9F%9C"><span class="toc-number">2.2.</span> <span class="toc-text">2. 服装上传与自动入柜</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-%E4%BA%BA%E7%89%A9%E7%85%A7%E7%89%87%E4%B8%8A%E4%BC%A0"><span class="toc-number">2.3.</span> <span class="toc-text">3. 人物照片上传</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#4-%E4%B8%AA%E4%BA%BA%E8%A1%A3%E6%9F%9C%E4%B8%8E%E6%8E%A8%E8%8D%90"><span class="toc-number">2.4.</span> <span class="toc-text">4. 个人衣柜与推荐</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%95%8C%E9%9D%A2%E5%B1%95%E7%A4%BA"><span class="toc-number">3.</span> <span class="toc-text">界面展示</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%A6%96%E9%A1%B5%E6%BC%94%E7%A4%BA"><span class="toc-number">3.1.</span> <span class="toc-text">首页演示</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BA%A7%E5%93%81%E7%89%B9%E8%89%B2"><span class="toc-number">4.</span> <span class="toc-text">产品特色</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%95%88%E6%9E%9C%E5%B1%95%E7%A4%BA"><span class="toc-number">5.</span> <span class="toc-text">效果展示</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%99%9A%E6%8B%9F%E8%AF%95%E7%A9%BF%E6%95%88%E6%9E%9C"><span class="toc-number">5.1.</span> <span class="toc-text">虚拟试穿效果</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%B7%A6%E4%BE%A7%E9%9D%A2%E6%9D%BF"><span class="toc-number">5.2.</span> <span class="toc-text">左侧面板</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%A2%84%E8%A7%88%E6%A8%A1%E5%BC%8F%E5%AF%B9%E6%AF%94"><span class="toc-number">5.3.</span> <span class="toc-text">预览模式对比</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%8A%80%E6%9C%AF%E4%BA%AE%E7%82%B9"><span class="toc-number">6.</span> <span class="toc-text">技术亮点</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%AE%9E%E7%8E%B0%E6%8A%80%E6%9C%AF%E5%8E%9F%E7%90%86"><span class="toc-number">7.</span> <span class="toc-text">实现技术原理</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-%E5%89%8D%E7%AB%AF%E4%B8%8A%E4%BC%A0%E4%B8%8E%E4%BB%BB%E5%8A%A1%E5%8F%91%E8%B5%B7"><span class="toc-number">7.1.</span> <span class="toc-text">1. 前端上传与任务发起</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-Worker-%E4%BD%9C%E4%B8%BA%E6%A0%B8%E5%BF%83%E7%BC%96%E6%8E%92%E5%B1%82"><span class="toc-number">7.2.</span> <span class="toc-text">2. Worker 作为核心编排层</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-AI-%E8%AF%95%E7%A9%BF%E7%94%9F%E6%88%90%E9%93%BE%E8%B7%AF"><span class="toc-number">7.3.</span> <span class="toc-text">3. AI 试穿生成链路</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#4-%E6%95%B0%E6%8D%AE%E5%AD%98%E5%82%A8%E4%B8%8E%E5%AE%89%E5%85%A8%E8%AE%BF%E9%97%AE"><span class="toc-number">7.4.</span> <span class="toc-text">4. 数据存储与安全访问</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#5-%E4%B8%AA%E4%BA%BA%E8%A1%A3%E6%9F%9C%E4%B8%8E%E6%8E%A8%E8%8D%90%E7%B3%BB%E7%BB%9F"><span class="toc-number">7.5.</span> <span class="toc-text">5. 个人衣柜与推荐系统</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#AI-%E5%B7%A5%E4%BD%9C%E6%B5%81%E8%AE%B2%E8%A7%A3"><span class="toc-number">8.</span> <span class="toc-text">AI 工作流讲解</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-%E8%BE%93%E5%85%A5%E9%A2%84%E5%A4%84%E7%90%86"><span class="toc-number">8.1.</span> <span class="toc-text">1. 输入预处理</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-%E5%BB%BA%E7%AB%8B%E4%BB%BB%E5%8A%A1%E3%80%81%E6%89%A3%E8%B4%B9%E4%B8%8E%E7%BC%93%E5%AD%98%E5%88%A4%E6%96%AD"><span class="toc-number">8.2.</span> <span class="toc-text">2. 建立任务、扣费与缓存判断</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-%E6%A8%A1%E5%9E%8B%E5%89%8D%E7%9A%84%E5%8F%AF%E9%80%89%E5%A2%9E%E5%BC%BA"><span class="toc-number">8.3.</span> <span class="toc-text">3. 模型前的可选增强</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#4-%E6%AD%A3%E5%BC%8F%E8%AF%95%E7%A9%BF%E4%B8%8E%E5%8D%95%E5%93%81%E9%A2%84%E8%A7%88%E7%9A%84%E5%88%86%E6%B5%81"><span class="toc-number">8.4.</span> <span class="toc-text">4. 正式试穿与单品预览的分流</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#5-Prompt-%E7%BA%A6%E6%9D%9F%E4%B8%8E%E7%94%9F%E6%88%90%E7%9B%AE%E6%A0%87"><span class="toc-number">8.5.</span> <span class="toc-text">5. Prompt 约束与生成目标</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#6-%E7%BB%93%E6%9E%9C%E8%AF%84%E4%BC%B0%E3%80%81%E5%AD%98%E5%82%A8%E4%B8%8E%E8%BF%94%E5%9B%9E"><span class="toc-number">8.6.</span> <span class="toc-text">6. 结果评估、存储与返回</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#7-%E4%BB%8E%E2%80%9C%E8%AF%95%E7%A9%BF%E7%BB%93%E6%9E%9C%E2%80%9D%E5%88%B0%E2%80%9C%E4%B8%AA%E4%BA%BA%E8%A1%A3%E6%9F%9C%E8%B5%84%E4%BA%A7%E2%80%9D"><span class="toc-number">8.7.</span> <span class="toc-text">7. 从“试穿结果”到“个人衣柜资产”</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#8-%E6%8E%A8%E8%8D%90%E9%93%BE%E8%B7%AF%E5%A6%82%E4%BD%95%E5%A4%8D%E7%94%A8%E5%89%8D%E9%9D%A2%E7%9A%84-AI-%E7%BB%93%E6%9E%9C"><span class="toc-number">8.8.</span> <span class="toc-text">8. 推荐链路如何复用前面的 AI 结果</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%AF%B9%E6%9C%AA%E6%9D%A5%E7%94%B5%E5%95%86%E7%9A%84%E5%BB%B6%E5%B1%95%E9%A1%B9%E7%9B%AE"><span class="toc-number">9.</span> <span class="toc-text">对未来电商的延展项目</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%80%BB%E7%BB%93"><span class="toc-number">10.</span> <span class="toc-text">总结</span></a></li></ol></div></div><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>最新文章</span></div><div class="aside-list"><div class="aside-list-item"><a class="thumbnail" href="/2026/04/11/20260411-%E5%AD%A6%E4%B9%A0UE-Lumen%E5%85%89%E7%85%A7%E5%AE%9E%E7%8E%B0%E5%8E%9F%E7%90%86/" title="学习 UE Lumen：动态全局光照的实现原理（概览）"><img src="https://picsum.photos/seed/20260411-学习UE-Lumen光照实现原理/1200/675" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="学习 UE Lumen：动态全局光照的实现原理（概览）"/></a><div class="content"><a class="title" href="/2026/04/11/20260411-%E5%AD%A6%E4%B9%A0UE-Lumen%E5%85%89%E7%85%A7%E5%AE%9E%E7%8E%B0%E5%8E%9F%E7%90%86/" title="学习 UE Lumen：动态全局光照的实现原理（概览）">学习 UE Lumen：动态全局光照的实现原理（概览）</a><time datetime="2026-04-11T06:00:00.000Z" title="发表于 2026-04-11 14:00:00">2026-04-11</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2026/04/10/20260410-%E5%AD%A6%E4%B9%A0%E5%9B%BE%E5%BD%A2%E5%AD%A6%E5%85%89%E7%BA%BF%E8%BF%BD%E8%B8%AA/" title="学习图形学：光线追踪入门（从 0 到可用的最小实现）"><img src="https://picsum.photos/seed/20260410-学习图形学光线追踪/1200/675" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="学习图形学：光线追踪入门（从 0 到可用的最小实现）"/></a><div class="content"><a class="title" href="/2026/04/10/20260410-%E5%AD%A6%E4%B9%A0%E5%9B%BE%E5%BD%A2%E5%AD%A6%E5%85%89%E7%BA%BF%E8%BF%BD%E8%B8%AA/" title="学习图形学：光线追踪入门（从 0 到可用的最小实现）">学习图形学：光线追踪入门（从 0 到可用的最小实现）</a><time datetime="2026-04-10T02:00:00.000Z" title="发表于 2026-04-10 10:00:00">2026-04-10</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2026/03/27/20260327-try-on-personal-wardrobe/" title="Try on 个人衣柜"><img src="/images/20260327-Try-on-AI-%E4%BD%9C%E5%93%81%E5%B1%95%E7%A4%BA/home-demo-1.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="Try on 个人衣柜"/></a><div class="content"><a class="title" href="/2026/03/27/20260327-try-on-personal-wardrobe/" title="Try on 个人衣柜">Try on 个人衣柜</a><time datetime="2026-03-27T04:33:00.000Z" title="发表于 2026-03-27 12:33:00">2026-03-27</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2026/03/08/20260308-selective-edge-bloom/" title="基于 URP 的 LDR 局部边缘泛光方案 (Selective Edge Bloom)"><img src="https://picsum.photos/seed/20260308-selective-edge-bloom/1200/675" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="基于 URP 的 LDR 局部边缘泛光方案 (Selective Edge Bloom)"/></a><div class="content"><a class="title" href="/2026/03/08/20260308-selective-edge-bloom/" title="基于 URP 的 LDR 局部边缘泛光方案 (Selective Edge Bloom)">基于 URP 的 LDR 局部边缘泛光方案 (Selective Edge Bloom)</a><time datetime="2026-03-08T03:13:00.000Z" title="发表于 2026-03-08 11:13:00">2026-03-08</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2026/03/03/20260303-ECS%E6%A1%86%E6%9E%B6%E8%AF%A6%E8%A7%A3/" title="游戏优化与设计模式（19）：ECS 框架详解"><img src="https://picsum.photos/seed/20260303-ECS框架详解/1200/675" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="游戏优化与设计模式（19）：ECS 框架详解"/></a><div class="content"><a class="title" href="/2026/03/03/20260303-ECS%E6%A1%86%E6%9E%B6%E8%AF%A6%E8%A7%A3/" title="游戏优化与设计模式（19）：ECS 框架详解">游戏优化与设计模式（19）：ECS 框架详解</a><time datetime="2026-03-03T12:40:00.000Z" title="发表于 2026-03-03 20:40:00">2026-03-03</time></div></div></div></div></div></div></main><footer id="footer"><div class="footer-other"><div class="footer-copyright"><span class="copyright">&copy;&nbsp;2025 - 2026 By Jatpeng</span><span class="framework-info"><span>框架 </span><a target="_blank" rel="noopener" href="https://hexo.io">Hexo 7.3.0</a><span class="footer-separator">|</span><span>主题 </span><a target="_blank" rel="noopener" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly 5.5.4</a></span></div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="阅读模式"><i class="fas fa-book-open"></i></button><button id="darkmode" type="button" title="日间和夜间模式切换"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside-config" type="button" title="设置"><i class="fas fa-cog fa-spin"></i></button><button class="close" id="mobile-toc-button" type="button" title="目录"><i class="fas fa-list-ul"></i></button><a id="to_comment" href="#post-comment" title="前往评论"><i class="fas fa-comments"></i></a><button id="go-up" type="button" title="回到顶部"><span class="scroll-percent"></span><i class="fas fa-arrow-up"></i></button></div></div><div><script src="/js/utils.js?v=5.5.4"></script><script src="/js/main.js?v=5.5.4"></script><div class="js-pjax"><script>(() => {
+  const isShuoshuo = GLOBAL_CONFIG_SITE.pageType === 'shuoshuo'
+  const option = null
+
+  const initValine = (el, path) => {
+    if (isShuoshuo) {
+      window.shuoshuoComment.destroyValine = () => {
+        if (el.children.length) {
+          el.innerHTML = ''
+          el.classList.add('no-comment')
+        }
+      }
+    }
+
+    const valineConfig = {
+      el: '#vcomment',
+      appId: 'aQWrbyCXv2t1dSu0mIJdzHFh-MdYXbMMI',
+      appKey: 'v5nFJzPNBU2DCg8W9PIg2umc',
+      avatar: 'mp',
+      serverURLs: 'https://aqwrbycx.api.lncldglobal.com',
+      emojiMaps: "",
+      visitor: true,
+      ...option,
+      path: isShuoshuo ? path : (option && option.path) || window.location.pathname
+    }
+
+    new Valine(valineConfig)
+  }
+
+  const loadValine = async (el, path) => {
+    if (typeof Valine === 'function') {
+      initValine(el, path)
+    } else {
+      await btf.getScript('https://cdn.jsdelivr.net/npm/valine@1.5.3/dist/Valine.min.js')
+      initValine(el, path)
+    }
+  }
+
+  if (isShuoshuo) {
+    'Valine' === 'Valine'
+      ? window.shuoshuoComment = { loadComment: loadValine }
+      : window.loadOtherComment = loadValine
+    return
+  }
+
+  if ('Valine' === 'Valine' || !false) {
+    if (false) btf.loadComment(document.getElementById('vcomment'),loadValine)
+    else setTimeout(loadValine, 0)
+  } else {
+    window.loadOtherComment = loadValine
+  }
+})()</script></div><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script></div></body></html>
