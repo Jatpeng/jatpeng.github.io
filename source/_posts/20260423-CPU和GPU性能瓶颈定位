@@ -1,0 +1,151 @@
+---
+
+## title: CPU 和 GPU 性能瓶颈定位（RenderDoc + Nsight 实战速查）
+comments: true
+copyright: true
+date: 2026-04-23 10:00:00
+tags:
+  - 图形学
+  - 性能优化
+  - GPU
+  - C/C++
+categories:
+  - 游戏开发
+description: 从 CPU/GPU 瓶颈判断入手，结合 RenderDoc 与 Nsight 的分工，快速定位 ALU/Memory/Occupancy/Divergence 问题并制定优化方向。
+cover: [https://picsum.photos/seed/20260423-CPU和GPU性能瓶颈定位/1200/675](https://picsum.photos/seed/20260423-CPU和GPU性能瓶颈定位/1200/675)
+
+---
+
+## 1. 如何判断 CPU 或 GPU 瓶颈
+
+核心思路：对比 `CPU frame time` 和 `GPU frame time`。
+
+- `GPU frame time > CPU frame time`：更可能是 GPU 瓶颈。
+- `CPU frame time > GPU frame time`：更可能是 CPU 瓶颈。
+
+## 2. RenderDoc 和 NVIDIA Nsight 的区别
+
+- **RenderDoc**：图形调试器，回答“渲染了什么 / 哪一步出了问题”。
+- **Nsight**：硬件性能分析器，回答“GPU 硬件在做什么 / 卡在哪里”。
+
+### 2.1 什么时候只用 RenderDoc 就够了
+
+- 排查渲染 Bug（画面错误、资源绑定问题）。
+- 性能问题只需要 Pass 级别粗定位（哪个 Pass 明显异常）。
+- 在非 NVIDIA 平台上（Nsight 不可用）。
+- 项目早期快速验证渲染流程正确性。
+
+### 2.2 什么时候必须上 Nsight
+
+- RenderDoc 只能告诉你“这个 Pass 慢”，但不知道“为什么慢”。
+- 需要做 Shader 精细优化，要有硬件计数器数据支撑。
+- 写 Compute Shader 时，需要分析 occupancy / warp 利用率。
+- 需要给优化结果做量化报告（例如 ALU 利用率从 X 变化到 Y）。
+
+### 2.3 典型排查流程
+
+```text
+发现帧率低
+  ↓
+[RenderDoc] 粗定位
+  -> 看 Pass 耗时分布
+  -> 发现 GBuffer Pass 耗时 12ms，异常
+  ↓
+[Nsight] 细定位
+  -> 对 GBuffer Pass 做 GPU Trace
+  -> 发现 L2 Cache Hit Rate 只有 38%
+  -> 判断为 Memory Bound（纹理采样瓶颈）
+  -> Source View 定位到具体采样代码行
+  ↓
+针对性优化（减少采样次数 / Channel Packing / 压缩格式）
+  ↓
+对比优化前后数据，验证收益
+```
+
+## 3. GPU 常见性能瓶颈指标
+
+### 3.1 ALU Bound（计算量过大）
+
+- 移动端优先考虑 `mediump`。
+- 用近似函数替代昂贵精确计算。
+- 能在顶点着色器做的计算，尽量不要放到像素着色器。
+
+### 3.2 Memory Bound（纹理采样 / 带宽不足）
+
+- 减少不必要的纹理采样次数。
+- 使用更合适的纹理格式和压缩方式。
+- 合理使用 Mipmap / 各向异性等级，降低带宽压力。
+
+### 3.3 Occupancy Bound（并发度不足）
+
+寄存器或共享内存压力过大，会导致 warp 并发度偏低。
+
+```text
+Occupancy = 实际同时活跃的 Warp 数量 / SM 理论可容纳的最大 Warp 数
+```
+
+### 3.4 Divergence（分支发散）
+
+- 同一 warp 内分支路径不一致，会降低执行效率。
+
+```text
+常见瓶颈分类：
+- Memory Bound：纹理采样/带宽不足
+- Occupancy Bound：寄存器/共享内存压力导致并发度低
+- Divergence：分支导致 warp 利用率下降
+```
+
+## 4. GPU 显存和带宽的区别
+
+- **显存**：占用了多少数据（容量问题）。
+- **带宽**：每秒能传输多少数据（吞吐问题）。
+
+## 5. GPU 内存空间（从快到慢）
+
+```text
+GPU 内存空间（快 -> 慢）
+|
+|- [片上，SM 内部，最快]
+|  |- Register File（寄存器）
+|  |  - 延迟：约 1 cycle
+|  |  - 大小：每 SM 约 256KB
+|  |  - 存放：Shader 局部变量、临时计算值
+|  |  - 归属：线程私有
+|  |
+|  |- Shared Memory（共享内存）
+|  |  - 延迟：约 1~2 cycles
+|  |  - 大小：每 SM 约 48~100KB（上限受架构限制）
+|  |  - 存放：`groupshared` 声明的数据
+|  |  - 归属：线程组共享
+|  |
+|  `- L1 Cache / Texture Cache
+|     - 延迟：约 30 cycles
+|     - 大小：每 SM 约 32~128KB
+|     - 存放：纹理与全局内存热点数据
+|     - 管理：硬件自动管理
+|
+|- [片上，所有 SM 共享]
+|  `- L2 Cache
+|     - 延迟：约 200 cycles
+|     - 大小：整个 GPU 约 4~80MB
+|     - 存放：L1 Miss 后的数据
+|     - 管理：硬件自动管理
+|
+`- [片外，最慢]
+   `- VRAM（显存）
+      - 延迟：约 600 cycles
+      - 大小：8GB / 10GB / 24GB ...
+      - 存放：纹理、RT、Buffer、Mesh 等资源
+      - 带宽：约 760GB/s ~ 1000GB/s（很高但仍可能成为瓶颈）
+```
+
+## 6. GPU 计算单元（以 Ampere 为例）
+
+```text
+一个 SM 内：
+- CUDA Cores（FP32）: 128   <- 普通 Shader 运算
+- INT32 Cores       : 64    <- 整数运算，可与 FP32 并行
+- Tensor Cores      : 4     <- 矩阵运算，AI / DLSS
+- RT Cores          : 1     <- 光线求交，DXR 光追
+- SFU               : 若干  <- sin/cos/sqrt 等超越函数
+```
