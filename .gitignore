@@ -2,7 +2,10 @@
 Thumbs.db
 db.json
 *.log
+*.swp
+.env.local
 node_modules/
 public/
 .deploy*/
 _multiconfig.yml
+tina/
