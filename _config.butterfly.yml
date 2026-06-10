@@ -140,3 +140,4 @@ valine:
 inject:
   head:
     - <link rel="stylesheet" href="/css/custom.css">
+    - <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-4356268514816778" crossorigin="anonymous"></script>
