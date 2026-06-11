@@ -1,0 +1,215 @@
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0,viewport-fit=cover"><title>游戏中常见效果实现方案 | Never Settle</title><meta name="author" content="Jatpeng"><meta name="copyright" content="Jatpeng"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta name="description" content="游戏中常见效果实现方案学习笔记（待补充）">
+<meta property="og:type" content="article">
+<meta property="og:title" content="游戏中常见效果实现方案">
+<meta property="og:url" content="https://jatpeng.github.io/2026/05/09/20260509-%E6%B8%B8%E6%88%8F%E4%B8%AD%E5%B8%B8%E8%A7%81%E6%95%88%E6%9E%9C%E5%AE%9E%E7%8E%B0%E6%96%B9%E6%A1%88/index.html">
+<meta property="og:site_name" content="Never Settle">
+<meta property="og:description" content="游戏中常见效果实现方案学习笔记（待补充）">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://picsum.photos/seed/20260509-%E6%B8%B8%E6%88%8F%E4%B8%AD%E5%B8%B8%E8%A7%81%E6%95%88%E6%9E%9C%E5%AE%9E%E7%8E%B0%E6%96%B9%E6%A1%88/1200/675">
+<meta property="article:published_time" content="2026-05-09T02:00:00.000Z">
+<meta property="article:modified_time" content="2026-06-11T04:04:27.523Z">
+<meta property="article:author" content="Jatpeng">
+<meta property="article:tag" content="游戏开发">
+<meta property="article:tag" content="图形学">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://picsum.photos/seed/20260509-%E6%B8%B8%E6%88%8F%E4%B8%AD%E5%B8%B8%E8%A7%81%E6%95%88%E6%9E%9C%E5%AE%9E%E7%8E%B0%E6%96%B9%E6%A1%88/1200/675"><script type="application/ld+json">{
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "headline": "游戏中常见效果实现方案",
+  "url": "https://jatpeng.github.io/2026/05/09/20260509-%E6%B8%B8%E6%88%8F%E4%B8%AD%E5%B8%B8%E8%A7%81%E6%95%88%E6%9E%9C%E5%AE%9E%E7%8E%B0%E6%96%B9%E6%A1%88/",
+  "image": "https://picsum.photos/seed/20260509-游戏中常见效果实现方案/1200/675",
+  "datePublished": "2026-05-09T02:00:00.000Z",
+  "dateModified": "2026-06-11T04:04:27.523Z",
+  "author": [
+    {
+      "@type": "Person",
+      "name": "Jatpeng",
+      "url": "https://jatpeng.github.io/"
+    }
+  ]
+}</script><link rel="shortcut icon" href="/img/favicon.png"><link rel="canonical" href="https://jatpeng.github.io/2026/05/09/20260509-%E6%B8%B8%E6%88%8F%E4%B8%AD%E5%B8%B8%E8%A7%81%E6%95%88%E6%9E%9C%E5%AE%9E%E7%8E%B0%E6%96%B9%E6%A1%88/index.html"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css"><script>
+    (() => {
+      
+    const saveToLocal = {
+      set: (key, value, ttl) => {
+        if (!ttl) return
+        const expiry = Date.now() + ttl * 86400000
+        localStorage.setItem(key, JSON.stringify({ value, expiry }))
+      },
+      get: key => {
+        const itemStr = localStorage.getItem(key)
+        if (!itemStr) return undefined
+        const { value, expiry } = JSON.parse(itemStr)
+        if (Date.now() > expiry) {
+          localStorage.removeItem(key)
+          return undefined
+        }
+        return value
+      }
+    }
+
+    window.btf = {
+      saveToLocal,
+      getScript: (url, attr = {}) => new Promise((resolve, reject) => {
+        const script = document.createElement('script')
+        script.src = url
+        script.async = true
+        Object.entries(attr).forEach(([key, val]) => script.setAttribute(key, val))
+        script.onload = script.onreadystatechange = () => {
+          if (!script.readyState || /loaded|complete/.test(script.readyState)) resolve()
+        }
+        script.onerror = reject
+        document.head.appendChild(script)
+      }),
+      getCSS: (url, id) => new Promise((resolve, reject) => {
+        const link = document.createElement('link')
+        link.rel = 'stylesheet'
+        link.href = url
+        if (id) link.id = id
+        link.onload = link.onreadystatechange = () => {
+          if (!link.readyState || /loaded|complete/.test(link.readyState)) resolve()
+        }
+        link.onerror = reject
+        document.head.appendChild(link)
+      }),
+      addGlobalFn: (key, fn, name = false, parent = window) => {
+        if (!false && key.startsWith('pjax')) return
+        const globalFn = parent.globalFn || {}
+        globalFn[key] = globalFn[key] || {}
+        globalFn[key][name || Object.keys(globalFn[key]).length] = fn
+        parent.globalFn = globalFn
+      }
+    }
+  
+      
+      const activateDarkMode = () => {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', 'undefined')
+        }
+      }
+      const activateLightMode = () => {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', 'undefined')
+        }
+      }
+
+      btf.activateDarkMode = activateDarkMode
+      btf.activateLightMode = activateLightMode
+
+      const theme = saveToLocal.get('theme')
+    
+          theme === 'dark' ? activateDarkMode() : theme === 'light' ? activateLightMode() : null
+        
+      
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        document.documentElement.classList.toggle('hide-aside', asideStatus === 'hide')
+      }
+    
+      
+    const detectApple = () => {
+      if (/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)) {
+        document.documentElement.classList.add('apple')
+      }
+    }
+    detectApple()
+  
+    })()
+  </script><script>const GLOBAL_CONFIG = {
+  root: '/',
+  algolia: undefined,
+  localSearch: undefined,
+  translate: undefined,
+  highlight: {"plugin":"highlight.js","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":false,"highlightFullpage":false,"highlightMacStyle":false},
+  copy: {
+    success: '复制成功',
+    error: '复制失败',
+    noSupport: '浏览器不支持'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: '',
+  dateSuffix: {
+    just: '刚刚',
+    min: '分钟前',
+    hour: '小时前',
+    day: '天前',
+    month: '个月前'
+  },
+  copyright: undefined,
+  lightbox: 'null',
+  Snackbar: undefined,
+  infinitegrid: {
+    js: 'https://cdn.jsdelivr.net/npm/@egjs/infinitegrid/dist/infinitegrid.min.js',
+    buttonText: '加载更多'
+  },
+  isPhotoFigcaption: false,
+  islazyloadPlugin: false,
+  isAnchor: false,
+  percent: {
+    toc: true,
+    rightside: false,
+  },
+  autoDarkmode: false
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: '游戏中常见效果实现方案',
+  isHighlightShrink: false,
+  isToc: false,
+  pageType: 'post'
+}</script><link rel="stylesheet" href="/css/custom.css"><script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-4356268514816778" crossorigin="anonymous"></script><meta name="generator" content="Hexo 7.3.0"></head><body><div id="web_bg" style="background: [object Object];"></div><div class="post" id="body-wrap"><header class="post-bg" id="page-header" style="background-image: url(https://picsum.photos/seed/20260509-游戏中常见效果实现方案/1200/675);"><nav id="nav"><span id="blog-info"><a class="nav-site-title" href="/"><span class="site-name">Never Settle</span></a><a class="nav-page-title" href="/"><span class="site-name">游戏中常见效果实现方案</span></a></span><div id="menus"></div></nav><div id="post-info"><h1 class="post-title">游戏中常见效果实现方案</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" datetime="2026-05-09T02:00:00.000Z" title="发表于 2026-05-09 10:00:00">2026-05-09</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2026-06-11T04:04:27.523Z" title="更新于 2026-06-11 12:04:27">2026-06-11</time></span><span class="post-meta-categories"><span class="post-meta-separator">|</span><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/categories/%E6%B8%B8%E6%88%8F%E5%BC%80%E5%8F%91/">游戏开发</a></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="leancloud_visitors" id="/2026/05/09/20260509-%E6%B8%B8%E6%88%8F%E4%B8%AD%E5%B8%B8%E8%A7%81%E6%95%88%E6%9E%9C%E5%AE%9E%E7%8E%B0%E6%96%B9%E6%A1%88/" data-flag-title="游戏中常见效果实现方案"><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">浏览量:</span><span class="leancloud-visitors-count"><i class="fa-solid fa-spinner fa-spin"></i></span></span><span class="post-meta-separator">|</span><span class="post-meta-commentcount"><i class="far fa-comments fa-fw post-meta-icon"></i><span class="post-meta-label">评论数:</span><a href="/2026/05/09/20260509-%E6%B8%B8%E6%88%8F%E4%B8%AD%E5%B8%B8%E8%A7%81%E6%95%88%E6%9E%9C%E5%AE%9E%E7%8E%B0%E6%96%B9%E6%A1%88/#post-comment" itemprop="discussionUrl"><span class="valine-comment-count" data-xid="/2026/05/09/20260509-%E6%B8%B8%E6%88%8F%E4%B8%AD%E5%B8%B8%E8%A7%81%E6%95%88%E6%9E%9C%E5%AE%9E%E7%8E%B0%E6%96%B9%E6%A1%88/" itemprop="commentCount"><i class="fa-solid fa-spinner fa-spin"></i></span></a></span></div></div></div></header><main class="layout" id="content-inner"><div id="post"><article class="container post-content" id="article-container"><p>（内容待补充）</p>
+</article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta"><i class="fas fa-circle-user fa-fw"></i>文章作者: </span><span class="post-copyright-info"><a href="https://jatpeng.github.io">Jatpeng</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta"><i class="fas fa-square-arrow-up-right fa-fw"></i>文章链接: </span><span class="post-copyright-info"><a href="https://jatpeng.github.io/2026/05/09/20260509-%E6%B8%B8%E6%88%8F%E4%B8%AD%E5%B8%B8%E8%A7%81%E6%95%88%E6%9E%9C%E5%AE%9E%E7%8E%B0%E6%96%B9%E6%A1%88/">https://jatpeng.github.io/2026/05/09/20260509-%E6%B8%B8%E6%88%8F%E4%B8%AD%E5%B8%B8%E8%A7%81%E6%95%88%E6%9E%9C%E5%AE%9E%E7%8E%B0%E6%96%B9%E6%A1%88/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta"><i class="fas fa-circle-exclamation fa-fw"></i>版权声明: </span><span class="post-copyright-info">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a> 许可协议。转载请注明来源 <a href="https://jatpeng.github.io" target="_blank">Never Settle</a>！</span></div></div><div class="tag_share"><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/%E6%B8%B8%E6%88%8F%E5%BC%80%E5%8F%91/">游戏开发</a><a class="post-meta__tags" href="/tags/%E5%9B%BE%E5%BD%A2%E5%AD%A6/">图形学</a></div><div class="post-share"><div class="social-share" data-image="https://picsum.photos/seed/20260509-游戏中常见效果实现方案/1200/675" data-sites="facebook,twitter,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/css/share.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/js/social-share.min.js" defer></script></div></div><nav class="pagination-post" id="pagination"><a class="pagination-related" href="/2026/05/09/20260509-%E5%9B%BE%E5%BD%A2%E5%AD%A6%E5%B8%B8%E8%A7%81%E6%95%B0%E5%AD%A6%E7%9F%A5%E8%AF%86%E7%82%B9%E8%80%83%E5%AF%9F/" title="图形学常见数学知识点考察"><img class="cover" src="https://picsum.photos/seed/20260509-图形学常见数学知识点考察/1200/675" onerror="onerror=null;src='/img/404.jpg'" alt="cover of previous post"><div class="info"><div class="info-1"><div class="info-item-1">上一篇</div><div class="info-item-2">图形学常见数学知识点考察</div></div><div class="info-2"><div class="info-item-1">1. 顶点变换中的裁剪矩阵的实现原理2. 齐次坐标是什么，为什么要用3. 射线追踪：射线数学表达和与面相交数学表达4. PBR 中 BRDF 实现概括5. 渲染方程讲一下</div></div></div></a><a class="pagination-related" href="/2026/05/09/20260509-%E7%A7%BB%E5%8A%A8%E6%B8%B2%E6%9F%93%E7%AE%A1%E7%BA%BF/" title="移动渲染管线"><img class="cover" src="https://picsum.photos/seed/20260509-移动渲染管线/1200/675" onerror="onerror=null;src='/img/404.jpg'" alt="cover of next post"><div class="info text-right"><div class="info-1"><div class="info-item-1">下一篇</div><div class="info-item-2">移动渲染管线</div></div><div class="info-2"><div class="info-item-1">1. 流程图 Tile-Based Deferred Rendering (TBDR) 流程图讲解这是 PowerVR GPU 的 TBDR 渲染架构流程图，分为两大阶段：几何阶段和渲染阶段，核心特点是利用片上缓存（On-Chip Buffers）减少对系统内存的读写。  第一阶段：几何处理（Geometry Phase）① Vertex Processing（顶点处理）  执行顶点着色器，完成坐标变换、光照计算等 输入来自系统内存中的 Geometry Data（几何数据）  ② Clip, Project &amp; Cull（裁剪、投影与剔除）  将顶点从世界空间变换到裁剪空间 剔除视锥体外的图元，减少后续计算量 Cull：剔除，视锥体外 Clip：裁剪，一部分视锥体内，一部分视锥体外  ③ Tiling（分块）  将屏幕划分为若干小块（Tile），判断每个图元属于哪些 Tile 输出 Primitive List（图元列表）和 Vertex Data（顶点数据）存入系统内存 ⚠️ 这是 TBDR 的关键步骤，后续按 Tile 逐块处理   第二阶段：逐 Tile...</div></div></div></a></nav><div class="relatedPosts"><div class="headline"><i class="fas fa-thumbs-up fa-fw"></i><span>相关推荐</span></div><div class="relatedPosts-list"><a class="pagination-related" href="/2025/01/16/20250116-UE5-demo%E5%AD%A6%E4%B9%A0/" title="UE5 Demo 学习"><img class="cover" src="https://picsum.photos/seed/20250116-UE5-demo学习/1200/675" alt="cover"><div class="info text-center"><div class="info-1"><div class="info-item-1"><i class="far fa-calendar-alt fa-fw"></i> 2025-01-16</div><div class="info-item-2">UE5 Demo 学习</div></div><div class="info-2"><div class="info-item-1">学习资源 教程视频链接  1. 角色系统导入动画资源，绑定骨架混合空间1D,作用通过一个值来控制两个动画的混合,这里的值是模型移动的speed 动画蓝图中的事件图表，可以获取所有者的移动速度 状态机因为混合空间1D的值是模型移动的speed，例如跳越的动作就无法完成。所以引入状态机 1.1 角色动画系统 动画状态机 动画蓝图 动画过渡  1.2 角色移动系统 基础移动设置 角色控制器 输入系统  1.3 角色交互系统 碰撞检测 交互事件 动画通知  2. 游戏系统2.1 游戏框架 游戏模式 游戏状态 玩家状态  2.2 关卡设计 场景搭建 光照系统 特效系统  2.3 UI 系统 HUD设计 菜单系统 交互界面  </div></div></div></a><a class="pagination-related" href="/2026/03/03/20260303-ECS%E6%A1%86%E6%9E%B6%E8%AF%A6%E8%A7%A3/" title="游戏优化与设计模式（19）：ECS 框架详解"><img class="cover" src="https://picsum.photos/seed/20260303-ECS框架详解/1200/675" alt="cover"><div class="info text-center"><div class="info-1"><div class="info-item-1"><i class="far fa-calendar-alt fa-fw"></i> 2026-03-03</div><div class="info-item-2">游戏优化与设计模式（19）：ECS 框架详解</div></div><div class="info-2"><div class="info-item-1"> 原视频：https://www.bilibili.com/video/BV1XTxuzfEB9/ 标题：【游戏优化与设计模式】19 ECS框架详解  为什么游戏项目会转向 ECS在传统面向对象写法里，一个角色类里往往同时包含移动、渲染、碰撞、AI、音效等逻辑。项目前期开发速度快，但随着功能增长，类会越来越“胖”，耦合增加，修改一个功能可能牵动多个模块。 ECS 的核心目标就是把“数据”和“行为”拆开：  Entity（实体）只负责身份标识。 Component（组件）只存数据，不写业务逻辑。 System（系统）只处理一类逻辑，对满足条件的实体批量执行。  这套拆分方式能显著提升可维护性，同时让底层数据更容易做连续存储，对 CPU 缓存更友好。 ECS 三要素怎么理解Entity：轻量 IDEntity 可以理解成一个整数 ID。它本身不包含业务信息，只是把不同组件关联起来。 例如玩家实体 Entity#1001...</div></div></div></a><a class="pagination-related" href="/2026/04/17/20260417-%E6%B8%B8%E6%88%8F%E5%8A%A8%E7%94%BB%E4%BC%98%E5%8C%96/" title="游戏动画优化：从卡顿定位到可交付的性能改进清单"><img class="cover" src="https://picsum.photos/seed/20260417-游戏动画优化/1200/675" alt="cover"><div class="info text-center"><div class="info-1"><div class="info-item-1"><i class="far fa-calendar-alt fa-fw"></i> 2026-04-17</div><div class="info-item-2">游戏动画优化：从卡顿定位到可交付的性能改进清单</div></div><div class="info-2"><div class="info-item-1">游戏里的“动画卡顿”往往不是一个点：它可能是 Animator 逻辑、骨骼蒙皮、IK&#x2F;物理、过多的事件回调、曲线采样、LOD&#x2F;裁剪没生效、甚至是 资源与内存 共同叠加的结果。 本文目标是给一条清晰的工程路径：先把问题量出来 → 再把责任归因到具体子系统 → 然后用一组可复用的手段把开销降下来。  0. 先统一术语：你到底在优化什么把“动画性能”拆成三类指标，后续每一步都围绕它们做：  CPU 时间：动画图评估（状态机&#x2F;混合树）、骨架姿态计算、IK、事件与脚本回调、剔除与调度。 GPU 时间：蒙皮（Skinning）在 GPU 还是 CPU、蒙皮顶点数量、绘制批次、材质与变体。 内存与带宽：动画剪辑数据体积、曲线数量、关键帧密度、压缩方式、运行时临时分配（GC&#x2F;alloc）。   经验法则：不要一上来“改很多”。先拿到一段稳定可复现的 profile，再做 1~2 个改动，验证收益，循环推进。   1. 定位阶段：把瓶颈量化到“可行动”的层级1.1...</div></div></div></a><a class="pagination-related" href="/2026/05/09/20260509-UE%E5%B0%84%E5%87%BB%E6%B8%B8%E6%88%8F%E5%AD%A6%E4%B9%A0/" title="UE 射击游戏学习"><img class="cover" src="https://picsum.photos/seed/20260509-UE射击游戏学习/1200/675" alt="cover"><div class="info text-center"><div class="info-1"><div class="info-item-1"><i class="far fa-calendar-alt fa-fw"></i> 2026-05-09</div><div class="info-item-2">UE 射击游戏学习</div></div><div class="info-2"><div class="info-item-1">（内容待补充） </div></div></div></a><a class="pagination-related" href="/2026/05/12/20260512-UE%E5%85%A5%E9%97%A8%E5%AD%A6%E4%B9%A0/" title="UE 入门学习"><img class="cover" src="https://picsum.photos/seed/20260512-UE入门学习/1200/675" alt="cover"><div class="info text-center"><div class="info-1"><div class="info-item-1"><i class="far fa-calendar-alt fa-fw"></i> 2026-05-12</div><div class="info-item-2">UE 入门学习</div></div><div class="info-2"><div class="info-item-1"> Ctrl+L 控制天光 </div></div></div></a><a class="pagination-related" href="/2026/05/22/20260522-%E4%B8%89%E8%A7%92%E6%B4%B2%E8%A7%86%E9%A2%91%E5%AD%A6%E4%B9%A0/" title="《三角洲行动》技术总结"><img class="cover" src="https://picsum.photos/seed/20260522-三角洲视频学习/1200/675" alt="cover"><div class="info text-center"><div class="info-1"><div class="info-item-1"><i class="far fa-calendar-alt fa-fw"></i> 2026-05-22</div><div class="info-item-2">《三角洲行动》技术总结</div></div><div class="info-2"><div class="info-item-1">核心结论：单团队、单引擎、一套资源，实现 PC + 移动端跨平台同步开发，这套技术方案可直接复用到同类射击 &#x2F; 开放世界项目。  一、引擎与技术选型（可复用） 引擎版本：采用 UE4.24 稳定版，不盲目升级，降低适配风险与工期压力。 跨平台策略：单团队同时维护 PC + Mobile，一套工程、双向同步，避免双端内容割裂。 对标依据：手游对标 CODM、和平精英；端游对标战地、COD 系列，取成熟渲染 &#x2F; 性能方案。   二、跨端渲染与画质方案（可复用） 色彩与曝光统一：定制 SSLMT 调色流程，保证双端色彩一致。PC 使用高级曝光提升可视性；Mobile 简化曝光，保帧率。 材质与贴图管控：双端着色器分离，用虚拟材质统一管理，维护一套材质库。贴图按平台做降噪 &#x2F; 细节压缩，Mobile 降低分辨率。 光照标准化：一套灯光资源自动适配双端，用蓝图封装标准灯具，统一亮度 &#x2F; 阴影 &#x2F; 性能。配套光源检测工具，自动排查超标灯光，保性能。   三、资源与性能优化（可复用） 模型与 LOD 体系：静态物体、植被按平台做分级...</div></div></div></a></div></div><hr class="custom-hr"/><div id="post-comment"><div class="comment-head"><div class="comment-headline"><i class="fas fa-comments fa-fw"></i><span> 评论</span></div></div><div class="comment-wrap"><div><div class="vcomment" id="vcomment"></div></div></div></div></div><div class="aside-content" id="aside-content"><div class="card-widget card-info text-center"><div class="avatar-img"><img src="/images/avatar.png" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="author-info-name">Jatpeng</div><div class="author-info-description">Never Settle</div><div class="site-data"><a href="/archives/"><div class="headline">文章</div><div class="length-num">76</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">60</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">10</div></a></div><a id="card-info-btn" target="_blank" rel="noopener" href="https://github.com/Jatpeng"><i class="fab fa-github"></i><span>Follow Me</span></a><div class="card-info-social-icons"><a class="social-icon" href="https://github.com/Jatpeng" target="_blank" title="fab fa-github"><i class="Github"></i></a><a class="social-icon" href="mailto:707752925@qq.com" target="_blank" title="fas fa-envelope"><i class="E-Mail"></i></a></div></div><div class="card-widget card-announcement"><div class="item-headline"><i class="fas fa-bullhorn fa-shake"></i><span>公告</span></div><div class="announcement_content">欢迎来到我的博客！<br/>这里会分享一些编程、游戏开发和生活感悟。</div></div><div class="sticky_layout"><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>最新文章</span></div><div class="aside-list"><div class="aside-list-item"><a class="thumbnail" href="/2026/06/10/20260610-UE%E5%BC%95%E6%93%8E%E4%B8%AD%E7%9A%84%E8%A7%92%E8%89%B2%E5%92%8C%E5%9C%BA%E6%99%AF%E4%BA%A4%E4%BA%92/" title="UE 引擎中的角色和场景交互"><img src="https://picsum.photos/seed/20260610-UE引擎中的角色和场景交互/1200/675" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="UE 引擎中的角色和场景交互"/></a><div class="content"><a class="title" href="/2026/06/10/20260610-UE%E5%BC%95%E6%93%8E%E4%B8%AD%E7%9A%84%E8%A7%92%E8%89%B2%E5%92%8C%E5%9C%BA%E6%99%AF%E4%BA%A4%E4%BA%92/" title="UE 引擎中的角色和场景交互">UE 引擎中的角色和场景交互</a><time datetime="2026-06-10T02:00:00.000Z" title="发表于 2026-06-10 10:00:00">2026-06-10</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2026/06/09/20260609-UE%E5%9C%B0%E5%9B%BE%E5%B1%82%E5%AD%A6%E4%B9%A0/" title="UE 地图层学习"><img src="https://picsum.photos/seed/20260609-UE地图层学习/1200/675" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="UE 地图层学习"/></a><div class="content"><a class="title" href="/2026/06/09/20260609-UE%E5%9C%B0%E5%9B%BE%E5%B1%82%E5%AD%A6%E4%B9%A0/" title="UE 地图层学习">UE 地图层学习</a><time datetime="2026-06-09T02:00:00.000Z" title="发表于 2026-06-09 10:00:00">2026-06-09</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2026/06/09/20260609-Vulcan%E5%AD%A6%E4%B9%A0/" title="Vulkan 与 OpenGL 区别"><img src="https://picsum.photos/seed/20260609-Vulcan学习/1200/675" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="Vulkan 与 OpenGL 区别"/></a><div class="content"><a class="title" href="/2026/06/09/20260609-Vulcan%E5%AD%A6%E4%B9%A0/" title="Vulkan 与 OpenGL 区别">Vulkan 与 OpenGL 区别</a><time datetime="2026-06-09T02:00:00.000Z" title="发表于 2026-06-09 10:00:00">2026-06-09</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2026/06/09/20260609-drawcall%E4%BC%98%E5%8C%96/" title="Draw Call 优化"><img src="https://picsum.photos/seed/20260609-drawcall优化/1200/675" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="Draw Call 优化"/></a><div class="content"><a class="title" href="/2026/06/09/20260609-drawcall%E4%BC%98%E5%8C%96/" title="Draw Call 优化">Draw Call 优化</a><time datetime="2026-06-09T02:00:00.000Z" title="发表于 2026-06-09 10:00:00">2026-06-09</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2026/06/05/%E7%BE%8E%E6%9C%AF%E4%BD%9C%E5%93%81%E9%9B%86%E5%90%88-20260605/" title="美术作品集合"><img src="https://picsum.photos/seed/美术作品集合-20260605/1200/675" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="美术作品集合"/></a><div class="content"><a class="title" href="/2026/06/05/%E7%BE%8E%E6%9C%AF%E4%BD%9C%E5%93%81%E9%9B%86%E5%90%88-20260605/" title="美术作品集合">美术作品集合</a><time datetime="2026-06-05T02:00:00.000Z" title="发表于 2026-06-05 10:00:00">2026-06-05</time></div></div></div></div></div></div></main><footer id="footer"><div id="footer-wrap"><div class="copyright">&copy;2019 - 2026 By Jatpeng</div><div class="framework-info"><span>框架 </span><a target="_blank" rel="noopener" href="https://hexo.io">Hexo</a><span class="footer-separator">|</span><span>主题 </span><a target="_blank" rel="noopener" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly</a></div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="阅读模式"><i class="fas fa-book-open"></i></button><button id="darkmode" type="button" title="日间和夜间模式切换"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside-config" type="button" title="设置"><i class="fas fa-cog fa-spin"></i></button><a id="to_comment" href="#post-comment" title="前往评论"><i class="fas fa-comments"></i></a><button id="go-up" type="button" title="回到顶部"><span class="scroll-percent"></span><i class="fas fa-arrow-up"></i></button></div></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><div class="js-pjax"><script>(() => {
+  const isShuoshuo = GLOBAL_CONFIG_SITE.pageType === 'shuoshuo'
+  const option = null
+
+  const initValine = (el, path) => {
+    if (isShuoshuo) {
+      window.shuoshuoComment.destroyValine = () => {
+        if (el.children.length) {
+          el.innerHTML = ''
+          el.classList.add('no-comment')
+        }
+      }
+    }
+
+    const valineConfig = {
+      el: '#vcomment',
+      appId: 'aQWrbyCXv2t1dSu0mIJdzHFh-MdYXbMMI',
+      appKey: 'v5nFJzPNBU2DCg8W9PIg2umc',
+      avatar: 'mp',
+      serverURLs: 'https://aqwrbycx.api.lncldglobal.com',
+      emojiMaps: "",
+      visitor: true,
+      ...option,
+      path: isShuoshuo ? path : (option && option.path) || window.location.pathname
+    }
+
+    new Valine(valineConfig)
+  }
+
+  const loadValine = async (el, path) => {
+    if (typeof Valine === 'function') {
+      initValine(el, path)
+    } else {
+      await btf.getScript('https://cdn.jsdelivr.net/npm/valine/dist/Valine.min.js')
+      initValine(el, path)
+    }
+  }
+
+  if (isShuoshuo) {
+    'Valine' === 'Valine'
+      ? window.shuoshuoComment = { loadComment: loadValine }
+      : window.loadOtherComment = loadValine
+    return
+  }
+
+  if ('Valine' === 'Valine' || !false) {
+    if (false) btf.loadComment(document.getElementById('vcomment'),loadValine)
+    else setTimeout(loadValine, 0)
+  } else {
+    window.loadOtherComment = loadValine
+  }
+})()</script></div><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script></div></body></html>

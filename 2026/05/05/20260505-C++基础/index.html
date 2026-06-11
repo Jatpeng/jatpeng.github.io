@@ -1,0 +1,217 @@
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0,viewport-fit=cover"><title>C++ 基础 | Never Settle</title><meta name="author" content="Jatpeng"><meta name="copyright" content="Jatpeng"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta name="description" content="C++ override&#x2F;final、静态成员、const 成员函数、this 指针与友元函数学习笔记">
+<meta property="og:type" content="article">
+<meta property="og:title" content="C++ 基础">
+<meta property="og:url" content="https://jatpeng.github.io/2026/05/05/20260505-C++%E5%9F%BA%E7%A1%80/index.html">
+<meta property="og:site_name" content="Never Settle">
+<meta property="og:description" content="C++ override&#x2F;final、静态成员、const 成员函数、this 指针与友元函数学习笔记">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://picsum.photos/seed/20260505-C++%E5%9F%BA%E7%A1%80/1200/675">
+<meta property="article:published_time" content="2026-05-05T02:00:00.000Z">
+<meta property="article:modified_time" content="2026-06-11T04:04:27.523Z">
+<meta property="article:author" content="Jatpeng">
+<meta property="article:tag" content="C++">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://picsum.photos/seed/20260505-C++%E5%9F%BA%E7%A1%80/1200/675"><script type="application/ld+json">{
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "headline": "C++ 基础",
+  "url": "https://jatpeng.github.io/2026/05/05/20260505-C++%E5%9F%BA%E7%A1%80/",
+  "image": "https://picsum.photos/seed/20260505-C++基础/1200/675",
+  "datePublished": "2026-05-05T02:00:00.000Z",
+  "dateModified": "2026-06-11T04:04:27.523Z",
+  "author": [
+    {
+      "@type": "Person",
+      "name": "Jatpeng",
+      "url": "https://jatpeng.github.io/"
+    }
+  ]
+}</script><link rel="shortcut icon" href="/img/favicon.png"><link rel="canonical" href="https://jatpeng.github.io/2026/05/05/20260505-C++%E5%9F%BA%E7%A1%80/index.html"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css"><script>
+    (() => {
+      
+    const saveToLocal = {
+      set: (key, value, ttl) => {
+        if (!ttl) return
+        const expiry = Date.now() + ttl * 86400000
+        localStorage.setItem(key, JSON.stringify({ value, expiry }))
+      },
+      get: key => {
+        const itemStr = localStorage.getItem(key)
+        if (!itemStr) return undefined
+        const { value, expiry } = JSON.parse(itemStr)
+        if (Date.now() > expiry) {
+          localStorage.removeItem(key)
+          return undefined
+        }
+        return value
+      }
+    }
+
+    window.btf = {
+      saveToLocal,
+      getScript: (url, attr = {}) => new Promise((resolve, reject) => {
+        const script = document.createElement('script')
+        script.src = url
+        script.async = true
+        Object.entries(attr).forEach(([key, val]) => script.setAttribute(key, val))
+        script.onload = script.onreadystatechange = () => {
+          if (!script.readyState || /loaded|complete/.test(script.readyState)) resolve()
+        }
+        script.onerror = reject
+        document.head.appendChild(script)
+      }),
+      getCSS: (url, id) => new Promise((resolve, reject) => {
+        const link = document.createElement('link')
+        link.rel = 'stylesheet'
+        link.href = url
+        if (id) link.id = id
+        link.onload = link.onreadystatechange = () => {
+          if (!link.readyState || /loaded|complete/.test(link.readyState)) resolve()
+        }
+        link.onerror = reject
+        document.head.appendChild(link)
+      }),
+      addGlobalFn: (key, fn, name = false, parent = window) => {
+        if (!false && key.startsWith('pjax')) return
+        const globalFn = parent.globalFn || {}
+        globalFn[key] = globalFn[key] || {}
+        globalFn[key][name || Object.keys(globalFn[key]).length] = fn
+        parent.globalFn = globalFn
+      }
+    }
+  
+      
+      const activateDarkMode = () => {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', 'undefined')
+        }
+      }
+      const activateLightMode = () => {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', 'undefined')
+        }
+      }
+
+      btf.activateDarkMode = activateDarkMode
+      btf.activateLightMode = activateLightMode
+
+      const theme = saveToLocal.get('theme')
+    
+          theme === 'dark' ? activateDarkMode() : theme === 'light' ? activateLightMode() : null
+        
+      
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        document.documentElement.classList.toggle('hide-aside', asideStatus === 'hide')
+      }
+    
+      
+    const detectApple = () => {
+      if (/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)) {
+        document.documentElement.classList.add('apple')
+      }
+    }
+    detectApple()
+  
+    })()
+  </script><script>const GLOBAL_CONFIG = {
+  root: '/',
+  algolia: undefined,
+  localSearch: undefined,
+  translate: undefined,
+  highlight: {"plugin":"highlight.js","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":false,"highlightFullpage":false,"highlightMacStyle":false},
+  copy: {
+    success: '复制成功',
+    error: '复制失败',
+    noSupport: '浏览器不支持'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: '',
+  dateSuffix: {
+    just: '刚刚',
+    min: '分钟前',
+    hour: '小时前',
+    day: '天前',
+    month: '个月前'
+  },
+  copyright: undefined,
+  lightbox: 'null',
+  Snackbar: undefined,
+  infinitegrid: {
+    js: 'https://cdn.jsdelivr.net/npm/@egjs/infinitegrid/dist/infinitegrid.min.js',
+    buttonText: '加载更多'
+  },
+  isPhotoFigcaption: false,
+  islazyloadPlugin: false,
+  isAnchor: false,
+  percent: {
+    toc: true,
+    rightside: false,
+  },
+  autoDarkmode: false
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: 'C++ 基础',
+  isHighlightShrink: false,
+  isToc: true,
+  pageType: 'post'
+}</script><link rel="stylesheet" href="/css/custom.css"><script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-4356268514816778" crossorigin="anonymous"></script><meta name="generator" content="Hexo 7.3.0"></head><body><div id="web_bg" style="background: [object Object];"></div><div class="post" id="body-wrap"><header class="post-bg" id="page-header" style="background-image: url(https://picsum.photos/seed/20260505-C++基础/1200/675);"><nav id="nav"><span id="blog-info"><a class="nav-site-title" href="/"><span class="site-name">Never Settle</span></a><a class="nav-page-title" href="/"><span class="site-name">C++ 基础</span></a></span><div id="menus"></div></nav><div id="post-info"><h1 class="post-title">C++ 基础</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" datetime="2026-05-05T02:00:00.000Z" title="发表于 2026-05-05 10:00:00">2026-05-05</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2026-06-11T04:04:27.523Z" title="更新于 2026-06-11 12:04:27">2026-06-11</time></span><span class="post-meta-categories"><span class="post-meta-separator">|</span><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/categories/%E7%BC%96%E7%A8%8B/">编程</a></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="leancloud_visitors" id="/2026/05/05/20260505-C++%E5%9F%BA%E7%A1%80/" data-flag-title="C++ 基础"><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">浏览量:</span><span class="leancloud-visitors-count"><i class="fa-solid fa-spinner fa-spin"></i></span></span><span class="post-meta-separator">|</span><span class="post-meta-commentcount"><i class="far fa-comments fa-fw post-meta-icon"></i><span class="post-meta-label">评论数:</span><a href="/2026/05/05/20260505-C++%E5%9F%BA%E7%A1%80/#post-comment" itemprop="discussionUrl"><span class="valine-comment-count" data-xid="/2026/05/05/20260505-C++%E5%9F%BA%E7%A1%80/" itemprop="commentCount"><i class="fa-solid fa-spinner fa-spin"></i></span></a></span></div></div></div></header><main class="layout" id="content-inner"><div id="post"><article class="container post-content" id="article-container"><h2 id="1-override-和-final-限定符"><a href="#1-override-和-final-限定符" class="headerlink" title="1. override 和 final 限定符"></a>1. override 和 final 限定符</h2><p><strong>override</strong>：编译器帮忙检查，用于父子类对父类 override 函数被实现，避免出现 override 函数调用失败。</p>
+<p><strong>final</strong>：加到父类函数后避免在子函数中被 override；加到类名后，类就无法被继承。</p>
+<h2 id="2-静态成员-static"><a href="#2-静态成员-static" class="headerlink" title="2. 静态成员 static"></a>2. 静态成员 static</h2><p>static 变量不依赖任何一个类对象，单独存在，单独初始化。</p>
+<p>static function：只能访问静态成员。non static 变量依赖类的实例化而存在的，要想访问需要在函数里先创建对象，再访问变量。</p>
+<h2 id="3-const-成员函数"><a href="#3-const-成员函数" class="headerlink" title="3. const 成员函数"></a>3. const 成员函数</h2><h2 id="4-this-指针"><a href="#4-this-指针" class="headerlink" title="4. this 指针"></a>4. this 指针</h2><h2 id="5-访问父类中的函数"><a href="#5-访问父类中的函数" class="headerlink" title="5. 访问父类中的函数"></a>5. 访问父类中的函数</h2><h2 id="6-友元函数与类"><a href="#6-友元函数与类" class="headerlink" title="6. 友元函数与类"></a>6. 友元函数与类</h2></article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta"><i class="fas fa-circle-user fa-fw"></i>文章作者: </span><span class="post-copyright-info"><a href="https://jatpeng.github.io">Jatpeng</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta"><i class="fas fa-square-arrow-up-right fa-fw"></i>文章链接: </span><span class="post-copyright-info"><a href="https://jatpeng.github.io/2026/05/05/20260505-C++%E5%9F%BA%E7%A1%80/">https://jatpeng.github.io/2026/05/05/20260505-C++%E5%9F%BA%E7%A1%80/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta"><i class="fas fa-circle-exclamation fa-fw"></i>版权声明: </span><span class="post-copyright-info">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a> 许可协议。转载请注明来源 <a href="https://jatpeng.github.io" target="_blank">Never Settle</a>！</span></div></div><div class="tag_share"><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/C/">C++</a></div><div class="post-share"><div class="social-share" data-image="https://picsum.photos/seed/20260505-C++基础/1200/675" data-sites="facebook,twitter,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/css/share.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/js/social-share.min.js" defer></script></div></div><nav class="pagination-post" id="pagination"><a class="pagination-related" href="/2026/04/29/20260429-dx%E5%85%B1%E4%BA%AB%E5%86%85%E5%AD%98%E6%8A%80%E6%9C%AF/" title="DX 共享内存技术"><img class="cover" src="https://picsum.photos/seed/20260429-dx共享内存技术/1200/675" onerror="onerror=null;src='/img/404.jpg'" alt="cover of previous post"><div class="info"><div class="info-1"><div class="info-item-1">上一篇</div><div class="info-item-2">DX 共享内存技术</div></div><div class="info-2"><div class="info-item-1">技术概述通过创建一个“共享显存服务进程”（下文简称共享进程），把所有客户端的纹理创建&#x2F;加载请求统一转发到共享进程执行，从而实现一个跨进程的纹理资源管理器（同一份纹理只创建一次，多客户端复用同一块显存）。 问题背景 某大型端游&#x2F;客户端应用存在“多开”使用场景，且大量视觉效果由 2D 序列帧纹理驱动。多开时每个客户端重复加载同一批资源，会导致显存总占用快速升高；显存压力过大时，可能出现资源分配失败甚至进程崩溃。 多开往往具有较高内容相关性（例如多个客户端在同一场景&#x2F;同一队伍内），意味着加载集合高度重叠。如果能把“相同资源只加载一次并跨进程共享”，则总显存占用可进一步下降。  技术思路 Direct3D 11 支持共享资源（shared resource &#x2F; shared handle）。一个进程创建的纹理可以通过共享句柄让另一个进程打开并使用。 客户端启动时创建或连接共享进程；客户端侧所有纹理创建请求都转发给共享进程执行。 客户端与共享进程之间的控制面通信使用共享内存（元信息、状态、句柄等），数据面仍由...</div></div></div></a><a class="pagination-related" href="/2026/05/09/20260509-UE%E5%B0%84%E5%87%BB%E6%B8%B8%E6%88%8F%E5%AD%A6%E4%B9%A0/" title="UE 射击游戏学习"><img class="cover" src="https://picsum.photos/seed/20260509-UE射击游戏学习/1200/675" onerror="onerror=null;src='/img/404.jpg'" alt="cover of next post"><div class="info text-right"><div class="info-1"><div class="info-item-1">下一篇</div><div class="info-item-2">UE 射击游戏学习</div></div><div class="info-2"><div class="info-item-1">（内容待补充） </div></div></div></a></nav><div class="relatedPosts"><div class="headline"><i class="fas fa-thumbs-up fa-fw"></i><span>相关推荐</span></div><div class="relatedPosts-list"><a class="pagination-related" href="/2026/04/20/20260420-C++%E5%A4%9A%E7%BA%BF%E7%A8%8B%E7%90%86%E8%A7%A3/" title="C++ 多线程理解"><img class="cover" src="https://picsum.photos/seed/20260420-C++多线程理解/1200/675" alt="cover"><div class="info text-center"><div class="info-1"><div class="info-item-1"><i class="far fa-calendar-alt fa-fw"></i> 2026-04-20</div><div class="info-item-2">C++ 多线程理解</div></div><div class="info-2"><div class="info-item-1">Why：为啥有多线程？提高 CPU 的利用率。 What：多线程是什么？How：多线程怎么实现？有什么问题？线程安全问题死锁问题 线程饥饿问题  </div></div></div></a><a class="pagination-related" href="/2026/04/27/20260427-C++%E5%A4%9A%E7%BA%BF%E7%A8%8B/" title="C++ 多线程"><img class="cover" src="https://picsum.photos/seed/20260427-C++多线程/1200/675" alt="cover"><div class="info text-center"><div class="info-1"><div class="info-item-1"><i class="far fa-calendar-alt fa-fw"></i> 2026-04-27</div><div class="info-item-2">C++ 多线程</div></div><div class="info-2"><div class="info-item-1">1. 使用原因1.任务分解：耗时任务，任务分解，实时响应 2.数据分解：充分利用多核心CPU 3.数据流分流 2.核心概念1.std::thread 基础​	join():主线程等待阻塞子线程完成后,回收子线程资源，线程生命周期受控； ​	detach(): 子线程与主线程分离,子线程后台游离运行。主线程销毁后，子线程会强行销毁。如果访问y 12345#include&lt;thread&gt;thread t1(worker);......t1.join() / t1.detach();  2.Mutex &amp; RAII 锁 ​	mutex (互斥量)类型:允许多个线程安全访问变量  1lock()	try_lock()  unlock()   mutex  recursive_mutex :用来解决递归调用lock_guard(mtx) 12345678910111213141516class DoSomething&#123;public:    int fun1()&#123;        std::lock_guard lock(mtx);       ...</div></div></div></a><a class="pagination-related" href="/2026/04/29/20260429-C++vscode%E7%8E%AF%E5%A2%83%E6%90%AD%E5%BB%BA/" title="Windows 下 VS Code + MSYS2 MinGW C++ 环境搭建笔记"><img class="cover" src="https://picsum.photos/seed/20260429-C++vscode环境搭建/1200/675" alt="cover"><div class="info text-center"><div class="info-1"><div class="info-item-1"><i class="far fa-calendar-alt fa-fw"></i> 2026-04-29</div><div class="info-item-2">Windows 下 VS Code + MSYS2 MinGW C++ 环境搭建笔记</div></div><div class="info-2"><div class="info-item-1">概述这份文档记录当前项目的 C++ 开发环境配置。目标是：在 VS Code 中按 F5 自动完成编译、生成、启动调试。 当前方案使用：  编译器：MSYS2 MinGW g++.exe 调试器：MSYS2 MinGW gdb.exe 编辑器：Visual Studio Code 代码提示：clangd 构建输出目录：build  需要安装什么 安装 VS Code。  安装 MSYS2。https://www.msys2.org/ 当前路径是： 1C:\msys64  在 MSYS2 里安装 MinGW 编译工具链。 打开 MSYS2 MinGW x64 终端，执行： 12pacman -Syupacman -S --needed mingw-w64-x86_64-gcc mingw-w64-x86_64-gdb  确认编译器和调试器存在： 12C:\msys64\mingw64\bin\g++.exeC:\msys64\mingw64\bin\gdb.exe  VS Code 建议安装这些扩展：  C&#x2F;C++，扩展...</div></div></div></a></div></div><hr class="custom-hr"/><div id="post-comment"><div class="comment-head"><div class="comment-headline"><i class="fas fa-comments fa-fw"></i><span> 评论</span></div></div><div class="comment-wrap"><div><div class="vcomment" id="vcomment"></div></div></div></div></div><div class="aside-content" id="aside-content"><div class="card-widget card-info text-center"><div class="avatar-img"><img src="/images/avatar.png" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="author-info-name">Jatpeng</div><div class="author-info-description">Never Settle</div><div class="site-data"><a href="/archives/"><div class="headline">文章</div><div class="length-num">76</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">60</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">10</div></a></div><a id="card-info-btn" target="_blank" rel="noopener" href="https://github.com/Jatpeng"><i class="fab fa-github"></i><span>Follow Me</span></a><div class="card-info-social-icons"><a class="social-icon" href="https://github.com/Jatpeng" target="_blank" title="fab fa-github"><i class="Github"></i></a><a class="social-icon" href="mailto:707752925@qq.com" target="_blank" title="fas fa-envelope"><i class="E-Mail"></i></a></div></div><div class="card-widget card-announcement"><div class="item-headline"><i class="fas fa-bullhorn fa-shake"></i><span>公告</span></div><div class="announcement_content">欢迎来到我的博客！<br/>这里会分享一些编程、游戏开发和生活感悟。</div></div><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="fas fa-stream"></i><span>目录</span><span class="toc-percentage"></span></div><div class="toc-content"><ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#1-override-%E5%92%8C-final-%E9%99%90%E5%AE%9A%E7%AC%A6"><span class="toc-number">1.</span> <span class="toc-text">1. override 和 final 限定符</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-%E9%9D%99%E6%80%81%E6%88%90%E5%91%98-static"><span class="toc-number">2.</span> <span class="toc-text">2. 静态成员 static</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3-const-%E6%88%90%E5%91%98%E5%87%BD%E6%95%B0"><span class="toc-number">3.</span> <span class="toc-text">3. const 成员函数</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#4-this-%E6%8C%87%E9%92%88"><span class="toc-number">4.</span> <span class="toc-text">4. this 指针</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#5-%E8%AE%BF%E9%97%AE%E7%88%B6%E7%B1%BB%E4%B8%AD%E7%9A%84%E5%87%BD%E6%95%B0"><span class="toc-number">5.</span> <span class="toc-text">5. 访问父类中的函数</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#6-%E5%8F%8B%E5%85%83%E5%87%BD%E6%95%B0%E4%B8%8E%E7%B1%BB"><span class="toc-number">6.</span> <span class="toc-text">6. 友元函数与类</span></a></li></ol></div></div><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>最新文章</span></div><div class="aside-list"><div class="aside-list-item"><a class="thumbnail" href="/2026/06/10/20260610-UE%E5%BC%95%E6%93%8E%E4%B8%AD%E7%9A%84%E8%A7%92%E8%89%B2%E5%92%8C%E5%9C%BA%E6%99%AF%E4%BA%A4%E4%BA%92/" title="UE 引擎中的角色和场景交互"><img src="https://picsum.photos/seed/20260610-UE引擎中的角色和场景交互/1200/675" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="UE 引擎中的角色和场景交互"/></a><div class="content"><a class="title" href="/2026/06/10/20260610-UE%E5%BC%95%E6%93%8E%E4%B8%AD%E7%9A%84%E8%A7%92%E8%89%B2%E5%92%8C%E5%9C%BA%E6%99%AF%E4%BA%A4%E4%BA%92/" title="UE 引擎中的角色和场景交互">UE 引擎中的角色和场景交互</a><time datetime="2026-06-10T02:00:00.000Z" title="发表于 2026-06-10 10:00:00">2026-06-10</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2026/06/09/20260609-UE%E5%9C%B0%E5%9B%BE%E5%B1%82%E5%AD%A6%E4%B9%A0/" title="UE 地图层学习"><img src="https://picsum.photos/seed/20260609-UE地图层学习/1200/675" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="UE 地图层学习"/></a><div class="content"><a class="title" href="/2026/06/09/20260609-UE%E5%9C%B0%E5%9B%BE%E5%B1%82%E5%AD%A6%E4%B9%A0/" title="UE 地图层学习">UE 地图层学习</a><time datetime="2026-06-09T02:00:00.000Z" title="发表于 2026-06-09 10:00:00">2026-06-09</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2026/06/09/20260609-Vulcan%E5%AD%A6%E4%B9%A0/" title="Vulkan 与 OpenGL 区别"><img src="https://picsum.photos/seed/20260609-Vulcan学习/1200/675" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="Vulkan 与 OpenGL 区别"/></a><div class="content"><a class="title" href="/2026/06/09/20260609-Vulcan%E5%AD%A6%E4%B9%A0/" title="Vulkan 与 OpenGL 区别">Vulkan 与 OpenGL 区别</a><time datetime="2026-06-09T02:00:00.000Z" title="发表于 2026-06-09 10:00:00">2026-06-09</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2026/06/09/20260609-drawcall%E4%BC%98%E5%8C%96/" title="Draw Call 优化"><img src="https://picsum.photos/seed/20260609-drawcall优化/1200/675" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="Draw Call 优化"/></a><div class="content"><a class="title" href="/2026/06/09/20260609-drawcall%E4%BC%98%E5%8C%96/" title="Draw Call 优化">Draw Call 优化</a><time datetime="2026-06-09T02:00:00.000Z" title="发表于 2026-06-09 10:00:00">2026-06-09</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2026/06/05/%E7%BE%8E%E6%9C%AF%E4%BD%9C%E5%93%81%E9%9B%86%E5%90%88-20260605/" title="美术作品集合"><img src="https://picsum.photos/seed/美术作品集合-20260605/1200/675" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="美术作品集合"/></a><div class="content"><a class="title" href="/2026/06/05/%E7%BE%8E%E6%9C%AF%E4%BD%9C%E5%93%81%E9%9B%86%E5%90%88-20260605/" title="美术作品集合">美术作品集合</a><time datetime="2026-06-05T02:00:00.000Z" title="发表于 2026-06-05 10:00:00">2026-06-05</time></div></div></div></div></div></div></main><footer id="footer"><div id="footer-wrap"><div class="copyright">&copy;2019 - 2026 By Jatpeng</div><div class="framework-info"><span>框架 </span><a target="_blank" rel="noopener" href="https://hexo.io">Hexo</a><span class="footer-separator">|</span><span>主题 </span><a target="_blank" rel="noopener" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly</a></div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="阅读模式"><i class="fas fa-book-open"></i></button><button id="darkmode" type="button" title="日间和夜间模式切换"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside-config" type="button" title="设置"><i class="fas fa-cog fa-spin"></i></button><button class="close" id="mobile-toc-button" type="button" title="目录"><i class="fas fa-list-ul"></i></button><a id="to_comment" href="#post-comment" title="前往评论"><i class="fas fa-comments"></i></a><button id="go-up" type="button" title="回到顶部"><span class="scroll-percent"></span><i class="fas fa-arrow-up"></i></button></div></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><div class="js-pjax"><script>(() => {
+  const isShuoshuo = GLOBAL_CONFIG_SITE.pageType === 'shuoshuo'
+  const option = null
+
+  const initValine = (el, path) => {
+    if (isShuoshuo) {
+      window.shuoshuoComment.destroyValine = () => {
+        if (el.children.length) {
+          el.innerHTML = ''
+          el.classList.add('no-comment')
+        }
+      }
+    }
+
+    const valineConfig = {
+      el: '#vcomment',
+      appId: 'aQWrbyCXv2t1dSu0mIJdzHFh-MdYXbMMI',
+      appKey: 'v5nFJzPNBU2DCg8W9PIg2umc',
+      avatar: 'mp',
+      serverURLs: 'https://aqwrbycx.api.lncldglobal.com',
+      emojiMaps: "",
+      visitor: true,
+      ...option,
+      path: isShuoshuo ? path : (option && option.path) || window.location.pathname
+    }
+
+    new Valine(valineConfig)
+  }
+
+  const loadValine = async (el, path) => {
+    if (typeof Valine === 'function') {
+      initValine(el, path)
+    } else {
+      await btf.getScript('https://cdn.jsdelivr.net/npm/valine/dist/Valine.min.js')
+      initValine(el, path)
+    }
+  }
+
+  if (isShuoshuo) {
+    'Valine' === 'Valine'
+      ? window.shuoshuoComment = { loadComment: loadValine }
+      : window.loadOtherComment = loadValine
+    return
+  }
+
+  if ('Valine' === 'Valine' || !false) {
+    if (false) btf.loadComment(document.getElementById('vcomment'),loadValine)
+    else setTimeout(loadValine, 0)
+  } else {
+    window.loadOtherComment = loadValine
+  }
+})()</script></div><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script></div></body></html>
