@@ -1,0 +1,222 @@
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0,viewport-fit=cover"><title>Never Settle | Never Settle</title><meta name="author" content="Jatpeng"><meta name="copyright" content="Jatpeng"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta name="description" content="天气系统雨，地面湿度变化从干燥变湿润，水滴涟漪，水面高光，水体边缘效果  雪，地面覆盖区域变化，水面变化效果，和夜景效果  场景雾气效果： 基于场景空间的雾气变化，支持颜色，遮罩区域，流动方向，流动速度等效果   多层地图效果">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Never Settle">
+<meta property="og:url" content="https://jatpeng.github.io/2026/06/11/20260526-UE%E7%AC%AC%E4%B8%89%E4%BA%BA%E7%A7%B0%E9%A1%B9%E7%9B%AE%E5%AD%A6%E4%B9%A0/index.html">
+<meta property="og:site_name" content="Never Settle">
+<meta property="og:description" content="天气系统雨，地面湿度变化从干燥变湿润，水滴涟漪，水面高光，水体边缘效果  雪，地面覆盖区域变化，水面变化效果，和夜景效果  场景雾气效果： 基于场景空间的雾气变化，支持颜色，遮罩区域，流动方向，流动速度等效果   多层地图效果">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://jatpeng.github.io/images/avatar.png">
+<meta property="article:published_time" content="2026-06-11T03:13:00.410Z">
+<meta property="article:modified_time" content="2026-06-11T03:13:00.410Z">
+<meta property="article:author" content="Jatpeng">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://jatpeng.github.io/images/avatar.png"><script type="application/ld+json">{
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "headline": "",
+  "url": "https://jatpeng.github.io/2026/06/11/20260526-UE%E7%AC%AC%E4%B8%89%E4%BA%BA%E7%A7%B0%E9%A1%B9%E7%9B%AE%E5%AD%A6%E4%B9%A0/",
+  "image": "https://jatpeng.github.io/images/avatar.png",
+  "datePublished": "2026-06-11T03:13:00.410Z",
+  "dateModified": "2026-06-11T03:13:00.410Z",
+  "author": [
+    {
+      "@type": "Person",
+      "name": "Jatpeng",
+      "url": "https://jatpeng.github.io/"
+    }
+  ]
+}</script><link rel="shortcut icon" href="/img/favicon.png"><link rel="canonical" href="https://jatpeng.github.io/2026/06/11/20260526-UE%E7%AC%AC%E4%B8%89%E4%BA%BA%E7%A7%B0%E9%A1%B9%E7%9B%AE%E5%AD%A6%E4%B9%A0/index.html"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css"><script>
+    (() => {
+      
+    const saveToLocal = {
+      set: (key, value, ttl) => {
+        if (!ttl) return
+        const expiry = Date.now() + ttl * 86400000
+        localStorage.setItem(key, JSON.stringify({ value, expiry }))
+      },
+      get: key => {
+        const itemStr = localStorage.getItem(key)
+        if (!itemStr) return undefined
+        const { value, expiry } = JSON.parse(itemStr)
+        if (Date.now() > expiry) {
+          localStorage.removeItem(key)
+          return undefined
+        }
+        return value
+      }
+    }
+
+    window.btf = {
+      saveToLocal,
+      getScript: (url, attr = {}) => new Promise((resolve, reject) => {
+        const script = document.createElement('script')
+        script.src = url
+        script.async = true
+        Object.entries(attr).forEach(([key, val]) => script.setAttribute(key, val))
+        script.onload = script.onreadystatechange = () => {
+          if (!script.readyState || /loaded|complete/.test(script.readyState)) resolve()
+        }
+        script.onerror = reject
+        document.head.appendChild(script)
+      }),
+      getCSS: (url, id) => new Promise((resolve, reject) => {
+        const link = document.createElement('link')
+        link.rel = 'stylesheet'
+        link.href = url
+        if (id) link.id = id
+        link.onload = link.onreadystatechange = () => {
+          if (!link.readyState || /loaded|complete/.test(link.readyState)) resolve()
+        }
+        link.onerror = reject
+        document.head.appendChild(link)
+      }),
+      addGlobalFn: (key, fn, name = false, parent = window) => {
+        if (!false && key.startsWith('pjax')) return
+        const globalFn = parent.globalFn || {}
+        globalFn[key] = globalFn[key] || {}
+        globalFn[key][name || Object.keys(globalFn[key]).length] = fn
+        parent.globalFn = globalFn
+      }
+    }
+  
+      
+      const activateDarkMode = () => {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', 'undefined')
+        }
+      }
+      const activateLightMode = () => {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', 'undefined')
+        }
+      }
+
+      btf.activateDarkMode = activateDarkMode
+      btf.activateLightMode = activateLightMode
+
+      const theme = saveToLocal.get('theme')
+    
+          theme === 'dark' ? activateDarkMode() : theme === 'light' ? activateLightMode() : null
+        
+      
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        document.documentElement.classList.toggle('hide-aside', asideStatus === 'hide')
+      }
+    
+      
+    const detectApple = () => {
+      if (/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)) {
+        document.documentElement.classList.add('apple')
+      }
+    }
+    detectApple()
+  
+    })()
+  </script><script>const GLOBAL_CONFIG = {
+  root: '/',
+  algolia: undefined,
+  localSearch: undefined,
+  translate: undefined,
+  highlight: {"plugin":"highlight.js","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":false,"highlightFullpage":false,"highlightMacStyle":false},
+  copy: {
+    success: '复制成功',
+    error: '复制失败',
+    noSupport: '浏览器不支持'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: '',
+  dateSuffix: {
+    just: '刚刚',
+    min: '分钟前',
+    hour: '小时前',
+    day: '天前',
+    month: '个月前'
+  },
+  copyright: undefined,
+  lightbox: 'null',
+  Snackbar: undefined,
+  infinitegrid: {
+    js: 'https://cdn.jsdelivr.net/npm/@egjs/infinitegrid/dist/infinitegrid.min.js',
+    buttonText: '加载更多'
+  },
+  isPhotoFigcaption: false,
+  islazyloadPlugin: false,
+  isAnchor: false,
+  percent: {
+    toc: true,
+    rightside: false,
+  },
+  autoDarkmode: false
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: 'Never Settle',
+  isHighlightShrink: false,
+  isToc: true,
+  pageType: 'post'
+}</script><link rel="stylesheet" href="/css/custom.css"><script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-4356268514816778" crossorigin="anonymous"></script><meta name="generator" content="Hexo 7.3.0"></head><body><div id="web_bg" style="background: [object Object];"></div><div class="post" id="body-wrap"><header class="post-bg" id="page-header"><nav id="nav"><span id="blog-info"><a class="nav-site-title" href="/"><span class="site-name">Never Settle</span></a><a class="nav-page-title" href="/"><span class="site-name">Never Settle</span></a></span><div id="menus"></div></nav><div id="post-info"><h1 class="post-title">无标题</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" datetime="2026-06-11T03:13:00.410Z" title="发表于 2026-06-11 11:13:00">2026-06-11</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2026-06-11T03:13:00.410Z" title="更新于 2026-06-11 11:13:00">2026-06-11</time></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="leancloud_visitors" id="/2026/06/11/20260526-UE%E7%AC%AC%E4%B8%89%E4%BA%BA%E7%A7%B0%E9%A1%B9%E7%9B%AE%E5%AD%A6%E4%B9%A0/" data-flag-title=""><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">浏览量:</span><span class="leancloud-visitors-count"><i class="fa-solid fa-spinner fa-spin"></i></span></span><span class="post-meta-separator">|</span><span class="post-meta-commentcount"><i class="far fa-comments fa-fw post-meta-icon"></i><span class="post-meta-label">评论数:</span><a href="/2026/06/11/20260526-UE%E7%AC%AC%E4%B8%89%E4%BA%BA%E7%A7%B0%E9%A1%B9%E7%9B%AE%E5%AD%A6%E4%B9%A0/#post-comment" itemprop="discussionUrl"><span class="valine-comment-count" data-xid="/2026/06/11/20260526-UE%E7%AC%AC%E4%B8%89%E4%BA%BA%E7%A7%B0%E9%A1%B9%E7%9B%AE%E5%AD%A6%E4%B9%A0/" itemprop="commentCount"><i class="fa-solid fa-spinner fa-spin"></i></span></a></span></div></div></div></header><main class="layout" id="content-inner"><div id="post"><article class="container post-content" id="article-container"><h1 id="天气系统"><a href="#天气系统" class="headerlink" title="天气系统"></a>天气系统</h1><p>雨，地面湿度变化从干燥变湿润，水滴涟漪，水面高光，水体边缘效果</p>
+<p><video src="https://nie.v.netease.com/nie/2022/0905/05312e7b4070ed026ba86e8bbe715280.mp4" controls></video></p>
+<p>雪，地面覆盖区域变化，水面变化效果，和夜景效果</p>
+<p><video src="https://nie.v.netease.com/nie/2022/0905/7d4b1c753bfdaaef4140553d0690395f.mp4" controls></video></p>
+<p>场景雾气效果：</p>
+<p>基于场景空间的雾气变化，支持颜色，遮罩区域，流动方向，流动速度等效果</p>
+<p><img src="https://nie.res.netease.com/r/pic/20241211/01f63f29-80af-4ab5-9aaa-76c15d54a265.jpg" alt="img"></p>
+<p><img src="https://nie.res.netease.com/r/pic/20241211/f060c462-c11b-4143-8906-55761fd3f09c.jpg" alt="img"></p>
+<h1 id="多层地图效果"><a href="#多层地图效果" class="headerlink" title="多层地图效果"></a>多层地图效果</h1><p><img src="https://xy2.res.netease.com/pc/zt/20230625115556/img/lk/5_72e90b0.webp" alt="img"></p>
+<p><img src="https://xy2.res.netease.com/pc/zt/20230625115556/img/lk/7_3d5d8fb.webp" alt="img"></p>
+</article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta"><i class="fas fa-circle-user fa-fw"></i>文章作者: </span><span class="post-copyright-info"><a href="https://jatpeng.github.io">Jatpeng</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta"><i class="fas fa-square-arrow-up-right fa-fw"></i>文章链接: </span><span class="post-copyright-info"><a href="https://jatpeng.github.io/2026/06/11/20260526-UE%E7%AC%AC%E4%B8%89%E4%BA%BA%E7%A7%B0%E9%A1%B9%E7%9B%AE%E5%AD%A6%E4%B9%A0/">https://jatpeng.github.io/2026/06/11/20260526-UE%E7%AC%AC%E4%B8%89%E4%BA%BA%E7%A7%B0%E9%A1%B9%E7%9B%AE%E5%AD%A6%E4%B9%A0/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta"><i class="fas fa-circle-exclamation fa-fw"></i>版权声明: </span><span class="post-copyright-info">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a> 许可协议。转载请注明来源 <a href="https://jatpeng.github.io" target="_blank">Never Settle</a>！</span></div></div><div class="tag_share"><div class="post-share"><div class="social-share" data-image="/images/avatar.png" data-sites="facebook,twitter,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/css/share.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/js/social-share.min.js" defer></script></div></div><nav class="pagination-post" id="pagination"><a class="pagination-related" href="/2026/06/11/20260525-Opengl%E8%BE%93%E5%85%A5%E7%BB%93%E6%9E%84%E5%AF%B9%E9%BD%90/" title=""><div class="cover" style="background: var(--default-bg-color)"></div><div class="info"><div class="info-1"><div class="info-item-1">上一篇</div><div class="info-item-2"></div></div><div class="info-2"><div class="info-item-1">Uniform缓冲对象(Uniform Buffer Object)opengl 中的分类需要传几个数字&#x2F;矩阵？ $\rightarrow$ Uniform 需要传几十个材质参数&#x2F;相机矩阵（多个 Shader 共享）？ $\rightarrow$ UBO 需要传模型的形状数据（几万个顶点）？ $\rightarrow$ VBO 需要传海量的查询表或图像？ $\rightarrow$ Texture 需要传百万级的光源&#x2F;粒子，且需要 GPU 参与计算和修改？ $\rightarrow$ SSBO UBO  SSBO 需要内存对齐   GLSL 数据类型 std140 (UBO) 基础对齐量 std430 (SSBO) 基础对齐量 差异点分析    float, int, bool 4 字节 4 字节 无区别。   vec2 8 字节 8 字节 无区别。   vec3 16 字节 16 字节 无区别！这是最大的坑！ 哪怕是 std430，vec3 也必须按 16 字节对齐，这意味着它后面永远跟着 4 字节的废料。   vec4 16 字节 16...</div></div></div></a><a class="pagination-related  no-desc" href="/2026/06/11/20260528-DDGI/" title=""><div class="cover" style="background: var(--default-bg-color)"></div><div class="info text-right"><div class="info-1"><div class="info-item-1">下一篇</div><div class="info-item-2"></div></div></div></a></nav><hr class="custom-hr"/><div id="post-comment"><div class="comment-head"><div class="comment-headline"><i class="fas fa-comments fa-fw"></i><span> 评论</span></div></div><div class="comment-wrap"><div><div class="vcomment" id="vcomment"></div></div></div></div></div><div class="aside-content" id="aside-content"><div class="card-widget card-info text-center"><div class="avatar-img"><img src="/images/avatar.png" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="author-info-name">Jatpeng</div><div class="author-info-description">Never Settle</div><div class="site-data"><a href="/archives/"><div class="headline">文章</div><div class="length-num">74</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">47</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">9</div></a></div><a id="card-info-btn" target="_blank" rel="noopener" href="https://github.com/Jatpeng"><i class="fab fa-github"></i><span>Follow Me</span></a><div class="card-info-social-icons"><a class="social-icon" href="https://github.com/Jatpeng" target="_blank" title="fab fa-github"><i class="Github"></i></a><a class="social-icon" href="mailto:707752925@qq.com" target="_blank" title="fas fa-envelope"><i class="E-Mail"></i></a></div></div><div class="card-widget card-announcement"><div class="item-headline"><i class="fas fa-bullhorn fa-shake"></i><span>公告</span></div><div class="announcement_content">欢迎来到我的博客！<br/>这里会分享一些编程、游戏开发和生活感悟。</div></div><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="fas fa-stream"></i><span>目录</span><span class="toc-percentage"></span></div><div class="toc-content"><ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%A4%A9%E6%B0%94%E7%B3%BB%E7%BB%9F"><span class="toc-number">1.</span> <span class="toc-text">天气系统</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%A4%9A%E5%B1%82%E5%9C%B0%E5%9B%BE%E6%95%88%E6%9E%9C"><span class="toc-number">2.</span> <span class="toc-text">多层地图效果</span></a></li></ol></div></div><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>最新文章</span></div><div class="aside-list"><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2026/06/11/20260505-C++%E5%9F%BA%E7%A1%80/" title="无标题">无标题</a><time datetime="2026-06-11T03:13:00.410Z" title="发表于 2026-06-11 11:13:00">2026-06-11</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2026/06/11/20260509-UE%E5%B0%84%E5%87%BB%E6%B8%B8%E6%88%8F%E5%AD%A6%E4%B9%A0/" title="无标题">无标题</a><time datetime="2026-06-11T03:13:00.410Z" title="发表于 2026-06-11 11:13:00">2026-06-11</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2026/06/11/20260509-%E5%9B%BE%E5%BD%A2%E5%AD%A6%E5%B8%B8%E8%A7%81%E6%95%B0%E5%AD%A6%E7%9F%A5%E8%AF%86%E7%82%B9%E8%80%83%E5%AF%9F/" title="无标题">无标题</a><time datetime="2026-06-11T03:13:00.410Z" title="发表于 2026-06-11 11:13:00">2026-06-11</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2026/06/11/20260509-%E5%82%BB%E9%80%BC%E4%B9%8B%E5%BF%83/" title="无标题">无标题</a><time datetime="2026-06-11T03:13:00.410Z" title="发表于 2026-06-11 11:13:00">2026-06-11</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2026/06/11/20260509-%E6%B8%B8%E6%88%8F%E4%B8%AD%E5%B8%B8%E8%A7%81%E6%95%88%E6%9E%9C%E5%AE%9E%E7%8E%B0%E6%96%B9%E6%A1%88/" title="无标题">无标题</a><time datetime="2026-06-11T03:13:00.410Z" title="发表于 2026-06-11 11:13:00">2026-06-11</time></div></div></div></div></div></div></main><footer id="footer"><div id="footer-wrap"><div class="copyright">&copy;2019 - 2026 By Jatpeng</div><div class="framework-info"><span>框架 </span><a target="_blank" rel="noopener" href="https://hexo.io">Hexo</a><span class="footer-separator">|</span><span>主题 </span><a target="_blank" rel="noopener" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly</a></div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="阅读模式"><i class="fas fa-book-open"></i></button><button id="darkmode" type="button" title="日间和夜间模式切换"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside-config" type="button" title="设置"><i class="fas fa-cog fa-spin"></i></button><button class="close" id="mobile-toc-button" type="button" title="目录"><i class="fas fa-list-ul"></i></button><a id="to_comment" href="#post-comment" title="前往评论"><i class="fas fa-comments"></i></a><button id="go-up" type="button" title="回到顶部"><span class="scroll-percent"></span><i class="fas fa-arrow-up"></i></button></div></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><div class="js-pjax"><script>(() => {
+  const isShuoshuo = GLOBAL_CONFIG_SITE.pageType === 'shuoshuo'
+  const option = null
+
+  const initValine = (el, path) => {
+    if (isShuoshuo) {
+      window.shuoshuoComment.destroyValine = () => {
+        if (el.children.length) {
+          el.innerHTML = ''
+          el.classList.add('no-comment')
+        }
+      }
+    }
+
+    const valineConfig = {
+      el: '#vcomment',
+      appId: 'aQWrbyCXv2t1dSu0mIJdzHFh-MdYXbMMI',
+      appKey: 'v5nFJzPNBU2DCg8W9PIg2umc',
+      avatar: 'mp',
+      serverURLs: 'https://aqwrbycx.api.lncldglobal.com',
+      emojiMaps: "",
+      visitor: true,
+      ...option,
+      path: isShuoshuo ? path : (option && option.path) || window.location.pathname
+    }
+
+    new Valine(valineConfig)
+  }
+
+  const loadValine = async (el, path) => {
+    if (typeof Valine === 'function') {
+      initValine(el, path)
+    } else {
+      await btf.getScript('https://cdn.jsdelivr.net/npm/valine/dist/Valine.min.js')
+      initValine(el, path)
+    }
+  }
+
+  if (isShuoshuo) {
+    'Valine' === 'Valine'
+      ? window.shuoshuoComment = { loadComment: loadValine }
+      : window.loadOtherComment = loadValine
+    return
+  }
+
+  if ('Valine' === 'Valine' || !false) {
+    if (false) btf.loadComment(document.getElementById('vcomment'),loadValine)
+    else setTimeout(loadValine, 0)
+  } else {
+    window.loadOtherComment = loadValine
+  }
+})()</script></div><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script></div></body></html>

@@ -1,0 +1,237 @@
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0,viewport-fit=cover"><title>Never Settle</title><meta name="author" content="Jatpeng"><meta name="copyright" content="Jatpeng"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta name="description" content="Never Settle">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Never Settle">
+<meta property="og:url" content="https://jatpeng.github.io/page/6/index.html">
+<meta property="og:site_name" content="Never Settle">
+<meta property="og:description" content="Never Settle">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://jatpeng.github.io/images/avatar.png">
+<meta property="article:author" content="Jatpeng">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://jatpeng.github.io/images/avatar.png"><link rel="shortcut icon" href="/img/favicon.png"><link rel="canonical" href="https://jatpeng.github.io/page/6/index.html"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css"><script>
+    (() => {
+      
+    const saveToLocal = {
+      set: (key, value, ttl) => {
+        if (!ttl) return
+        const expiry = Date.now() + ttl * 86400000
+        localStorage.setItem(key, JSON.stringify({ value, expiry }))
+      },
+      get: key => {
+        const itemStr = localStorage.getItem(key)
+        if (!itemStr) return undefined
+        const { value, expiry } = JSON.parse(itemStr)
+        if (Date.now() > expiry) {
+          localStorage.removeItem(key)
+          return undefined
+        }
+        return value
+      }
+    }
+
+    window.btf = {
+      saveToLocal,
+      getScript: (url, attr = {}) => new Promise((resolve, reject) => {
+        const script = document.createElement('script')
+        script.src = url
+        script.async = true
+        Object.entries(attr).forEach(([key, val]) => script.setAttribute(key, val))
+        script.onload = script.onreadystatechange = () => {
+          if (!script.readyState || /loaded|complete/.test(script.readyState)) resolve()
+        }
+        script.onerror = reject
+        document.head.appendChild(script)
+      }),
+      getCSS: (url, id) => new Promise((resolve, reject) => {
+        const link = document.createElement('link')
+        link.rel = 'stylesheet'
+        link.href = url
+        if (id) link.id = id
+        link.onload = link.onreadystatechange = () => {
+          if (!link.readyState || /loaded|complete/.test(link.readyState)) resolve()
+        }
+        link.onerror = reject
+        document.head.appendChild(link)
+      }),
+      addGlobalFn: (key, fn, name = false, parent = window) => {
+        if (!false && key.startsWith('pjax')) return
+        const globalFn = parent.globalFn || {}
+        globalFn[key] = globalFn[key] || {}
+        globalFn[key][name || Object.keys(globalFn[key]).length] = fn
+        parent.globalFn = globalFn
+      }
+    }
+  
+      
+      const activateDarkMode = () => {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', 'undefined')
+        }
+      }
+      const activateLightMode = () => {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', 'undefined')
+        }
+      }
+
+      btf.activateDarkMode = activateDarkMode
+      btf.activateLightMode = activateLightMode
+
+      const theme = saveToLocal.get('theme')
+    
+          theme === 'dark' ? activateDarkMode() : theme === 'light' ? activateLightMode() : null
+        
+      
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        document.documentElement.classList.toggle('hide-aside', asideStatus === 'hide')
+      }
+    
+      
+    const detectApple = () => {
+      if (/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)) {
+        document.documentElement.classList.add('apple')
+      }
+    }
+    detectApple()
+  
+    })()
+  </script><script>const GLOBAL_CONFIG = {
+  root: '/',
+  algolia: undefined,
+  localSearch: undefined,
+  translate: undefined,
+  highlight: {"plugin":"highlight.js","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":false,"highlightFullpage":false,"highlightMacStyle":false},
+  copy: {
+    success: '复制成功',
+    error: '复制失败',
+    noSupport: '浏览器不支持'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: '',
+  dateSuffix: {
+    just: '刚刚',
+    min: '分钟前',
+    hour: '小时前',
+    day: '天前',
+    month: '个月前'
+  },
+  copyright: undefined,
+  lightbox: 'null',
+  Snackbar: undefined,
+  infinitegrid: {
+    js: 'https://cdn.jsdelivr.net/npm/@egjs/infinitegrid/dist/infinitegrid.min.js',
+    buttonText: '加载更多'
+  },
+  isPhotoFigcaption: false,
+  islazyloadPlugin: false,
+  isAnchor: false,
+  percent: {
+    toc: true,
+    rightside: false,
+  },
+  autoDarkmode: false
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: 'Never Settle',
+  isHighlightShrink: false,
+  isToc: false,
+  pageType: 'home'
+}</script><link rel="stylesheet" href="/css/custom.css"><script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-4356268514816778" crossorigin="anonymous"></script><meta name="generator" content="Hexo 7.3.0"></head><body><div id="web_bg" style="background: [object Object];"></div><div class="page" id="body-wrap"><header class="full_page" id="page-header" style="background-image: url(/images/background/wood.jpeg);"><nav id="nav"><span id="blog-info"><a class="nav-site-title" href="/"><span class="site-name">Never Settle</span></a></span><div id="menus"></div></nav><div id="site-info"><h1 id="site-title">Never Settle</h1><div id="site_social_icons"><a class="social-icon" href="https://github.com/Jatpeng" target="_blank" title="fab fa-github"><i class="Github"></i></a><a class="social-icon" href="mailto:707752925@qq.com" target="_blank" title="fas fa-envelope"><i class="E-Mail"></i></a></div></div><div id="scroll-down"><i class="fas fa-angle-down scroll-down-effects"></i></div></header><main class="layout" id="content-inner"><div class="recent-posts nc" id="recent-posts"><div class="recent-post-items"><div class="recent-post-item"><div class="post_cover left"><a href="/2025/02/18/20250218-leetcode1552%E4%B8%A4%E7%90%83%E4%B9%8B%E9%97%B4%E7%9A%84%E7%A3%81%E5%8A%9B/" title="LeetCode 1552 - 两球之间的磁力"><img class="post-bg" src="https://picsum.photos/seed/20250218-leetcode1552两球之间的磁力/1200/675" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="LeetCode 1552 - 两球之间的磁力"></a></div><div class="recent-post-info"><a class="article-title" href="/2025/02/18/20250218-leetcode1552%E4%B8%A4%E7%90%83%E4%B9%8B%E9%97%B4%E7%9A%84%E7%A3%81%E5%8A%9B/" title="LeetCode 1552 - 两球之间的磁力">LeetCode 1552 - 两球之间的磁力</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">发表于</span><time datetime="2025-02-18T01:29:29.000Z" title="发表于 2025-02-18 09:29:29">2025-02-18</time></span></div><div class="content">题目给定一个数组 position 表示球的位置，以及整数 m 表示要放的球数。把 m 个球放入这些位置，使任意两球间的最小磁力（距离）最大。返回这个最大值。 解题思路 先对位置排序。 对“最小间距”进行二分搜索：假设最小间距为 d，检查能否放下 m 个球。 检查方式：从最左位置开始贪心放球，尽量保持相邻球间距 ≥ d，统计能放下的球数。  如果能放下 m 个球，说明 d 可行，尝试更大；否则缩小。 代码实现（Python）1234567891011121314151617181920212223242526from typing import Listclass Solution:    def maxDistance(self, position: List[int], m: int) -&gt; int:        position.sort()        def can_place(dist: int) -&gt; bool:            count = 1            last = position[0]            for x...</div></div></div><div class="recent-post-item"><div class="post_cover right"><a href="/2025/02/18/20250218-leetcode2080%E5%8C%BA%E9%97%B4%E5%86%85%E6%9F%A5%E8%AF%A2%E6%95%B0%E5%AD%97%E9%A2%91%E7%8E%87/" title="LeetCode 2080 - 区间内查询数字频率"><img class="post-bg" src="https://picsum.photos/seed/20250218-leetcode2080区间内查询数字频率/1200/675" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="LeetCode 2080 - 区间内查询数字频率"></a></div><div class="recent-post-info"><a class="article-title" href="/2025/02/18/20250218-leetcode2080%E5%8C%BA%E9%97%B4%E5%86%85%E6%9F%A5%E8%AF%A2%E6%95%B0%E5%AD%97%E9%A2%91%E7%8E%87/" title="LeetCode 2080 - 区间内查询数字频率">LeetCode 2080 - 区间内查询数字频率</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">发表于</span><time datetime="2025-02-18T00:21:35.000Z" title="发表于 2025-02-18 08:21:35">2025-02-18</time></span></div><div class="content">题目请你设计一个数据结构，它能求出给定子数组内一个给定值的频率。 子数组中一个值的频率指的是这个子数组中这个值的出现次数。 请你实现 RangeFreqQuery 类：  RangeFreqQuery(int[] arr) 用下标从 0 开始的整数数组 arr 构造一个类的实例。 int query(int left, int right, int value) 返回子数组 arr[left...right] 中 value 的频率。  示例 1输入： 12[&quot;RangeFreqQuery&quot;, &quot;query&quot;, &quot;query&quot;][[[12, 33, 4, 56, 22, 2, 34, 33, 22, 12, 34, 56]], [1, 2, 4], [0, 11, 33]] 输出： 1[null, 1, 2]  解释： 123RangeFreqQuery rangeFreqQuery = new RangeFreqQuery([12, 33, 4, 56, 22, 2, 34, 33, 22, 12, 34,...</div></div></div><div class="recent-post-item"><div class="post_cover left"><a href="/2025/02/17/20250217-leetcode1706%E7%90%83%E4%BC%9A%E8%90%BD%E5%9C%A8%E5%93%AA%E9%87%8C/" title="LeetCode 1706 - 球会落在哪里"><img class="post-bg" src="https://picsum.photos/seed/20250217-leetcode1706球会落在哪里/1200/675" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="LeetCode 1706 - 球会落在哪里"></a></div><div class="recent-post-info"><a class="article-title" href="/2025/02/17/20250217-leetcode1706%E7%90%83%E4%BC%9A%E8%90%BD%E5%9C%A8%E5%93%AA%E9%87%8C/" title="LeetCode 1706 - 球会落在哪里">LeetCode 1706 - 球会落在哪里</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">发表于</span><time datetime="2025-02-17T08:50:45.000Z" title="发表于 2025-02-17 16:50:45">2025-02-17</time></span></div><div class="content">题目用一个大小为 m x n 的二维网格 grid 表示一个箱子。你有 n 颗球。箱子的顶部和底部都是开着的。 箱子中的每个单元格都有一个对角线挡板，跨过单元格的两个角，可以将球导向左侧或者右侧。 将球导向右侧的挡板跨过左上角和右下角，在网格中用 1 表示。将球导向左侧的挡板跨过右上角和左下角，在网格中用 -1 表示。在箱子每一列的顶端各放一颗球。每颗球都可能卡在箱子里或从底部掉出来。如果球恰好卡在两块挡板之间的 “V” 形图案，或者被一块挡导向到箱子的任意一侧边上，就会卡住。 返回一个大小为 n 的数组 answer ，其中 answer[i] 是球放在顶部的第 i 列后从底部掉出来的那一列对应的下标，如果球卡在盒子里，则返回 -1 。 思路 构造一个长度为球数的数组 result，记录每个球当前所在的列。 如果某个球无法进入下一行，则将对应位置设为 -1。 遍历每一行时，只更新 result 中不为 -1 的球。  代码实现12345678910111213141516171819202122232425262728class Solution:    def...</div></div></div><div class="recent-post-item"><div class="post_cover right"><a href="/2025/02/16/20250217-leetcode%E9%A2%98%E7%9B%AE%E5%88%86%E7%B1%BB%E6%80%BB%E7%BB%93/" title="LeetCode题目分类总结"><img class="post-bg" src="https://picsum.photos/seed/20250217-leetcode题目分类总结/1200/675" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="LeetCode题目分类总结"></a></div><div class="recent-post-info"><a class="article-title" href="/2025/02/16/20250217-leetcode%E9%A2%98%E7%9B%AE%E5%88%86%E7%B1%BB%E6%80%BB%E7%BB%93/" title="LeetCode题目分类总结">LeetCode题目分类总结</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">发表于</span><time datetime="2025-02-16T16:00:00.000Z" title="发表于 2025-02-17 00:00:00">2025-02-17</time></span><span class="article-meta"><span class="article-meta-separator">|</span><i class="fas fa-inbox"></i><a class="article-meta__categories" href="/categories/%E7%AE%97%E6%B3%95%E6%80%BB%E7%BB%93/">算法总结</a></span></div><div class="content">动态规划类题目1. 基础型动态规划 LeetCode 746 使用最小花费爬楼梯  特点：线性DP，每步决策只依赖前两步 状态定义：dp[i]表示到达第i个台阶的最小花费 优化：可以用滚动数组将空间复杂度优化到O(1)   LeetCode 119 杨辉三角形 II  特点：组合数学问题，可以用DP优化 技巧：利用滚动数组优化空间复杂度    2. 决策型动态规划 LeetCode 198 打家劫舍  特点：相邻元素不能同时选择 状态定义：dp[i]表示前i个房屋能偷到的最大金额 状态转移：dp[i] &#x3D; max(dp[i-1], dp[i-2] + nums[i])   LeetCode 740 删除并获取点数  特点：决策会影响相邻元素，类似打家劫舍 优化：通过计数转化为打家劫舍问题    3. 多维动态规划 LeetCode 2944...</div></div></div><div class="recent-post-item"><div class="post_cover left"><a href="/2025/02/13/20250213-leetcode1742%E7%9B%92%E5%AD%90%E4%B8%AD%E5%B0%8F%E7%90%83%E7%9A%84%E6%9C%80%E5%A4%A7%E6%95%B0%E9%87%8F/" title="LeetCode 1742 - 盒子中小球的最大数量"><img class="post-bg" src="https://picsum.photos/seed/20250213-leetcode1742盒子中小球的最大数量/1200/675" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="LeetCode 1742 - 盒子中小球的最大数量"></a></div><div class="recent-post-info"><a class="article-title" href="/2025/02/13/20250213-leetcode1742%E7%9B%92%E5%AD%90%E4%B8%AD%E5%B0%8F%E7%90%83%E7%9A%84%E6%9C%80%E5%A4%A7%E6%95%B0%E9%87%8F/" title="LeetCode 1742 - 盒子中小球的最大数量">LeetCode 1742 - 盒子中小球的最大数量</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">发表于</span><time datetime="2025-02-13T13:11:33.000Z" title="发表于 2025-02-13 21:11:33">2025-02-13</time></span></div><div class="content">题目你在一家生产小球的玩具厂工作，有 n 个小球，编号从 lowLimit 开始，到 highLimit 结束（包括 lowLimit 和 highLimit，即 n == highLimit - lowLimit + 1）。另有无限数量的盒子，编号从 1 到 infinity。 你的工作是将每个小球放入盒子中，其中盒子的编号应当等于小球编号上每位数字的和。例如，编号 321 的小球应当放入编号 3 + 2 + 1 = 6 的盒子，而编号 10 的小球应当放入编号 1 + 0 = 1 的盒子。 给你两个整数 lowLimit 和 highLimit，返回放有最多小球的盒子中的小球数量。如果有多个盒子都满足放有最多小球，只需返回其中任一盒子的小球数量。 解题思路方法一：哈希表统计12345678910111213def countBalls(self, lowLimit: int, highLimit: int) -&gt; int:    # 使用字典存储每个盒子中球的数量    box_count = &#123;&#125;        # 遍历每个球的编号    for...</div></div></div><div class="recent-post-item"><div class="post_cover right"><a href="/2025/02/12/20250212-leetcode1760%E8%A2%8B%E5%AD%90%E9%87%8C%E6%9C%80%E5%B0%91%E7%9A%84%E7%90%83/" title="LeetCode 1760 - 袋子里最少的球"><img class="post-bg" src="https://picsum.photos/seed/20250212-leetcode1760袋子里最少的球/1200/675" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="LeetCode 1760 - 袋子里最少的球"></a></div><div class="recent-post-info"><a class="article-title" href="/2025/02/12/20250212-leetcode1760%E8%A2%8B%E5%AD%90%E9%87%8C%E6%9C%80%E5%B0%91%E7%9A%84%E7%90%83/" title="LeetCode 1760 - 袋子里最少的球">LeetCode 1760 - 袋子里最少的球</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">发表于</span><time datetime="2025-02-12T06:06:20.000Z" title="发表于 2025-02-12 14:06:20">2025-02-12</time></span></div><div class="content">题目给你一个整数数组 nums，其中 nums[i] 表示第 i 个袋子里球的数目。同时给你一个整数 maxOperations。 你可以进行如下操作至多 maxOperations 次： 选择任意一个袋子，并将袋子里的球分到 2 个新的袋子中，每个袋子里都有正整数个球。比如一个袋子里有 5 个球，可以分成 1 和 4，或者 2 和 3。 你的开销是单个袋子里球数目的最大值，你想要最小化开销。请返回最小开销。 示例 1输入：nums = [9], maxOperations = 2输出：3解释：[9] -&gt; [6,3] -&gt; [3,3,3]，最大值为 3。 示例 2输入：nums = [2,4,8,2], maxOperations = 4输出：2解释：最终可分为 [2,2,2,2,2,2,2,2]，最大值为 2。 示例 3输入：nums = [7,17], maxOperations = 2输出：7 解题思路这道题可以使用二分查找来解决：  题目分析：  我们需要找到一个最小值 x，使得所有袋子里的球数都不超过 x 对于每个袋子，如果球数超过...</div></div></div><div class="recent-post-item"><div class="post_cover left"><a href="/2025/02/10/20250210-leetcode740%E5%88%A0%E9%99%A4%E5%B9%B6%E8%8E%B7%E5%8F%96%E7%82%B9%E6%95%B0/" title="LeetCode 740 - 删除并获取点数"><img class="post-bg" src="https://picsum.photos/seed/20250210-leetcode740删除并获取点数/1200/675" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="LeetCode 740 - 删除并获取点数"></a></div><div class="recent-post-info"><a class="article-title" href="/2025/02/10/20250210-leetcode740%E5%88%A0%E9%99%A4%E5%B9%B6%E8%8E%B7%E5%8F%96%E7%82%B9%E6%95%B0/" title="LeetCode 740 - 删除并获取点数">LeetCode 740 - 删除并获取点数</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">发表于</span><time datetime="2025-02-10T02:36:49.000Z" title="发表于 2025-02-10 10:36:49">2025-02-10</time></span><span class="article-meta"><span class="article-meta-separator">|</span><i class="fas fa-inbox"></i><a class="article-meta__categories" href="/categories/%E7%AE%97%E6%B3%95/">算法</a></span></div><div class="content">题目给你一个整数数组 nums，你可以对它进行一些操作。 每次操作中，选择任意一个 nums[i]，删除它并获得 nums[i] 的点数。之后，你必须删除所有等于 nums[i] - 1 和 nums[i] + 1 的元素。 开始你拥有 0 个点数。返回你能通过这些操作获得的最大点数。 示例 1输入：nums = [3,4,2]输出：6解释：删除 4 获得 4 点数，因此 3 也被删除；之后删除 2 获得 2 点数，总共 6。 示例 2输入：nums = [2,2,3,3,3,4]输出：9解释：删除 3 获得 3 点数，接着要删除两个 2 和 4；之后再次删除 3 获得 3 点数，再删除 3 获得 3 点数，总共 9。 提示 1 &lt;= nums.length &lt;= 2 * 10^4 1 &lt;= nums[i] &lt;= 10^4  解题思路这道题可以转化为打家劫舍问题：  首先统计每个数字出现的次数，记录在数组sum中 sum[i]表示数字i出现的总和（即出现次数 ×...</div></div></div><div class="recent-post-item"><div class="post_cover right"><a href="/2025/02/08/20250208-leetcode63%E4%B8%8D%E5%90%8C%E8%B7%AF%E5%BE%842/" title="LeetCode 63 - 不同路径 II"><img class="post-bg" src="https://picsum.photos/seed/20250208-leetcode63不同路径2/1200/675" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="LeetCode 63 - 不同路径 II"></a></div><div class="recent-post-info"><a class="article-title" href="/2025/02/08/20250208-leetcode63%E4%B8%8D%E5%90%8C%E8%B7%AF%E5%BE%842/" title="LeetCode 63 - 不同路径 II">LeetCode 63 - 不同路径 II</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">发表于</span><time datetime="2025-02-08T01:39:47.000Z" title="发表于 2025-02-08 09:39:47">2025-02-08</time></span><span class="article-meta"><span class="article-meta-separator">|</span><i class="fas fa-inbox"></i><a class="article-meta__categories" href="/categories/%E7%AE%97%E6%B3%95%E9%A2%98%E8%A7%A3/">算法题解</a></span></div><div class="content">题目描述给定一个 m x n 的整数数组 grid。一个机器人初始位于左上角（即 grid[0][0]）。机器人尝试移动到右下角（即 grid[m - 1][n - 1]）。机器人每次只能向下或者向右移动一步。 网格中的障碍物和空位置分别用 1 和 0 来表示。机器人的移动路径中不能包含任何有障碍物的方格。 返回机器人能够到达右下角的不同路径数量。 测试用例保证答案小于等于 2 * 109。 解题思路这是一个典型的动态规划问题，我们可以这样解决：  创建一个 dp 数组，dp[i][j] 表示到达位置 (i,j) 的不同路径数 初始条件： 如果起点有障碍物，直接返回 0 否则 dp[0][0] = 1   状态转移： 如果当前位置有障碍物，dp[i][j] = 0 否则 dp[i][j] = dp[i-1][j] + dp[i][j-1]    代码实现12345678910111213141516171819202122232425262728class Solution:    def uniquePathsWithObstacles(self, obstacleGrid:...</div></div></div><div class="recent-post-item"><div class="post_cover left"><a href="/2025/02/07/20250202-leetcode98%E9%AA%8C%E8%AF%81%E4%BA%8C%E5%8F%89%E6%90%9C%E7%B4%A2%E6%A0%91/" title="LeetCode 98 - 验证二叉搜索树"><img class="post-bg" src="https://picsum.photos/seed/20250202-leetcode98验证二叉搜索树/1200/675" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="LeetCode 98 - 验证二叉搜索树"></a></div><div class="recent-post-info"><a class="article-title" href="/2025/02/07/20250202-leetcode98%E9%AA%8C%E8%AF%81%E4%BA%8C%E5%8F%89%E6%90%9C%E7%B4%A2%E6%A0%91/" title="LeetCode 98 - 验证二叉搜索树">LeetCode 98 - 验证二叉搜索树</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">发表于</span><time datetime="2025-02-07T06:58:38.000Z" title="发表于 2025-02-07 14:58:38">2025-02-07</time></span><span class="article-meta"><span class="article-meta-separator">|</span><i class="fas fa-inbox"></i><a class="article-meta__categories" href="/categories/%E7%AE%97%E6%B3%95%E9%A2%98%E8%A7%A3/">算法题解</a></span></div><div class="content">题目描述给你一个二叉树的根节点 root ，判断其是否是一个有效的二叉搜索树。 有效二叉搜索树定义如下：  节点的左子树只包含小于当前节点的数。 节点的右子树只包含大于当前节点的数。 所有左子树和右子树自身必须也是二叉搜索树。  解题思路要验证一个二叉树是否为有效的二叉搜索树，我们需要：  确保当前节点的值大于左子树的所有节点 确保当前节点的值小于右子树的所有节点 递归验证左右子树也满足BST的性质  关键在于维护每个节点值的合法范围。我们可以通过递归时传递上下界来实现这一点。 代码实现123456789101112131415161718192021222324class TreeNode:    def __init__(self, val=0, left=None, right=None):        self.val = val        self.left = left        self.right = rightclass Solution:    def isValidBST(self, root: Optional[TreeNode]) -&gt;...</div></div></div><div class="recent-post-item"><div class="post_cover right"><a href="/2025/02/06/20250206-leetcode47%E5%85%A8%E6%8E%92%E5%88%972/" title="LeetCode 47 - 全排列 II"><img class="post-bg" src="https://picsum.photos/seed/20250206-leetcode47全排列2/1200/675" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="LeetCode 47 - 全排列 II"></a></div><div class="recent-post-info"><a class="article-title" href="/2025/02/06/20250206-leetcode47%E5%85%A8%E6%8E%92%E5%88%972/" title="LeetCode 47 - 全排列 II">LeetCode 47 - 全排列 II</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">发表于</span><time datetime="2025-02-06T02:50:38.000Z" title="发表于 2025-02-06 10:50:38">2025-02-06</time></span><span class="article-meta"><span class="article-meta-separator">|</span><i class="fas fa-inbox"></i><a class="article-meta__categories" href="/categories/%E7%AE%97%E6%B3%95%E9%A2%98%E8%A7%A3/">算法题解</a></span></div><div class="content">题目给定一个可包含重复数字的序列 nums ，按任意顺序 返回所有不重复的全排列。 示例 1：输入：nums &#x3D; [1,1,2]输出：[[1,1,2], [1,2,1], [2,1,1]] 示例 2：输入：nums &#x3D; [1,2,3]输出：[[1,2,3],[1,3,2],[2,1,3],[2,3,1],[3,1,2],[3,2,1]] 解题思路1. 基本回溯法 使用交换的方式生成排列 每次固定一个位置，然后递归处理剩余位置 但这种方法会产生重复的排列  2. 回溯法+剪枝 在基本回溯的基础上添加剪枝条件 通过判断是否已经使用过相同的数字来避免重复 需要先对数组排序，使相同的数字相邻  代码实现1. 基本回溯法12345678910111213141516class Solution:    def permuteUnique(self, nums: List[int]) -&gt; List[List[int]]:        def backtrack(nums, start, end):            #...</div></div></div></div><nav id="pagination"><div class="pagination"><a class="extend prev" rel="prev" href="/page/5/#content-inner"><i class="fas fa-chevron-left fa-fw"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/5/#content-inner">5</a><span class="page-number current">6</span><a class="page-number" href="/page/7/#content-inner">7</a><a class="page-number" href="/page/8/#content-inner">8</a><a class="extend next" rel="next" href="/page/7/#content-inner"><i class="fas fa-chevron-right fa-fw"></i></a></div></nav></div><div class="aside-content" id="aside-content"><div class="card-widget card-info text-center"><div class="avatar-img"><img src="/images/avatar.png" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="author-info-name">Jatpeng</div><div class="author-info-description">Never Settle</div><div class="site-data"><a href="/archives/"><div class="headline">文章</div><div class="length-num">74</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">47</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">9</div></a></div><a id="card-info-btn" target="_blank" rel="noopener" href="https://github.com/Jatpeng"><i class="fab fa-github"></i><span>Follow Me</span></a><div class="card-info-social-icons"><a class="social-icon" href="https://github.com/Jatpeng" target="_blank" title="fab fa-github"><i class="Github"></i></a><a class="social-icon" href="mailto:707752925@qq.com" target="_blank" title="fas fa-envelope"><i class="E-Mail"></i></a></div></div><div class="card-widget card-announcement"><div class="item-headline"><i class="fas fa-bullhorn fa-shake"></i><span>公告</span></div><div class="announcement_content">欢迎来到我的博客！<br/>这里会分享一些编程、游戏开发和生活感悟。</div></div><div class="sticky_layout"><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>最新文章</span></div><div class="aside-list"><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2026/06/11/20260505-C++%E5%9F%BA%E7%A1%80/" title="无标题">无标题</a><time datetime="2026-06-11T03:13:00.410Z" title="发表于 2026-06-11 11:13:00">2026-06-11</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2026/06/11/20260509-UE%E5%B0%84%E5%87%BB%E6%B8%B8%E6%88%8F%E5%AD%A6%E4%B9%A0/" title="无标题">无标题</a><time datetime="2026-06-11T03:13:00.410Z" title="发表于 2026-06-11 11:13:00">2026-06-11</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2026/06/11/20260509-%E5%9B%BE%E5%BD%A2%E5%AD%A6%E5%B8%B8%E8%A7%81%E6%95%B0%E5%AD%A6%E7%9F%A5%E8%AF%86%E7%82%B9%E8%80%83%E5%AF%9F/" title="无标题">无标题</a><time datetime="2026-06-11T03:13:00.410Z" title="发表于 2026-06-11 11:13:00">2026-06-11</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2026/06/11/20260509-%E5%82%BB%E9%80%BC%E4%B9%8B%E5%BF%83/" title="无标题">无标题</a><time datetime="2026-06-11T03:13:00.410Z" title="发表于 2026-06-11 11:13:00">2026-06-11</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2026/06/11/20260509-%E6%B8%B8%E6%88%8F%E4%B8%AD%E5%B8%B8%E8%A7%81%E6%95%88%E6%9E%9C%E5%AE%9E%E7%8E%B0%E6%96%B9%E6%A1%88/" title="无标题">无标题</a><time datetime="2026-06-11T03:13:00.410Z" title="发表于 2026-06-11 11:13:00">2026-06-11</time></div></div></div></div><div class="card-widget card-categories"><div class="item-headline">
+            <i class="fas fa-folder-open"></i>
+            <span>分类</span>
+            <a class="card-more-btn" href="/categories/" title="查看更多">
+      <i class="fas fa-angle-right"></i></a>
+          </div>
+          <ul class="card-category-list" id="aside-cat-list">
+            <li class="card-category-list-item "><a class="card-category-list-link" href="/categories/C/"><span class="card-category-list-name">C++</span><span class="card-category-list-count">6</span></a></li><li class="card-category-list-item "><a class="card-category-list-link" href="/categories/UE/"><span class="card-category-list-name">UE</span><span class="card-category-list-count">1</span></a></li><li class="card-category-list-item "><a class="card-category-list-link" href="/categories/%E6%B8%B8%E6%88%8F%E5%BC%80%E5%8F%91/"><span class="card-category-list-name">游戏开发</span><span class="card-category-list-count">6</span></a></li><li class="card-category-list-item "><a class="card-category-list-link" href="/categories/%E7%AE%97%E6%B3%95/"><span class="card-category-list-name">算法</span><span class="card-category-list-count">3</span></a></li><li class="card-category-list-item "><a class="card-category-list-link" href="/categories/%E7%AE%97%E6%B3%95%E6%80%BB%E7%BB%93/"><span class="card-category-list-name">算法总结</span><span class="card-category-list-count">1</span></a></li><li class="card-category-list-item "><a class="card-category-list-link" href="/categories/%E7%AE%97%E6%B3%95%E9%A2%98%E8%A7%A3/"><span class="card-category-list-name">算法题解</span><span class="card-category-list-count">9</span></a></li><li class="card-category-list-item "><a class="card-category-list-link" href="/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/"><span class="card-category-list-name">计算机基础</span><span class="card-category-list-count">1</span></a></li><li class="card-category-list-item "><a class="card-category-list-link" href="/categories/%E9%9A%8F%E7%AC%94/"><span class="card-category-list-name">随笔</span><span class="card-category-list-count">2</span></a></li>
+          </ul></div><div class="card-widget card-tags"><div class="item-headline"><i class="fas fa-tags"></i><span>标签</span></div><div class="card-tag-cloud"><a href="/tags/%E5%90%8E%E5%A4%84%E7%90%86/" style="font-size: 1.1em; color: #999">后处理</a> <a href="/tags/%E5%BC%80%E5%8F%91%E7%8E%AF%E5%A2%83/" style="font-size: 1.1em; color: #999">开发环境</a> <a href="/tags/%E5%85%A8%E5%B1%80%E5%85%89%E7%85%A7/" style="font-size: 1.1em; color: #999">全局光照</a> <a href="/tags/Shader/" style="font-size: 1.1em; color: #999">Shader</a> <a href="/tags/%E9%A1%B9%E7%9B%AE%E5%B1%95%E7%A4%BA/" style="font-size: 1.1em; color: #999">项目展示</a> <a href="/tags/URP/" style="font-size: 1.1em; color: #999">URP</a> <a href="/tags/%E6%BB%91%E5%8A%A8%E7%AA%97%E5%8F%A3/" style="font-size: 1.1em; color: #999">滑动窗口</a> <a href="/tags/UE5/" style="font-size: 1.18em; color: #999ca1">UE5</a> <a href="/tags/VS-Code/" style="font-size: 1.1em; color: #999">VS Code</a> <a href="/tags/React/" style="font-size: 1.1em; color: #999">React</a> <a href="/tags/%E7%94%B5%E5%95%86/" style="font-size: 1.18em; color: #999ca1">电商</a> <a href="/tags/GPU/" style="font-size: 1.1em; color: #999">GPU</a> <a href="/tags/%E5%9B%BE%E5%BD%A2%E5%AD%A6/" style="font-size: 1.1em; color: #999">图形学</a> <a href="/tags/%E6%B8%B2%E6%9F%93/" style="font-size: 1.26em; color: #999fa8">渲染</a> <a href="/tags/%E5%8A%A8%E6%80%81%E8%A7%84%E5%88%92/" style="font-size: 1.42em; color: #99a6b7">动态规划</a> <a href="/tags/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/" style="font-size: 1.1em; color: #999">计算机基础</a> <a href="/tags/%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96/" style="font-size: 1.34em; color: #99a3b0">性能优化</a> <a href="/tags/%E6%80%9D%E8%80%83/" style="font-size: 1.1em; color: #999">思考</a> <a href="/tags/C/" style="font-size: 1.1em; color: #999">C++</a> <a href="/tags/Unity/" style="font-size: 1.18em; color: #999ca1">Unity</a> <a href="/tags/%E5%95%86%E4%B8%9A%E6%80%9D%E8%80%83/" style="font-size: 1.1em; color: #999">商业思考</a> <a href="/tags/ECS/" style="font-size: 1.1em; color: #999">ECS</a> <a href="/tags/%E5%89%91%E6%8C%87Offer/" style="font-size: 1.1em; color: #999">剑指Offer</a> <a href="/tags/MSYS2/" style="font-size: 1.1em; color: #999">MSYS2</a> <a href="/tags/Lumen/" style="font-size: 1.1em; color: #999">Lumen</a> <a href="/tags/C-C/" style="font-size: 1.18em; color: #999ca1">C/C++</a> <a href="/tags/LeetCode/" style="font-size: 1.5em; color: #99a9bf">LeetCode</a> <a href="/tags/%E5%8A%A8%E7%94%BB/" style="font-size: 1.1em; color: #999">动画</a> <a href="/tags/%E5%9B%9E%E6%BA%AF/" style="font-size: 1.18em; color: #999ca1">回溯</a> <a href="/tags/leetcode/" style="font-size: 1.26em; color: #999fa8">leetcode</a> <a href="/tags/%E6%B8%B8%E6%88%8F%E5%BC%80%E5%8F%91/" style="font-size: 1.26em; color: #999fa8">游戏开发</a> <a href="/tags/%E8%B7%AF%E5%BE%84%E8%A7%84%E5%88%92/" style="font-size: 1.1em; color: #999">路径规划</a> <a href="/tags/Unreal/" style="font-size: 1.1em; color: #999">Unreal</a> <a href="/tags/%E9%80%92%E5%BD%92/" style="font-size: 1.1em; color: #999">递归</a> <a href="/tags/Cloudflare-Workers/" style="font-size: 1.1em; color: #999">Cloudflare Workers</a> <a href="/tags/%E6%95%B0%E7%BB%84/" style="font-size: 1.42em; color: #99a6b7">数组</a> <a href="/tags/%E7%AE%97%E6%B3%95/" style="font-size: 1.26em; color: #999fa8">算法</a> <a href="/tags/%E9%9D%A2%E8%AF%95%E9%A2%98/" style="font-size: 1.1em; color: #999">面试题</a> <a href="/tags/AI/" style="font-size: 1.18em; color: #999ca1">AI</a> <a href="/tags/%E6%9E%B6%E6%9E%84%E8%AE%BE%E8%AE%A1/" style="font-size: 1.1em; color: #999">架构设计</a></div></div><div class="card-widget card-archives">
+    <div class="item-headline">
+      <i class="fas fa-archive"></i>
+      <span>归档</span>
+      <a class="card-more-btn" href="/archives/"
+            title="查看更多">
+            <i class="fas fa-angle-right"></i>
+          </a>
+    </div>
+  
+    <ul class="card-archive-list">
+      
+        <li class="card-archive-list-item">
+          <a class="card-archive-list-link" href="/archives/2026/06/">
+            <span class="card-archive-list-date">
+              六月 2026
+            </span>
+            <span class="card-archive-list-count">23</span>
+          </a>
+        </li>
+      
+        <li class="card-archive-list-item">
+          <a class="card-archive-list-link" href="/archives/2026/04/">
+            <span class="card-archive-list-date">
+              四月 2026
+            </span>
+            <span class="card-archive-list-count">6</span>
+          </a>
+        </li>
+      
+        <li class="card-archive-list-item">
+          <a class="card-archive-list-link" href="/archives/2026/03/">
+            <span class="card-archive-list-date">
+              三月 2026
+            </span>
+            <span class="card-archive-list-count">3</span>
+          </a>
+        </li>
+      
+        <li class="card-archive-list-item">
+          <a class="card-archive-list-link" href="/archives/2026/02/">
+            <span class="card-archive-list-date">
+              二月 2026
+            </span>
+            <span class="card-archive-list-count">1</span>
+          </a>
+        </li>
+      
+        <li class="card-archive-list-item">
+          <a class="card-archive-list-link" href="/archives/2025/09/">
+            <span class="card-archive-list-date">
+              九月 2025
+            </span>
+            <span class="card-archive-list-count">1</span>
+          </a>
+        </li>
+      
+        <li class="card-archive-list-item">
+          <a class="card-archive-list-link" href="/archives/2025/07/">
+            <span class="card-archive-list-date">
+              七月 2025
+            </span>
+            <span class="card-archive-list-count">9</span>
+          </a>
+        </li>
+      
+        <li class="card-archive-list-item">
+          <a class="card-archive-list-link" href="/archives/2025/06/">
+            <span class="card-archive-list-date">
+              六月 2025
+            </span>
+            <span class="card-archive-list-count">3</span>
+          </a>
+        </li>
+      
+        <li class="card-archive-list-item">
+          <a class="card-archive-list-link" href="/archives/2025/04/">
+            <span class="card-archive-list-date">
+              四月 2025
+            </span>
+            <span class="card-archive-list-count">2</span>
+          </a>
+        </li>
+      
+    </ul>
+  </div><div class="card-widget card-webinfo"><div class="item-headline"><i class="fas fa-chart-line"></i><span>网站信息</span></div><div class="webinfo"><div class="webinfo-item"><div class="item-name">文章数目 :</div><div class="item-count">74</div></div><div class="webinfo-item"><div class="item-name">本站访客数 :</div><div class="item-count" id="busuanzi_value_site_uv"><i class="fa-solid fa-spinner fa-spin"></i></div></div><div class="webinfo-item"><div class="item-name">本站总浏览量 :</div><div class="item-count" id="busuanzi_value_site_pv"><i class="fa-solid fa-spinner fa-spin"></i></div></div><div class="webinfo-item"><div class="item-name">最后更新时间 :</div><div class="item-count" id="last-push-date" data-lastPushDate="2026-06-11T03:13:17.093Z"><i class="fa-solid fa-spinner fa-spin"></i></div></div></div></div></div></div></main><footer id="footer"><div id="footer-wrap"><div class="copyright">&copy;2019 - 2026 By Jatpeng</div><div class="framework-info"><span>框架 </span><a target="_blank" rel="noopener" href="https://hexo.io">Hexo</a><span class="footer-separator">|</span><span>主题 </span><a target="_blank" rel="noopener" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly</a></div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="darkmode" type="button" title="日间和夜间模式切换"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside-config" type="button" title="设置"><i class="fas fa-cog fa-spin"></i></button><button id="go-up" type="button" title="回到顶部"><span class="scroll-percent"></span><i class="fas fa-arrow-up"></i></button></div></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><div class="js-pjax"></div><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script></div></body></html>
